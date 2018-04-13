@@ -20,7 +20,7 @@ input[type="url"],
 input[type="search"], 
 input[type="tel"], 
 input[type="color"] {
-    border-radius: 0!important;
+    border-radius: 3px !important;
     color: #666666;
     background-color: #fff;
     border:0;
@@ -1551,11 +1551,10 @@ img {max-width: none;}
 .Reg_header .login_top a{ display:block; float:left; margin-right:20px;}
 .Reg_header .login_top .title{ font-size:18px; margin-top:20px; display:block; float:left}
 .Reg_header .login_top{  margin-top:30px;height:70px; border-bottom:1px solid #dddddd;}
-.Registration_details .details_content{ border-bottom:1px solid #dddddd}
 .Registration_details .details_content .left_text{ width:600px; padding-right:20px; float:left; border-right:1px solid #dddddd}
 .Registration_details .details_content .left_text i{ color:#F00; margin-right:5px;}
 .Registration_details .details_content .right_add_img{ width:580px; float:right}
-.Registration_details .details_content .label_info{ border:1px solid #dddddd; margin-bottom:40px; margin-top:20px; padding:20px 0px; position:relative}
+.Registration_details .details_content .label_info{ border:1px solid #dddddd; margin-top:20px; padding:20px 0px; position:relative}
 .Registration_details .details_content .label_info .title_name{ 
 	font-size:16px;  
 	position:absolute; 
@@ -1566,10 +1565,10 @@ img {max-width: none;}
 	color:#88C522;
 }
 .Registration_details .details_content   .text_add{ border:1px solid #dddddd; height:35px;  line-height:35px;}
-.Registration_details .details_content .add_text{ float:left; width:460px; font-size:12px; position:relative}
+.Registration_details .details_content .add_text{ float:left; font-size:12px; position:relative}
 .Registration_details .details_content .add_text em{ font-family:"新宋体"; color:#F60; margin-left:10px;}
 .Registration_details .details_content  .details_info li{ line-height:35px; margin:20px 0px;}
-.Registration_details .details_content  .details_info .label_name{ font-size:14px; color:#666; float:left; width:80px; text-align:right; margin-right:10px;}
+.Registration_details .details_content  .details_info .label_name{ font-size:14px; color:#666; float:left; width:100px; text-align:center; margin-right:10px;padding-left:20px;}
 .Registration_details .details_content .textarea{ width:350px; border:1px solid #dddddd;   height:150px; resize: none;}
 .Registration_details .details_content .add_text  .wordage{ position:absolute; right:130px; top:120px;}
 .Registration_details .details_content .upload_style{ border:1px solid #dddddd; text-align:center; margin:20px;  color:#999; position:relative}
@@ -1577,7 +1576,6 @@ img {max-width: none;}
 .Submit_operation .save_btn{ background-color:#999}
 .Submit_operation .submit_btn{ background-color:#F60}
 .Submit_operation .btn{ 
-	height:40px; 
 	font-size:16px; 
 	line-height:40px; 
 	cursor:pointer; 

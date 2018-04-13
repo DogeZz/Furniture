@@ -23,4 +23,16 @@ public class FrontController {
 		Map<String, Object> model = this.frontService.toHomePage();
 		return new ModelAndView(model.get("url").toString(), model);
 	}
+	
+	@RequestMapping(value = "/front/login.fjsp")
+	public ModelAndView login(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		Map<String, Object> model = this.frontService.toLogin();
+		return new ModelAndView(model.get("url").toString(), model);
+	}
+	
+	@RequestMapping(value = "/front/register.fjsp")
+	public ModelAndView register(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		Map<String, Object> model = this.frontService.toRegister();
+		return new ModelAndView(model.get("url").toString(), model);
+	}
 }

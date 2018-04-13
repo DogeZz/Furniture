@@ -9,4 +9,14 @@ public interface FrontService {
 	 */
 	public Map<String, Object> toHomePage();
 
+	/**
+	 * 登录页.
+	 */
+	public Map<String, Object> toLogin();
+
+	/**
+	 * 注册页.
+	 */
+	public Map<String, Object> toRegister();
+
 }

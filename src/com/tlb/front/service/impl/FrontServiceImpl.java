@@ -18,4 +18,18 @@ public class FrontServiceImpl implements FrontService{
 		return map;
 	}
 
+	@Transactional( readOnly = true )
+	public Map<String, Object> toLogin() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("url", "/pc/front/homePage/login");
+		return map;
+	}
+
+	@Transactional( readOnly = true )
+	public Map<String, Object> toRegister() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("url", "/pc/front/homePage/register");
+		return map;
+	}
+
 }

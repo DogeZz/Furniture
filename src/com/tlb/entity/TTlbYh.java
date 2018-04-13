@@ -29,7 +29,7 @@ public class TTlbYh extends BaseEntity implements UserDetails {
 	private String zsxm; // 真实姓名
 	private Boolean xb; // 性别
 	private String sfz; // 身份证
-	private String yhlx; // 用户类型（1、管理 2、用户 3、商户）
+	private String yhlx; // 用户类型（0、管理 1、用户 2、商户）
 	private String yhtx; // 用户头像
 	private String yhjj; // 用户简介
 	private String sjhm; // 手机号码

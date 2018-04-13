@@ -166,7 +166,7 @@ input[type="color"] {
 .Program_single_style .Program_operating span.share{ float:right}
 /**********底部样式************/
 .footer{ border-top:1px solid #dddddd; margin-top:50px; line-height:30px; background-color:#FFF}
-.footer .footer_spacing{ padding:20px 0px; color:#666666}
+.footer .footer_spacing{ padding:20px 0px; color:#666666; text-align: center;}
 .footer .footer_spacing a{ color:#666666; margin:0px 10px;}
 /**************内页样式*******************/
 .page_Style .left_style{ width:235px; float:left; margin-right:15px;}

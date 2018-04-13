@@ -1,0 +1,112 @@
+package com.tlb.dao.impl;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.tlb.common.Pager;
+import com.tlb.dao.BaseDao;
+
+@Component
+@SuppressWarnings({"rawtypes", "unchecked"})
+@Transactional
+public class BaseDaoImpl<T> implements BaseDao<T> {
+	
+	@Resource
+	private SessionFactory sessionFactory;
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+	
+	private Session getCurrentSession() {
+		return sessionFactory.getCurrentSession();
+	}
+	
+	public void flush() {
+		this.getCurrentSession().flush();
+	}
+	
+	public void save(T o) {
+		this.getCurrentSession().save(o);
+		this.flush();
+	}
+
+	public void update(T o) {
+		this.getCurrentSession().update(o);
+		this.flush();
+	}
+
+	public void saveOrUpdate(T o) {
+		this.getCurrentSession().saveOrUpdate(o);
+		this.flush();
+	}
+
+	public void delete(T o) {
+		this.getCurrentSession().delete(o);
+		this.flush();
+	}
+
+	public int count(String hql, Object... param) {
+		Query q = this.getCurrentSession().createQuery("select count(*) " + hql);
+		if (param != null && param.length > 0) {
+			for (int i = 0; i < param.length; i++) {
+				q.setParameter(i, param[i]);
+			}
+		}
+		return Integer.valueOf(q.uniqueResult().toString());
+	}
+	
+	public T get(Class c, Serializable id) {
+		return (T)this.getCurrentSession().get(c, id);
+	}
+	
+	public T get(String hql, Object... param) {
+		Query q = this.getCurrentSession().createQuery(hql);
+		if (param != null && param.length > 0) {
+			for (int i = 0; i < param.length; i++) {
+				q.setParameter(i, param[i]);
+			}
+		}
+		return (T)q.uniqueResult();
+	}
+
+	public List<T> find(String hql, Object... param) {
+		Query q = this.getCurrentSession().createQuery(hql);
+		if (param != null && param.length > 0) {
+			for (int i = 0; i < param.length; i++) {
+				q.setParameter(i, param[i]);
+			}
+		}
+		return q.list();
+	}
+	
+	public List<T> find(String hql, int page, int limit, Object... param) {
+		Query q = this.getCurrentSession().createQuery(hql);
+		if (param != null && param.length > 0) {
+			for (int i = 0; i < param.length; i++) {
+				q.setParameter(i, param[i]);
+			}
+		}
+		return q.setFirstResult((page - 1) * limit).setMaxResults(limit).list();
+	}
+	
+	public Pager<T> getForPager(String hql, int page, int rows, Object... param) {
+		Pager<T> pager = new Pager<T>();
+		List<T> list = this.find(hql, page, rows, param);
+		int count = this.count(hql, param);
+		pager.setDatas(list);
+		pager.setTotal(count);
+		pager.setPageCount(count % rows == 0? count / rows : (count / rows) + 1);
+		pager.setPageIndex(page);
+		return pager;
+	}
+
+}

@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+body{
+	background: url("../imgs/14644914727589.jpg") no-repeat;
+  	background-size: 100%;
+ 	width: 100%;
+}
+#login_background{
+	width: 380px;
+	height: 300px;
+	border: 10px solid #ccc;
+	background: green;
+	opacity:0.35;
+	margin: 220px 0 0 550px;
+	border-radius: 50px;
+	float: left;
+	position: static;
+}
+#login_panel{
+	width: 400px;
+	height: 300px;
+	float: left;
+	margin-top: 230px;
+	position: absolute;
+	left:580px;
+
+}
+form{
+	width: 100%;
+	margin:75px 0 0 50px;
+}
+.login_btn{
+	margin-top:25px;
+	margin-left:20px;
+}

@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+body,div,ul,li,ol,h1,h2,h3,h4,h5,h6,textarea,p,form,input,dl,dt,dd {
+	margin:0px;
+	padding:0px;
+	font-size:13px;
+	font-family:微软雅黑;
+}
+ul {
+	list-style:none;
+}
+img,a img {
+	border:none;
+}
+a {
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+.auto{
+	margin: 0 auto;
+}

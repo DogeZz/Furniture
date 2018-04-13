@@ -1,0 +1,12 @@
+package com.tlb.dao;
+
+import com.tlb.entity.TTlbYh;
+
+public interface TTlbYhDao extends BaseDao<TTlbYh>{
+
+	/**
+	 * 通过用户名来获取用户实体.
+	 */
+	public TTlbYh getTTlbYh(String username);
+
+}

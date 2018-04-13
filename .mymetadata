@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Furniture"
+  id="myeclipse.1520925642423"
+  context-root="/Furnitrue"
+  j2ee-spec="5.0"
+  archive="Furniture.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

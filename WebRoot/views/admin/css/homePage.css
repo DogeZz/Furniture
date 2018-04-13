@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+.layoutPanel{
+	background: url('../imgs/025.png');
+}
+.homePage_northPanel .homePage_logo{
+	font-size:28px;
+	margin:10px 0 0 60px;
+	float:left;
+}
+.homePage_northPanel .homePage_info{
+	margin:0px 5px 0 0;
+	float:right;
+}
+.homePage_northPanel .homePage_info .homePage_header img{
+	padding:5px 5px 0 0;
+}
+.homePage_northPanel .homePage_name{
+	float:right;
+	line-height: 58px;
+	padding-right:80px;
+}
+.homePage_northPanel .homePage_name .exit{
+	cursor: pointer;
+}
+.homePage_westPanel .homePage_nav .nav_son{
+	background: url('../imgs/025.png');
+}
+.homePage_westPanel .homePage_nav .nav_son p{
+	margin:10px 0 0 20px;
+}
+.homePage_westPanel .homePage_nav .nav_son p img{
+	margin-right:10px;
+}
+.homePage_westPanel .homePage_nav .nav_son p a{
+	font-size: 18px;
+	color:#000;
+	text-decoration: none;
+}

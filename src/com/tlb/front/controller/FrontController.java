@@ -35,4 +35,10 @@ public class FrontController {
 		Map<String, Object> model = this.frontService.toRegister();
 		return new ModelAndView(model.get("url").toString(), model);
 	}
+	
+	@RequestMapping(value = "/front/personalInfo.fjsp")
+	public ModelAndView personalInfo(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		Map<String, Object> model = this.frontService.toPersonalInfo();
+		return new ModelAndView(model.get("url").toString(), model);
+	}
 }

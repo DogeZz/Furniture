@@ -19,4 +19,9 @@ public interface FrontService {
 	 */
 	public Map<String, Object> toRegister();
 
+
+	/**
+	 * 个人信息页.
+	 */
+	public Map<String, Object> toPersonalInfo();
 }

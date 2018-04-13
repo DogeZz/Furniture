@@ -211,7 +211,7 @@ $(document).ready(function(){
                 </li>
                 <li>
                 	<p><img src="/views/front/images/icon_s02.jpg" /></p>
-                    <p class="s_tip"c>实现</p>
+                    <p class="s_tip">实现</p>
                     <p class="s_tip_text">软装饰细节，无论是从视觉到触觉，从感官到心里都彻底温暖起来。</p>
                 </li>
                 <li>
@@ -271,9 +271,9 @@ $(document).ready(function(){
 </div>
 <!--服务流程  e-->
 
-<div class="footer clearfix" style="margin-top:0; background:#f5f5f5; border-top:1px solid #e6e6e6;">
+<div class="footer" style="margin-top:0; background:#f5f5f5; border-top:1px solid #e6e6e6;">
 <div class="footer_spacing clearfix">
-  <span class="copyright r_f">copyright©厚德 D1-743 有限公司 版权所有   粤ICP备16043743号-1</span>
+  <span class="copyright">copyright©厚德 D1-743 有限公司 版权所有   粤ICP备16043743号-1</span>
   </div>
 </div>
 </body>

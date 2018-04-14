@@ -25,86 +25,25 @@
 	</style>
 </head>
 <body>
-	<div class="header">
-		<div class="header_top">
-			<div class="top_info clearfix">
-				<div class="logo_style l_f">
-					<a href="/front/homepage.fjsp"><img src="/views/front/images/logo.jpg" /></a>
-				</div>
-				<div class="Search_style l_f">
-					<form action="#" method="post">
-						<div class="select">
-							<select name="homePage_search">
-								<option value="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品&nbsp;&nbsp;&nbsp;</option>
-								<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;店铺&nbsp;&nbsp;&nbsp;</option>
-							</select>
-						</div>
-						<input name="" type="text" class="add_Search" /> 
-						<input name=""type="submit" value="" class="submit_Search" />
-					</form>
-				</div>
-				<div class="Cart_user r_f">
-					<div class="Cart_Quantity">
-						<span class="number">0</span>
-					</div>
-					<div class="header_operating l_f">
-						<span class="header_touxiang">
-							<img src="/views/front/images/touxiang_03.png" />
-						</span> 
-						<a href="/front/login.fjsp">登录</a>
-						<a href="/front/register.fjsp">注册</a>
-					</div>
-				</div>
-			</div>
-			<div class="header_menu">
-				<!--菜单导航栏-->
-				<ul class="menu" id="nav">
-					<li class="nLi"><a href="/front/homepage.fjsp">网站首页</a></li>
-					<li class="nLi"><a href="#">设计精粹</a></li>
-					<li class="nLi Down"><a href="#">场景方案</a><em class="icon_jiantou"></em>
-						<ul class="sub">
-							<li><a href="#">新闻首页</a></li>
-							<li><a href="#">新闻人物</a></li>
-							<li><a href="#">新闻电视</a></li>
-							<li><a href="#">新闻图片</a></li>
-							<li><a href="#">新闻视频</a></li>
-							<li><a href="# ">新闻专题</a></li>
-						</ul>
-					</li>
-				</ul>
-				<script>
-					$("#nav").slide({
-						type : "menu",
-						titCell : ".nLi",
-						targetCell : ".sub",
-						effect : "slideDown",
-						delayTime : 300,
-						triggerTime : 0,
-						returnDefault : true,
-						trigger : "click"
-					});
-				</script>
-			</div>
-		</div>
-	</div>
+	<%@include file="../public/header.jsp"%>
 	<!--banner轮播  s-->
 	<div class="fullSlide">
 		<div class="bd">
 			<ul>
 				<li style=" background: url(/views/front/images/banner01.jpg) 50% 0px no-repeat;">
-					<a target="_blank" href="#"></a>
+					<a target="_blank" href="/front/detail.fjsp"></a>
 				</li>
 				<li style="background: url(/views/front/images/banner02.jpg) 50% 0px no-repeat;">
-					<a target="_blank" href="#"></a>
+					<a target="_blank" href="/front/detail.fjsp"></a>
 				</li>
 				<li style="background: url(/views/front/images/banner03.jpg) 50% 0px no-repeat;">
-					<a target="_blank" href="#"></a>
+					<a target="_blank" href="/front/detail.fjsp"></a>
 				</li>
 				<li style="background: url(/views/front/images/banner01.jpg) 50% 0px no-repeat;">
-					<a target="_blank" href="#"></a>
+					<a target="_blank" href="/front/detail.fjsp"></a>
 				</li>
 				<li style="background: url(/views/front/images/banner03.jpg) 50% 0px no-repeat;">
-					<a target="_blank" href="#"></a>
+					<a target="_blank" href="/front/detail.fjsp"></a>
 				</li>
 			</ul>
 		</div>
@@ -316,14 +255,9 @@
 		</div>
 	</div>
 	<!--服务流程  e-->
-
-	<div class="footer"
-		style="margin-top:0; background:#f5f5f5; border-top:1px solid #e6e6e6;">
-		<div class="footer_spacing clearfix">
-			<span class="copyright">copyright©厚德 D1-743 有限公司 版权所有 粤ICP备16043743号-1</span>
-		</div>
-	</div>
+	<%@include file="../public/footer.jsp"%>
 </body>
+<script type="text/javascript" src="/views/front/public.js"></script>
 <script type="text/javascript">
 	$(".fullSlide").slide({
 		titCell : ".hd ul",
@@ -335,5 +269,6 @@
 		autoPage : true,
 		trigger : "click"
 	});
+	
 </script>
 </html>

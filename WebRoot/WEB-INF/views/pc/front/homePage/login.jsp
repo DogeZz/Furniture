@@ -99,11 +99,10 @@
 				success: function(res) {
 					if(res.success){
 						 layer.msg(res.title);
+						 sessionStorage.setItem("username", username);
 						 window.location.href = '/front/homepage.fjsp';
 					} else {
-						layer.tips(res.title, '.submitbtn', {
-							tips: 1
-						});
+						layer.tips(res.title, '.submitbtn', {tips: 1});
 					}
 				}
 			});

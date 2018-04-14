@@ -38,4 +38,11 @@ public class FrontServiceImpl implements FrontService{
 		map.put("url", "/pc/front/personalInfo/personalInfo");
 		return map;
 	}
+
+	@Transactional( readOnly = true )
+	public Map<String, Object> toDetail() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("url", "/pc/front/detail/detail");
+		return map;
+	}
 }

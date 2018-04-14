@@ -19,7 +19,7 @@
 <body>
 	<div class="login_style">
 		<div class="login_top">
-			<a href="/front/homepage.fjsp"><img src="/views/front/images/logo.jpg" /></a><span class="title">用户登录</span>
+			<a href="/front/homePage.fjsp"><img src="/views/front/images/logo.jpg" /></a><span class="title">用户登录</span>
 		</div>
 		<div class="login_add_style l_f">
 			<div class="login_ad">
@@ -100,7 +100,7 @@
 					if(res.success){
 						 layer.msg(res.title);
 						 sessionStorage.setItem("username", username);
-						 window.location.href = '/front/homepage.fjsp';
+						 window.location.href = '/front/homePage.fjsp';
 					} else {
 						layer.tips(res.title, '.submitbtn', {tips: 1});
 					}

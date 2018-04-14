@@ -29,7 +29,7 @@
 	<div class="Reg_header">
 		<div class="login_top">
 			<div class="content_style">
-				<a href="/front/homepage.fjsp"><img src="/views/front/images/logo.jpg" /></a>
+				<a href="/front/homePage.fjsp"><img src="/views/front/images/logo.jpg" /></a>
 			</div>
 		</div>
 	</div>

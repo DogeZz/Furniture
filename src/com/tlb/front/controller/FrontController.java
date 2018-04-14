@@ -18,7 +18,7 @@ public class FrontController {
 	@Resource
 	private FrontService frontService;
 	
-	@RequestMapping(value = "/front/homepage.fjsp")
+	@RequestMapping(value = "/front/homePage.fjsp")
 	public ModelAndView homePage(HttpServletResponse response, HttpServletRequest request) throws Exception {
 		Map<String, Object> model = this.frontService.toHomePage();
 		return new ModelAndView(model.get("url").toString(), model);
@@ -45,6 +45,12 @@ public class FrontController {
 	@RequestMapping(value = "/front/detail.fjsp")
 	public ModelAndView detail(HttpServletResponse response, HttpServletRequest request) throws Exception {
 		Map<String, Object> model = this.frontService.toDetail();
+		return new ModelAndView(model.get("url").toString(), model);
+	}
+	
+	@RequestMapping(value = "/front/type.fjsp")
+	public ModelAndView type(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		Map<String, Object> model = this.frontService.toType();
 		return new ModelAndView(model.get("url").toString(), model);
 	}
 }

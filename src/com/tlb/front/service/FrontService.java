@@ -19,7 +19,6 @@ public interface FrontService {
 	 */
 	public Map<String, Object> toRegister();
 
-
 	/**
 	 * 个人信息页.
 	 */
@@ -29,4 +28,9 @@ public interface FrontService {
 	 * 商品详细页.
 	 */
 	public Map<String, Object> toDetail();
+
+	/**
+	 * 分类搜索页.
+	 */
+	public Map<String, Object> toType();
 }

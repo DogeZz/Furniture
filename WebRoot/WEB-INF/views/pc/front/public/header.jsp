@@ -3,7 +3,7 @@
 	<div class="header_top">
 		<div class="top_info clearfix">
 			<div class="logo_style l_f">
-				<a href="/front/homepage.fjsp"><img src="/views/front/images/logo.jpg" /></a>
+				<a href="/front/homePage.fjsp"><img src="/views/front/images/logo.jpg" /></a>
 			</div>
 			<div class="Search_style l_f">
 				<form action="#" method="post">
@@ -34,7 +34,7 @@
 			<!--菜单导航栏-->
 			<ul class="menu" id="nav">
 				<li class="nLi"><a href="/front/homepage.fjsp">网站首页</a></li>
-				<li class="nLi"><a href="#">设计精粹</a></li>
+				<li class="nLi"><a href="/front/type.fjsp">分类搜索</a></li>
 				<li class="nLi Down"><a href="#">场景方案</a><em class="icon_jiantou"></em>
 					<ul class="sub">
 						<li><a href="#">新闻首页</a></li>
@@ -42,22 +42,10 @@
 						<li><a href="#">新闻电视</a></li>
 						<li><a href="#">新闻图片</a></li>
 						<li><a href="#">新闻视频</a></li>
-						<li><a href="# ">新闻专题</a></li>
+						<li><a href="#">新闻专题</a></li>
 					</ul>
 				</li>
 			</ul>
-			<script>
-				$("#nav").slide({
-					type : "menu",
-					titCell : ".nLi",
-					targetCell : ".sub",
-					effect : "slideDown",
-					delayTime : 300,
-					triggerTime : 0,
-					returnDefault : true,
-					trigger : "click"
-				});
-			</script>
 		</div>
 	</div>
 </div>

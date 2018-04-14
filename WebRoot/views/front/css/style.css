@@ -33,13 +33,13 @@ input[type="color"] {
     -webkit-transition-duration: .1s;
     transition-duration: .1s;
 }
-.Search_style .select{ height:35px; border-right:1px solid #dddddd; width:95px; float:left}
+.Search_style .select{ height:35px; border-right:1px solid #dddddd; width:95px; float:left;cursor: pointer;}
 .Search_style .select select{ height:36px; line-height:36px;}
-.Search_style .add_Search{ width:480px; float:left; height:32px; font-size:12px; line-height:32px;}
+.Search_style .add_Search{ width:480px; float:left; height:36px; font-size:12px; line-height:32px;}
 .Search_style .submit_Search{ 
 	background-image:url(../images/images_album.png); 
-	background-position:2px -63px; 
-	width:36px; 
+	background-position:1px -63px; 
+	width:46px; 
 	height:36px; 
 	background-color:#FFF; 
 	border:0px; 
@@ -313,14 +313,14 @@ input[type="color"] {
 .prodcuts_style .product .pic_img .operating{ 
 	position:absolute; 
 	height:30px; 
-	bottom:0px; 
+	bottom:-30px; 
 	width:285px;
 	background-image:url(../images/bg_tm_03.png);
 	background-repeat:repeat;
-     -webkit-transition: bottom .1s;
-    -moz-transition: bottom .1s;
-    -o-transition: bottom .1s;
-    transition: bottom .1s;
+    -webkit-transition: bottom .3s;
+    -moz-transition: bottom .3s;
+    -o-transition: bottom .3s;
+    transition: bottom .3s;
 	display:none;
 }
 .prodcuts_style .product.hover .pic_img .operating{ display:block; }
@@ -1493,18 +1493,17 @@ img {max-width: none;}
 .login_add_style .add_login_cont .login_content{ width:330px; border:1px solid #dddddd; background-color:#ffffff; padding:40px;}
 .login_add_style .add_login_cont .login_content span{ color:#88c523; border-bottom:2px solid #88c523; padding:5px 15px; height:30px; line-height:30px;}
 .login_add_style .add_login_cont .login_content .login_name{ border-bottom:1px solid #dddddd; margin-bottom:20px; font-size: 16px}
-.Reg_log_style .frame_style{ position:relative; height:32px; padding:0px 5px; margin-bottom:20px; border:1px solid #ddd; line-height:32px; width:250px;}
+.Reg_log_style .frame_style{ position:relative; height:32px; margin-bottom:20px; border:1px solid #ddd; line-height:32px; width:250px;}
 .Reg_log_style .frame_style input {
-    height: 32px;
-    padding: 0px;
+    height: 30px;
+    padding-left: 10px;
     border: 0px;
-    width: 243px;
+    width: 248px;
 	line-height:32px;
     font-size: 14px;
     z-index: 11;
     position: relative;
     background: 0 none;
-	
 }
 .Reg_log_style .frame_style.form_error i { display: block;}
 .Reg_log_style .frame_style.form_errors i{ display:none}

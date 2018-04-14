@@ -6,7 +6,7 @@
 	<script src="/views/front/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript"src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 	<link href="/views/front/css/common.css" type="text/css"rel="stylesheet" />
-	<link href="/views/front/css/style.css" type="text/css" rel="stylesheet" />
+	<link href="/views/front/css/style.css?v=1" type="text/css" rel="stylesheet" />
 	<link href="/views/front/css/z_css.css" type="text/css" rel="stylesheet" />
 	<!--[if lt IE 9]>
 	<script src="/views/front/js/html5shiv.js" type="text/javascript"></script>
@@ -257,8 +257,20 @@
 	<!--服务流程  e-->
 	<%@include file="../public/footer.jsp"%>
 </body>
-<script type="text/javascript" src="/views/front/public.js"></script>
+<script type="text/javascript" src="/views/front/public.js?v=1"></script>
 <script type="text/javascript">
+	$("#nav").slide({
+		type : "menu",
+		titCell : ".nLi",
+		targetCell : ".sub",
+		effect : "slideDown",
+		delayTime : 300,
+		triggerTime : 0,
+		returnDefault : true,
+		trigger : "click",
+		defaultIndex: 0
+	});
+	
 	$(".fullSlide").slide({
 		titCell : ".hd ul",
 		mainCell : ".bd ul",
@@ -270,5 +282,7 @@
 		trigger : "click"
 	});
 	
+	goToTop("toTop");
+	showTopSearch("showTopSearch");
 </script>
 </html>

@@ -13,7 +13,7 @@
 					</select>
 				</div>
 				<input type="text" class="add_Search" /> 
-				<input type="button" class="submit_Search" onclick="header_toSearch()"/>
+				<input type="button" class="submit_Search" onclick="header_toSearch(0)"/>
 			</div>
 			<div class="Cart_user r_f">
 				<div class="Cart_Quantity">

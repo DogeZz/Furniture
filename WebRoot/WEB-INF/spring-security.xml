@@ -10,12 +10,14 @@
     <!--静态资源不过滤 -->
     <http pattern="/views/**" security="none"/>
     <http pattern="/resource/**" security="none"/>
+    <http pattern="/favicon.ico" security="none"/>
     <!--前台页面不过滤 -->
     <http pattern="/front/**" security="none"/>
     
 	<http auto-config="true" access-denied-page="/loginPage/denied.jsp">  
 		<form-login login-page="/loginPage/login.jsp" authentication-failure-url="/loginPage/login.jsp?error=1" />
 		<intercept-url  pattern="/**" access="ROLE_USER_LOGIN" />
+		<intercept-url pattern="/favicon.ico" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<!-- session-management是用来防止多个用户同时登陆一个账号的。 -->
         <session-management>
             <concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />  

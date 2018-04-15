@@ -60,4 +60,10 @@ public class AjaxServiceImpl implements AjaxService{
 		return JsonUtil.toRes("保存成功");
 	}
 
+	@Transactional(readOnly = true)
+	public String toGetUser(String username) {
+		TTlbYh tTlbYh = tTlbYhDao.getTTlbYh(username);
+		return JsonUtil.toStringFromObject(tTlbYh);
+	}
+
 }

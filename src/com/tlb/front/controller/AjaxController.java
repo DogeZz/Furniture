@@ -39,4 +39,12 @@ public class AjaxController {
 		response.getWriter().print(res);
 		return null;
 	}
+	
+	@RequestMapping(value = "/front/getUser.ajx")
+	public String getUser(HttpServletResponse response, HttpServletRequest request, 
+			String username) throws Exception {
+		String res = this.ajaxService.toGetUser(username);
+		response.getWriter().print(res);
+		return null;
+	}
 }

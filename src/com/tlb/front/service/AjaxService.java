@@ -26,4 +26,11 @@ public interface AjaxService {
 	 */
 	public String toSaveRegister(TTlbYh tTlbYh);
 
+	/**
+	 * 获取用户数据.
+	 * @param username 用户名
+	 * @return 数据
+	 */
+	public String toGetUser(String username);
+
 }

@@ -33,4 +33,14 @@ public interface FrontService {
 	 * 分类搜索页.
 	 */
 	public Map<String, Object> toType();
+
+	/**
+	 * 商店列表页.
+	 */
+	public Map<String, Object> toMerchantList();
+
+	/**
+	 * 商店详细页.
+	 */
+	public Map<String, Object> toMerchantDetail();
 }

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tlb.entity.TTlbYh;
 import com.tlb.front.service.AjaxService;
@@ -44,6 +45,22 @@ public class AjaxController {
 	public String getUser(HttpServletResponse response, HttpServletRequest request, 
 			String username) throws Exception {
 		String res = this.ajaxService.toGetUser(username);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/getShListData.ajx")
+	public String getShListData(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(defaultValue = "") String name) throws Exception {
+		String res = this.ajaxService.toGetShListData(name);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/getShData.ajx")
+	public String getShData(HttpServletResponse response, HttpServletRequest request,
+			String shid) throws Exception {
+		String res = this.ajaxService.toGetShData(shid);
 		response.getWriter().print(res);
 		return null;
 	}

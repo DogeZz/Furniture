@@ -62,9 +62,10 @@ public class MerchantServiceImpl implements MerchantService{
 		if (param.getShid() == null || param.getShid().equals("")) { //新建商户
 			param.setShid(null);
 			param.setShzt(true);
+			param.setShdjl(0);
 			this.tTlbShDao.saveTTlbSh(param);
 		} else { //修改商户
-			BeanUtils.copyProperties(param, tTlbSh, new String[]{"shid", "cjsj","shzt"});
+			BeanUtils.copyProperties(param, tTlbSh, new String[]{"shid", "cjsj","shzt", "shdjl"});
 			this.tTlbShDao.saveTTlbSh(tTlbSh);
 		}
 		return JsonUtil.toRes("保存成功");

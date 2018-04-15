@@ -30,4 +30,8 @@ public class TTlbShDaoImpl extends BaseDaoImpl<TTlbSh> implements TTlbShDao{
 	public void saveTTlbSh(TTlbSh tTlbSh) {
 		this.saveOrUpdate(tTlbSh);
 	}
+
+	public List<TTlbSh> getTTlbShs(String name) {
+		return this.find("from TTlbSh where shmc like ? and shzt = true order by shdj desc", "%"+ name +"%");
+	}
 }

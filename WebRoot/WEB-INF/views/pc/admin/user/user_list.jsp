@@ -59,9 +59,9 @@
 	        	if (value) return '女';
 	   			else return '男';
 	        }},
-	        {field: 'xb', title:'性别', width: 60, formatter: function(value, row, index) {
-	        	if (value) return '女';
-	   			else return '男';
+	        {field: 'yhtx',title: '用户头像', align: 'center', width: 110, formatter: function(value, row, index) {
+	   			if(value === '' || value === null || value === undefined){value = '/views/admin/imgs/User-005.png';}
+	        	return '<img alt="用户头像" src="'+value+'" onclick="lookImg(\''+ value +'\')" onerror="javascript:this.src=\'/views/admin/imgs/User-005.png\');" style="max-width:100px;max-height:100px;cursor: pointer;">';
 	        }},
 	        {field: 'yhlx', title:'用户类型', width: 60, formatter: function(value, row, index) {
 	        	if (value == 1) return '商铺';

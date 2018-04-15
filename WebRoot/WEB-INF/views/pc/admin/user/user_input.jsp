@@ -104,6 +104,15 @@
 	                </div>
 	                <div class="hr-line-dashed"></div>
 	                <div class="form-group">
+	                    <label class="col-sm-1 control-label">用户头像</label>
+	                    <div class="col-sm-11">
+	                    	<img id="user-img" src="${data.yhtx}" onerror="Javascript:this.src='/views/admin/imgs/User-005.png';" style="max-width:450px;max-height:250px;margin-right:15px;">
+	                    	<button class="btn btn-primary" type="button" id="user-uploadImgBtn" >上传图片</button>
+	                        <input id="user-img-input" type="hidden" class="form-control" name="yhtx" value="${data.yhtx}" required>
+	                    </div>
+	                </div>
+	                <div class="hr-line-dashed"></div>
+	                <div class="form-group">
 	                    <label class="col-sm-1 control-label">用户简介：</label>
 	                    <div class="col-sm-6">
 	                        <textarea class="form-control" name="yhjj" rows="5" placeholder="输入用户简介" >${data.yhjj}</textarea>
@@ -117,6 +126,9 @@
 	                    </div>
 	                </div>
 	            </form>
+	            <form method="post" enctype="multipart/form-data" id="userData-edit-upload">
+					<input type="file" name="upload" class="user-fmtimg" style="display:none;" onchange="userInput_imgurl(this.value)"/>
+				</form>
 	        </div>
 	    </div>
     </div>
@@ -191,6 +203,41 @@
 		} else {
 			$("option").eq(2).attr("selected","selected");
 		}
+	}
+	
+	$("#user-uploadImgBtn").click(function(){
+    	$(".user-fmtimg").click();
+    });
+    
+    var userInput_imgurl = function(){
+    	var index = parent.layer.open({
+			title: '提示',
+			icon: 0,
+			btn: ['确定', '取消'],
+			content: '是否上传?',
+			cancel: function() {},
+			yes: function() {
+				var uploadImgLoad =  parent.layer.load();
+				$.ajax({
+					url : '/admin/upload.do?file',
+					type: 'POST',
+		        	cache: false,
+					data: new FormData($('#userData-edit-upload')[0]),
+					processData: false,
+		        	contentType: false,
+					success : function(data){
+						 parent.layer.close(uploadImgLoad);
+						 var res = eval ("(" + data + ")");
+						 var title = res.error == 0 ? "上传成功" : "上传失败";
+						 var index = parent.layer.alert(title, function() {
+						  	$("#user-img").attr("src", res.url);
+						  	$("#user-img-input").val(res.url);
+						  	parent.layer.close(index);
+						 });
+					}
+				});				
+			}
+		});
 	}
 </script>
 </html>

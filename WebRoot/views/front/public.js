@@ -65,3 +65,10 @@ var goToTop = function(selection, min_height){
         };
     });
 };
+
+var header_toSearch = function(){
+	var value = $(".add_Search").val();
+	var type = $("#homePage_search").val();
+	window.location.href = "/front/type.fjsp?searchValue=" + value + "&searchType=" + type;
+}
+

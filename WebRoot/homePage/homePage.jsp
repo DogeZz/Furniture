@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
 		<div class="down" id="homePage-userinfo-content" style="padding: 10px 0 5px 0;">
 			<script type="text/html" id="homePage-userinfo-template">
-		  	<a href="#"><img src="../views/admin/imgs/head.jpg" style="max-width: 80px;"></a>
+		  	<a href="#"><img src="{{user.yhtx}}" onerror="javascript:this.src='/views/admin/imgs/User-005.png';" style="width: 80px;height:80px;"></a>
 		  	<a href="#"><span class=" name-caret">{{user.username}}</span></a>
 			<ul>
 				<li><a class="tooltips"><span>个人信息</span><i class="lnr lnr-user"></i></a></li>
@@ -112,8 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			data: {}, 
 			dataType: 'json',
 			success: function(res) {
-				userInfo = res;
-				var html = template('homePage-userinfo-template', {user: userInfo});
+				var html = template('homePage-userinfo-template', {user: res});
 				$('#homePage-userinfo-content').html(html);
 			}
 		});
@@ -124,7 +123,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			data: {}, 
 			dataType: 'json',
 			success: function(res) {
-				console.log(res);
 				var html = template('homePage-menu-template', {menu: res});
 				$('#menu').append(html);
 			}

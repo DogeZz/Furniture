@@ -14,13 +14,15 @@ public class TTlbSh extends BaseEntity {
 
 	private static final long serialVersionUID = 6402064447978249670L;
 
-	private String shid;//商户id
-	private String yhid;//用户id
-	private String shmc;//商户名称
-	private String shms;//商户描述
-	private String shtx;//商户头像
-	private String shdj;//商户等级
-	private Boolean shzt; //商户状态（0、不可用；1、正常）
+	private String shid;// 商户id
+	private String yhid;// 用户id
+	private String shmc;// 商户名称
+	private String shms;// 商户描述
+	private String shtx;// 商户头像
+	private String shbjt; // 商户背景图
+	private String shdj;// 商户等级
+	private Boolean shzt; // 商户状态（0、不可用；1、正常）
+	private Integer shdjl; // 商户点击量
 
 	@Id
 	@GeneratedValue(generator = "uuid")
@@ -67,6 +69,14 @@ public class TTlbSh extends BaseEntity {
 		this.shtx = shtx;
 	}
 
+	public String getShbjt() {
+		return shbjt;
+	}
+
+	public void setShbjt(String shbjt) {
+		this.shbjt = shbjt;
+	}
+
 	public String getShdj() {
 		return shdj;
 	}
@@ -81,6 +91,14 @@ public class TTlbSh extends BaseEntity {
 
 	public void setShzt(Boolean shzt) {
 		this.shzt = shzt;
+	}
+
+	public Integer getShdjl() {
+		return shdjl;
+	}
+
+	public void setShdjl(Integer shdjl) {
+		this.shdjl = shdjl;
 	}
 
 }

@@ -53,4 +53,16 @@ public class FrontController {
 		Map<String, Object> model = this.frontService.toType();
 		return new ModelAndView(model.get("url").toString(), model);
 	}
+	
+	@RequestMapping(value = "/front/merchantList.fjsp")
+	public ModelAndView merchantList(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		Map<String, Object> model = this.frontService.toMerchantList();
+		return new ModelAndView(model.get("url").toString(), model);
+	}
+	
+	@RequestMapping(value = "/front/merchantDetail.fjsp")
+	public ModelAndView merchantDetail(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		Map<String, Object> model = this.frontService.toMerchantDetail();
+		return new ModelAndView(model.get("url").toString(), model);
+	}
 }

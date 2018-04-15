@@ -33,4 +33,18 @@ public interface AjaxService {
 	 */
 	public String toGetUser(String username);
 
+	/**
+	 * 获取所有商户信息.
+	 * @param name 关键字
+	 * @return 数据
+	 */
+	public String toGetShListData(String name);
+
+	/**
+	 * 获取单个商户实体.
+	 * @param shid 商户id
+	 * @return 数据
+	 */
+	public String toGetShData(String shid);
+
 }

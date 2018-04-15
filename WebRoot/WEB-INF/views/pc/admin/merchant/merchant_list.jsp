@@ -55,6 +55,11 @@
 	    columns: [
 	   		{field: 'shmc',title: '商户名', width: 60},
 	   		{field: 'yhmc',title: '用户名称', width: 60},
+	   		{field: 'shms',title: '描述', width: 60},
+	   		{field: 'shtx',title: '商户头像', align: 'center', width: 110, formatter: function(value, row, index) {
+	   			if(value === '' || value === null || value === undefined){value = '/views/admin/imgs/User-005.png';}
+	        	return '<img alt="商户头像" src="'+value+'" onclick="lookImg(\''+ value +'\')" onerror="javascript:this.src=\'/views/admin/imgs/User-005.png\');" style="max-width:100px;max-height:100px;cursor: pointer;">';
+	        }},
 	        {field: 'xgsj', title: '最后修改时间', width: 60, formatter: function(value, row, index) {
 	        	return new Date(value.time).Format('yyyy-MM-dd hh:mm:ss');
 	        }},

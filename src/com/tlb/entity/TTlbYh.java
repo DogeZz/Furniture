@@ -71,7 +71,6 @@ public class TTlbYh extends BaseEntity implements UserDetails {
 		this.yhlx = yhlx;
 	}
 
-	@Column(length = 50)
 	public String getYhtx() {
 		return yhtx;
 	}

@@ -129,9 +129,9 @@
 	//实现功能，保存用户的登录信息到cookie中。当登录页面被打开时，就查询cookie
 	window.onload = function() {
 		 var userNameValue = getCookieValue("j_username");
-		 $("#j_username").textbox('setValue',userNameValue);
+		 $("#j_username").attr('value', userNameValue);
 		 var userPassValue = getCookieValue("j_password");
-		 $("#j_password").passwordbox('setValue',userPassValue);
+		 $("#j_password").attr('value', userPassValue);
 		 if(userPassValue!=""){
 			 $("#j_remember").attr("checked","checked");
 		 }else{

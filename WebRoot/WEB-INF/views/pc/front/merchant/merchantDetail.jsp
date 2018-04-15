@@ -4,88 +4,59 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="/views/front/css/common.css" type="text/css" rel="stylesheet" />
-<link href="/views/front/css/style.css?v=1" type="text/css" rel="stylesheet" />
+<link href="/views/front/css/style.css" type="text/css" rel="stylesheet" />
 <script src="/views/front/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/views/front/js/jquery.imagezoom.min.js"></script>
 <script type="text/javascript" src="/views/front/js/layer/layer.js"></script>
+<script src="../views/common/template-web.js"></script>
 <script src="/views/common/until.js"></script>
 <!--[if lt IE 9]>
 <script src="/views/front/js/html5shiv.js" type="text/javascript"></script>
 <script src="/views/front/js/respond.min.js"></script>
 <script src="/views/front/js/css3-mediaqueries.js"  type="text/javascript"></script>
 <![endif]-->
-<title>单品大全</title>
+<title>店铺首页</title>
 </head>
 <body>
 	<div class="Background_color">
 		<%@include file="../public/header.jsp"%>
-		<!--产品列表-->
+		<!--店铺首页-->
 		<div class="content_style clearfix">
-			<div class="page_Style">
-				<!--条件筛选-->
-				<div class="filter_style clearfix">
-					<ul>
-						<li><label class="filter_name">风格分类</label>
-							<div class="filter_link">
-								<a href="#" class="Select">中式</a>
-								<a href="#">美式</a>
-								<a href="#">欧式</a>
-								<a href="#">现代简约</a>
-							</div>
-						</li>
-						<li><label class="filter_name">区域分类</label>
-							<div class="filter_link">
-								<a href="#">主卧</a>
-								<a href="#">客厅</a>
-								<a href="#">厨房</a>
-								<a href="#">卫生间</a> 
-								<a href="#">阳台</a>
-								<a href="#">次卧</a>
-								<a href="#">衣帽间</a>
-								<a href="#">书房</a>
-								<a href="#">卫生间</a>
-							</div>
-						</li>
-						<li><label class="filter_name">功能分类</label>
-							<div class="filter_link">
-								<a href="#">主卧</a>
-								<a href="#">客厅</a>
-								<a href="#">厨房</a>
-								<a href="#">卫生间</a>
-								<a href="#">阳台</a>
-								<a href="#">次卧</a>
-								<a href="#">衣帽间</a>
-								<a href="#">书房</a>
-								<a href="#">卫生间</a>
-							</div>
-						</li>
-						<li><label class="filter_name">种类分类</label>
-							<div class="filter_link">
-								<div class="level_one grade">
-									<a href="#" class="Select">床</a>
-									<a href="#">桌椅</a>
-									<a href="#">衣柜</a>
-									<a href="#">灯具</a>
-								</div>
-								<div class="level_two grade">
-									<a href="#" class="Select">美式</a>
-									<a href="#">欧式</a>
-									<a href="#">中式</a>
-									<a href="#">日式</a>
+			<div class="page_Style shops_style">
+				<div id="merchantDetail-content">
+					<script type="text/html" id="merchantDetail-template">
+						<div class="Shop_header">
+							<div class="Shop_header_top"  style="cursor: pointer;">
+								<img src="{{merchant.shbjt}}" onerror="javascript:this.src='/views/front/images/shop_img_03.png';"width="1200px" height="275px"/>
+								<div class="shop_Into">
+									<div class="shop_logo">
+										<img src="{{merchant.shtx}}" onerror="javascript:this.src='/views/front/images/dp_logo.jpg';" width="85px" height="85px" />
+									</div>
+									<span class="name">{{merchant.shmc}}</span>
+									<div class="shop_fx_sc" style="padding-left: 120px;">
+										<a href="#" class="Store_data"><em class="icon_user"></em>&nbsp;{{merchant.shdjl}}</a>
+										<a href="#" class="Store_data"><em class="icon_Collection"></em>收藏</a>
+										<a href="#" class="Store_data"><em class="icon_shareit"></em>分享</a>
+									</div>
 								</div>
 							</div>
-						</li>
-					</ul>
+							<!--地址信息-->
+							<div class="shop_info">
+								<p>{{merchant.shms}}</p>
+							</div>
+						</div>	
+					</script>
 				</div>
 				<!--产品列表-->
-				<div class="prodcuts_list clearfix">
+				<div class="shops_proc_list clearfix">
 					<ul class="prodcuts_style clearfix">
 						<li class="product">
 							<div class="pic_img textalign">
-								<a href="#"><img src="/views/front/images/product/p-1.jpg" /></a>
-								<div class="operating">
-									<a href="javascript:addToShoppingCart();" class="pic_cart">加入购物车</a>
-									<a href="javascript:addToCollection();" class="Collection">收藏</a>
+								<a href="#"><img src="/views/front/images/product/p-2.jpg"></a>
+								<div class="operating" style="bottom: -30px;">
+									<a href="#" class="pic_cart">加入购物车</a><a href="#"
+										class="Collection">收藏</a>
 								</div>
 							</div>
 							<p class="pic_nme">
@@ -95,9 +66,12 @@
 						</li>
 					</ul>
 					<div class="pic_page_style clearfix">
-						<ul class="page_example pagination">
-							<li class="first disabled" data-page="1"><a href="javascript:void(0);"> 〈 上一页 </a></li>
-							<li class="page active" data-page="1"><a href="javascript:void(0);">1</a></li>
+						<ul class="page_example pagination" style="margin-left: 294px;">
+							<li></li>
+							<li class="first disabled" data-page="1"><a
+								href="javascript:void(0);"> 〈 上一页 </a></li>
+							<li class="page active" data-page="1"><a
+								href="javascript:void(0);">1</a></li>
 							<li class="page" data-page="2"><a href="javascript:void(0);">2</a></li>
 							<li class="page" data-page="3"><a href="javascript:void(0);">3</a></li>
 							<li class="page" data-page="4"><a href="javascript:void(0);">4</a></li>
@@ -106,9 +80,11 @@
 							<li class="page" data-page="7"><a href="javascript:void(0);">7</a></li>
 							<li class="page" data-page="8"><a href="javascript:void(0);">8</a></li>
 							<li class="page" data-page="9"><a href="javascript:void(0);">9</a></li>
-							<li class="page" data-page="10"><a href="javascript:void(0);">10</a></li>
+							<li class="page" data-page="10"><a
+								href="javascript:void(0);">10</a></li>
 							<li class="page" data-page=""><a href="javascript:void(0);">...</a></li>
-							<li class="last" data-page="35"><a href="javascript:void(0);">下一页 〉</a></li>
+							<li class="last" data-page="35"><a
+								href="javascript:void(0);">下一页 〉</a></li>
 						</ul>
 					</div>
 				</div>
@@ -145,7 +121,7 @@
 		triggerTime : 0,
 		returnDefault : true,
 		trigger : "click",
-		defaultIndex: 1
+		defaultIndex: 2
 	});
 	
 	var addToShoppingCart = function(value){
@@ -155,17 +131,18 @@
 	var addToCollection = function(value){
 		alert("kjdshgj")
 	}
-	
-	var loadMerchantListData = function(){
-		var searchValue = getAttribute("searchValue");
-		if(isNotNull(searchValue)){
-			$(".add_Search").val(searchValue);
-		}
-		var searchType = getAttribute("searchType");
-		if(isNotNull(searchType)){
-			$("#homePage_search option").eq(searchType-1).attr("selected", "selected");
-		}
+	var loadShListData = function() {
+		$.ajax({
+			url:'/front/getShData.ajx', 
+			type: 'post',
+			data: {shid: getAttribute("shid")}, 
+			dataType: 'json',
+			success: function(res) {
+				var html = template('merchantDetail-template', {merchant: res});
+				$('#merchantDetail-content').html(html);
+			}
+		});
 	}
-	loadMerchantListData();
+	loadShListData();
 </script>
 </html>

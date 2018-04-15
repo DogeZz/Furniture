@@ -9,9 +9,10 @@
 
 	<!-- 静态资源的访问 -->
 	<mvc:resources location="/views/" mapping="/views/**"/>
+	<mvc:resources location="/resource/" mapping="/resource/**"/>
 	<mvc:resources location="/loginPage/" mapping="/loginPage/**"/>
 
-	<mvc:resources mapping="/favicon.ico" location="/views/admin/imgs/favicon.ico"/>
+	<mvc:resources mapping="/views/admin/imgs/favicon.ico" location="/views/admin/imgs/favicon.ico"/>
 	
 	<!-- 定义视图解析器 -->	
    <bean id="ViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

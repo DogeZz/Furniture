@@ -6,16 +6,14 @@
 				<a href="/front/homePage.fjsp"><img src="/views/front/images/logo.jpg" /></a>
 			</div>
 			<div class="Search_style l_f">
-				<form action="#" method="post">
-					<div class="select">
-						<select name="homePage_search">
-							<option value="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品&nbsp;&nbsp;&nbsp;</option>
-							<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;店铺&nbsp;&nbsp;&nbsp;</option>
-						</select>
-					</div>
-					<input name="" type="text" class="add_Search" /> 
-					<input name=""type="submit" value="" class="submit_Search" />
-				</form>
+				<div class="select">
+					<select id="homePage_search">
+						<option value="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品&nbsp;&nbsp;&nbsp;</option>
+						<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;店铺&nbsp;&nbsp;&nbsp;</option>
+					</select>
+				</div>
+				<input type="text" class="add_Search" /> 
+				<input type="button" class="submit_Search" onclick="header_toSearch()"/>
 			</div>
 			<div class="Cart_user r_f">
 				<div class="Cart_Quantity">
@@ -33,18 +31,9 @@
 		<div class="header_menu">
 			<!--菜单导航栏-->
 			<ul class="menu" id="nav">
-				<li class="nLi"><a href="/front/homepage.fjsp">网站首页</a></li>
+				<li class="nLi"><a href="/front/homePage.fjsp">网站首页</a></li>
 				<li class="nLi"><a href="/front/type.fjsp">分类搜索</a></li>
-				<li class="nLi Down"><a href="#">场景方案</a><em class="icon_jiantou"></em>
-					<ul class="sub">
-						<li><a href="#">新闻首页</a></li>
-						<li><a href="#">新闻人物</a></li>
-						<li><a href="#">新闻电视</a></li>
-						<li><a href="#">新闻图片</a></li>
-						<li><a href="#">新闻视频</a></li>
-						<li><a href="#">新闻专题</a></li>
-					</ul>
-				</li>
+				<li class="nLi"><a href="/front/merchantList.fjsp">商店列表</a></li>
 			</ul>
 		</div>
 	</div>

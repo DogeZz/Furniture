@@ -65,4 +65,10 @@ public class FrontController {
 		Map<String, Object> model = this.frontService.toMerchantDetail();
 		return new ModelAndView(model.get("url").toString(), model);
 	}
+	
+	@RequestMapping(value = "/front/deliveryAddress.fjsp")
+	public ModelAndView deliveryAddress(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		Map<String, Object> model = this.frontService.toDeliveryAddress();
+		return new ModelAndView(model.get("url").toString(), model);
+	}
 }

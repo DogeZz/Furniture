@@ -43,4 +43,9 @@ public interface FrontService {
 	 * 商店详细页.
 	 */
 	public Map<String, Object> toMerchantDetail();
+	
+	/**
+	 * 收货地址.
+	 */
+	public Map<String, Object> toDeliveryAddress();
 }

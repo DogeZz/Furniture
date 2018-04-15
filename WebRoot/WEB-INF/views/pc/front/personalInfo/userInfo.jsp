@@ -25,6 +25,7 @@
 		background:#000;
 		display:none;
 	}
+	
 </style>
    <!--个人资料-->
 <div class="right_content clearfix">
@@ -42,13 +43,13 @@
 		<script type="text/html" id="personalInfo-userInfo-template">
 			<!--个人信息-->
 			<ul class="Edit_Info">
-		        <div class="Add_info">
+		        <li style="height:100%;overflow:hidden;">
 		       		<label class="personalInfo_hdLabel" >当前头像：</label>
 		       		<div class="personalInfo_img">     
 		            	<a href=""><img src="{{user.yhtx}}" onerror="javascript:this.src='//wwc.alicdn.com/avatar/getAvatar.do?userId=2698210082&width=80&height=80&type=sns';" /></a>
 		        		<a href="//i.taobao.com/user/headset.htm" class="personalInfo_edithd">编辑头像</a>
 		        	</div>  
-		        </div>
+		        </li>
 				<li>
 					<label class="label_name">昵称：</label>
 					<span class="Add_info">
@@ -144,6 +145,7 @@
 				var html = template('personalInfo-userInfo-template', {user: res});
 				$('#personalInfo-userInfo-content').html(html);
 				userInfo_editHdMoveenter();
+				xgsjhm_moveenter();
 			}
 		});
 	};
@@ -155,5 +157,11 @@
 		    $(".personalInfo_edithd").hide();
 		});
 	}
-	                 
+	var xgsjhm_moveenter = function(){
+		$("front").on("mouseenter", function () {
+		    $("front").show();    
+		}).on("mouseleave", function () {
+		    $("front").hide();
+		});
+	}	                 
 </script>

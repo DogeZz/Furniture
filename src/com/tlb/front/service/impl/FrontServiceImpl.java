@@ -66,4 +66,11 @@ public class FrontServiceImpl implements FrontService{
 		map.put("url", "/pc/front/merchant/merchantDetail");
 		return map;
 	}
+
+	@Override
+	public Map<String, Object> toDeliveryAddress() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("url", "/pc/front/personalInfo/deliveryAddress");
+		return map;
+	}
 }

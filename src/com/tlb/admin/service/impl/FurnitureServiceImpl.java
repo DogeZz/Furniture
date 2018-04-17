@@ -17,20 +17,17 @@ import com.tlb.dao.TTlbJjDao;
 import com.tlb.entity.TTlbJj;
 
 @Component
+@SuppressWarnings("unchecked")
 public class FurnitureServiceImpl implements FurnitureService {
 	
 	@Resource
 	private TTlbJjDao tTlbJjDao;
 	
-	@Override
 	@Transactional(readOnly = true)
 	public Map<String, Object> toList() {
-		// TODO Auto-generated method stub
 		Map<String,Object> model = new HashMap<String,Object>();
-		//TODO 页面位置
 		model.put("url", "/pc/admin/furniture/furniture_list");
 		return model;
-		//return null;
 	}
 
 	@Transactional(readOnly = true)
@@ -39,40 +36,31 @@ public class FurnitureServiceImpl implements FurnitureService {
 		return JsonUtil.toStringFromObject(pager.putMapObject());
 	}
 
-	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public Map<String, Object> toAdd() {
-		// TODO 页面
 		Map<String,Object> model = new HashMap<String,Object>();
 		model.put("url", "/pc/admin/furniture/furniture_input");
 		return model;
 	}
 
-	@Override
+	@Transactional
 	public String saveFurniture(TTlbJj param) {
-		// TODO Auto-generated method stub
-		TTlbJj tTlbJj = this.tTlbJjDao.getTTlbShByjjm(param.getJjbt());
-		/*
-		 * 新建家具
-		 */
-		if(tTlbJj==null&&(param.getJjdj().equals("")||param.getJjid()==null)){
+		TTlbJj tTlbJj = this.tTlbJjDao.getTTlbJj(param.getJjid());
+		//新建家具
+		if(tTlbJj == null && (param.getJjid().equals("") || param.getJjid() == null)){
+			param.setJjid(null);
 			param.setSfky(true);
 			param.setSfsc(false);
 			this.tTlbJjDao.saveTTlbJj(param);
-		}
-		else{
-			BeanUtils.copyProperties(param, tTlbJj, new String[]{"shid","cjsj","sfky","sfsc"});
-			tTlbJj.setSfky(true);
-			tTlbJj.setSfsc(false);
+		}else{
+			BeanUtils.copyProperties(param, tTlbJj, new String[]{"jjid","cjsj","sfsc"});
 			this.tTlbJjDao.saveTTlbJj(tTlbJj);
 		}
 		return JsonUtil.toRes("保存成功");
 	}
 
-	@Override
 	@Transactional(readOnly=true)
 	public Map<String, Object> toEdit(String jjid) {
-		// TODO Auto-generated method stub
 		Map<String,Object> model = new HashMap<String,Object>();
 		TTlbJj tTlbJj = this.tTlbJjDao.getTTlbJj(jjid);
 		model.put("data", tTlbJj);
@@ -80,10 +68,8 @@ public class FurnitureServiceImpl implements FurnitureService {
 		return model;
 	}
 
-	@Override
-	@Transactional(readOnly=true)
+	@Transactional
 	public String deleteFurniture(String jjid) {
-		// TODO Auto-generated method stub
 		TTlbJj tTlbJj = this.tTlbJjDao.getTTlbJj(jjid);
 		tTlbJj.setSfsc(true);
 		this.tTlbJjDao.saveTTlbJj(tTlbJj);

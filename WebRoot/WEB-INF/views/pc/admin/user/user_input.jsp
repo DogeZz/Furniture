@@ -5,7 +5,6 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="renderer" content="webkit">
     <title>用户编辑</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/views/common/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/views/common/animate.min.css" rel="stylesheet">

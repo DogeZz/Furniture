@@ -14,7 +14,6 @@ import com.tlb.common.JsonUtil;
 import com.tlb.common.RequestUtil;
 import com.tlb.dao.TTlbCdDao;
 import com.tlb.dao.TTlbYhDao;
-import com.tlb.entity.TTlbCd;
 import com.tlb.entity.TTlbYh;
 import com.tlb.admin.service.HomeService;
 
@@ -46,9 +45,9 @@ public class HomeServiceImpl implements HomeService {
 //		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(RequestUtil.getUsername());
 		List<Map<String, Object>> list = this.tTlbCdDao.getTTlbCds();
 		List<Map<String, Object>> djcd = new ArrayList<Map<String,Object>>();
-		List<Map<String, Object>> zcd = new ArrayList<Map<String,Object>>();
 		for (Map<String, Object> map : list) {
 			if (map.get("sjcdid") == null || map.get("sjcdid") == "") { //是最顶层菜单
+				List<Map<String, Object>> zcd = new ArrayList<Map<String,Object>>();
 				for (Map<String, Object> map1 : list) {
 					if (map != null && map1 != null && map1.get("sjcdid") != null) {
 						if (map1.get("sjcdid").equals(map.get("cdid"))) {

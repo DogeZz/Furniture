@@ -14,7 +14,7 @@ import com.tlb.entity.TTlbYhgz;
 public class TTlbYhgzDaoImpl extends BaseDaoImpl<TTlbYhgz> implements TTlbYhgzDao{
 
 	public Pager<List<Map<String, Object>>> getTTlbYhgzs(PageParam page, String name) {
-		return this.getForPagerBySql("select b.yhmc, c.jjmc from t_tlb_yhgz a, t_tlb_yh b, t_tlb_sh c " +
+		return this.getForPagerBySql("select b.yhmc, c.shmc from t_tlb_yhgz a, t_tlb_yh b, t_tlb_sh c " +
 				"where a.yhid = b.yhid and a.shid = c.shid and (b.yhmc like ? or c.shmc like ?) and a.zt = 1 order by a.cjsj desc", page, "%" + name + "%", "%" + name + "%");
 	}
 

@@ -101,23 +101,7 @@
 							<p class="pic_price">￥2310.00</p>
 						</li>
 					</ul>
-					<div class="pic_page_style clearfix">
-						<ul class="page_example pagination">
-							<li class="first disabled" data-page="1"><a href="javascript:void(0);"> 〈 上一页 </a></li>
-							<li class="page active" data-page="1"><a href="javascript:void(0);">1</a></li>
-							<li class="page" data-page="2"><a href="javascript:void(0);">2</a></li>
-							<li class="page" data-page="3"><a href="javascript:void(0);">3</a></li>
-							<li class="page" data-page="4"><a href="javascript:void(0);">4</a></li>
-							<li class="page" data-page="5"><a href="javascript:void(0);">5</a></li>
-							<li class="page" data-page="6"><a href="javascript:void(0);">6</a></li>
-							<li class="page" data-page="7"><a href="javascript:void(0);">7</a></li>
-							<li class="page" data-page="8"><a href="javascript:void(0);">8</a></li>
-							<li class="page" data-page="9"><a href="javascript:void(0);">9</a></li>
-							<li class="page" data-page="10"><a href="javascript:void(0);">10</a></li>
-							<li class="page" data-page=""><a href="javascript:void(0);">...</a></li>
-							<li class="last" data-page="35"><a href="javascript:void(0);">下一页 〉</a></li>
-						</ul>
-					</div>
+					<div id="public_pagination"></div>
 				</div>
 			</div>
 		</div>
@@ -141,6 +125,15 @@
 		$(window).resize(function() {
 			$('.pagination').css({"margin-left" : ($(".page_Style").width() - $('.pagination').outerWidth()) / 2});
 		});
+		
+		var searchValue = getAttribute("searchValue");
+		if(isNotNull(searchValue)){
+			$(".add_Search").val(searchValue);
+		}
+		var searchType = getAttribute("searchType");
+		if(isNotNull(searchType)){
+			$("#homePage_search option").eq(searchType-1).attr("selected", "selected");
+		}
 	});
 
 	$("#nav").slide({
@@ -156,23 +149,109 @@
 	});
 	
 	var addToShoppingCart = function(value){
-		alert("kjdshgj")
+		if(isNull(sessionStorage.getItem("username"))){
+			layer.msg("请先登录！");
+			return false;
+		}
+		$.ajax({
+			url:'/front/addToShoppingCart.ajx', 
+			type: 'post',
+			data: {
+				yhid: sessionStorage.getItem("username"),
+				jjid: value
+			}, 
+			dataType: 'json',
+			success: function(res) {
+				layer.msg(res.title);
+			}
+		});
 	}
 	
 	var addToCollection = function(value){
-		alert("kjdshgj")
+		if(isNull(sessionStorage.getItem("username"))){
+			layer.msg("请先登录！");
+			return false;
+		}
+		$.ajax({
+			url:'/front/addToCollection.ajx', 
+			type: 'post',
+			data: {
+				yhid: sessionStorage.getItem("username"),
+				jjid: value
+			}, 
+			dataType: 'json',
+			success: function(res) {
+				layer.msg(res.title);
+			}
+		});
 	}
 	
-	var loadMerchantListData = function(){
-		var searchValue = getAttribute("searchValue");
-		if(isNotNull(searchValue)){
-			$(".add_Search").val(searchValue);
-		}
-		var searchType = getAttribute("searchType");
-		if(isNotNull(searchType)){
-			$("#homePage_search option").eq(searchType-1).attr("selected", "selected");
-		}
+	var loadShJjPageData = function(){
+		$.ajax({
+			url:'/front/getShJjPageData.ajx', 
+			type: 'post',
+			data: {shid: getAttribute("shid")}, 
+			dataType: 'json',
+			success: function(res) {
+// 				var html = template('merchantDetail-template', {merchant: res});
+// 				$('#merchantDetail-content').html(html);
+				pagination(res, 'public_pagination');
+			}
+		});
+		pagination(res, 'public_pagination');
 	}
-	loadMerchantListData();
+	loadShJjPageData();
+	
+	var pagination = function(data, divID){
+		pageCount = data.pageCount;
+		page = data.pageIndex;
+		total = data.total - ((pageCount-1) * rows);
+		var paginationHtml = '<div class="pic_page_style clearfix">' +
+								'<ul class="page_example pagination" style="margin-left: 294px;">';
+		if ( page > 2 ) paginationHtml += '<li class="page" data-page="1"><a href="javascript:pagination_selectPage(1);">首页</a></li>';
+		if(page == 1) paginationHtml += '<li class="page disabled"><a href="javascript:pagination_upPage();">上一页</a></li>';
+		else paginationHtml += '<li class="page"><a href="javascript:pagination_upPage();">上一页</a></li>';
+		if ( page > 3 && page > data.pageCount - 2 ){
+			paginationHtml += '<li class="page"><a>...</a></li>';
+		}
+		for (var i = 1; i <= data.pageCount; i++){
+			if ((i >= page - 2 && i <= page + 2 )){
+				if (i == page){
+					paginationHtml += '<li class="page active"><a href="javascript:pagination_selectPage('+ i +');">'+ i +'</a></li>';
+				} else {
+					paginationHtml += '<li class="page"><a href="javascript:pagination_selectPage('+ i +');">'+ i +'</a></li>';
+				}
+			}
+		}
+		if (page < data.pageCount && page != data.pageCount - 1 ) paginationHtml += '<li><a>...</a></li>';
+		if(page == pageCount) paginationHtml += '<li class="page disabled"><a href="javascript:pagination_downPage();">下一页</a></li>';
+		else paginationHtml += '<li class="page"><a href="javascript:pagination_downPage();">下一页</a></li>';
+		paginationHtml += '</ul></div>';
+		document.getElementById(divID).innerHTML = paginationHtml;
+		
+	};
+
+	var pagination_selectPage = function(pageIndex){
+		page = pageIndex;
+		loadShJjPageData();
+		$("html, body").animate({scrollTop : 0}, 100);
+	};
+
+	var pagination_upPage = function(){
+		if(page > 1){
+			page--;
+			loadShJjPageData();
+			$("html, body").animate({scrollTop : 0}, 100);
+		}
+	};
+
+	var pagination_downPage = function(){
+		if(page < pageCount){
+			page++;
+			loadShJjPageData();
+			$("html, body").animate({scrollTop : 0}, 100);
+		}
+	};
+	
 </script>
 </html>

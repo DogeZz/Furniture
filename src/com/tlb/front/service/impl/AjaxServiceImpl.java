@@ -1,6 +1,7 @@
 package com.tlb.front.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -9,10 +10,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tlb.common.JsonUtil;
+import com.tlb.common.PageParam;
+import com.tlb.common.Pager;
 import com.tlb.dao.TTlbShDao;
 import com.tlb.dao.TTlbYhDao;
+import com.tlb.dao.TTlbYhgzDao;
+import com.tlb.dao.TTlbYhscDao;
 import com.tlb.entity.TTlbSh;
 import com.tlb.entity.TTlbYh;
+import com.tlb.entity.TTlbYhgz;
+import com.tlb.entity.TTlbYhsc;
 import com.tlb.front.service.AjaxService;
 
 @Component
@@ -24,6 +31,12 @@ public class AjaxServiceImpl implements AjaxService{
 	
 	@Resource
 	private TTlbShDao tTlbShDao;
+	
+	@Resource
+	private TTlbYhgzDao tTlbYhgzDao;
+	
+	@Resource
+	private TTlbYhscDao tTlbYhscDao;
 
 	@Transactional(readOnly = true)
 	public String getLoginResult(String username, String password) {
@@ -74,12 +87,9 @@ public class AjaxServiceImpl implements AjaxService{
 	}
 
 	@Transactional(readOnly = true)
-	public String toGetShListData(String name) {
-		List<TTlbSh> list = this.tTlbShDao.getTTlbShs(name);
-		if (list != null) {
-			return JsonUtil.toString(list);
-		}
-		return null;
+	public String toGetShPageData(PageParam page, String name) {
+		Pager<List<Map<String, Object>>> pager = this.tTlbShDao.getTTlbShs(page, name);
+		return JsonUtil.toStringFromObject(pager.putMapObject());
 	}
 	
 	@Transactional(readOnly = true)
@@ -91,6 +101,42 @@ public class AjaxServiceImpl implements AjaxService{
 			return JsonUtil.toStringFromObject(tTlbSh);
 		}
 		return null;
+	}
+
+	@Transactional
+	public String addToAttention(String yhid, String shid) {
+		TTlbYhgz tTlbYhgz = this.tTlbYhgzDao.getTTlbYhgzByYhidAndShid(yhid, shid);
+		if (tTlbYhgz == null) { //新建
+			tTlbYhgz = new TTlbYhgz();
+			tTlbYhgz.setYhid(yhid);
+			tTlbYhgz.setShid(shid);
+			tTlbYhgz.setZt(true);
+			this.tTlbYhgzDao.saveTTlbYhgz(tTlbYhgz);
+		} else {
+			if (!tTlbYhgz.getZt()) {
+				tTlbYhgz.setZt(true);
+				this.tTlbYhgzDao.saveTTlbYhgz(tTlbYhgz);
+			}
+		}
+		return JsonUtil.toRes("关注成功");
+	}
+
+	@Transactional
+	public String addToCollection(String yhid, String jjid) {
+		TTlbYhsc tTlbYhsc = this.tTlbYhscDao.getTTlbYhscByYhidAndJjid(yhid, jjid);
+		if (tTlbYhsc == null) { //新建
+			tTlbYhsc = new TTlbYhsc();
+			tTlbYhsc.setYhid(yhid);
+			tTlbYhsc.setJjid(jjid);
+			tTlbYhsc.setZt(true);
+			this.tTlbYhscDao.saveTTlbYhsc(tTlbYhsc);
+		} else {
+			if (!tTlbYhsc.getZt()) {
+				tTlbYhsc.setZt(true);
+				this.tTlbYhscDao.saveTTlbYhsc(tTlbYhsc);
+			}
+		}
+		return JsonUtil.toRes("关注成功");
 	}
 
 }

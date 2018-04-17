@@ -28,6 +28,7 @@
 						<script type="text/html" id="merchantList-template">
 						{{each merchants}}
 						<div class="Shop_header">
+							<div></div>
 							<div class="Shop_header_top"  style="cursor: pointer;" onclick="javascript:window.location.href='/front/merchantDetail.fjsp?shid={{$value.shid}}';">
 								<img src="{{$value.shbjt}}" onerror="javascript:this.src='/views/front/images/shop_img_03.png';"width="1200px" height="275px"/>
 								<div class="shop_Into">
@@ -35,10 +36,8 @@
 										<img src="{{$value.shtx}}" onerror="javascript:this.src='/views/front/images/dp_logo.jpg';" width="85px" height="85px" />
 									</div>
 									<span class="name">{{$value.shmc}}</span>
-									<div class="shop_fx_sc" style="padding-left: 120px;">
+									<div class="shop_fx_sc" style="padding-left: 300px;">
 										<a href="#" class="Store_data"><em class="icon_user"></em>&nbsp;{{$value.shdjl}}</a>
-										<a href="#" class="Store_data"><em class="icon_Collection"></em>收藏</a>
-										<a href="#" class="Store_data"><em class="icon_shareit"></em>分享</a>
 									</div>
 								</div>
 							</div>
@@ -51,30 +50,7 @@
 						</script>
 					</div>
 				</div>
-				<div class="shops_proc_list clearfix">
-					<div class="pic_page_style clearfix">
-						<ul class="page_example pagination" style="margin-left: 294px;">
-							<li></li>
-							<li class="first disabled" data-page="1"><a
-								href="javascript:void(0);"> 〈 上一页 </a></li>
-							<li class="page active" data-page="1"><a
-								href="javascript:void(0);">1</a></li>
-							<li class="page" data-page="2"><a href="javascript:void(0);">2</a></li>
-							<li class="page" data-page="3"><a href="javascript:void(0);">3</a></li>
-							<li class="page" data-page="4"><a href="javascript:void(0);">4</a></li>
-							<li class="page" data-page="5"><a href="javascript:void(0);">5</a></li>
-							<li class="page" data-page="6"><a href="javascript:void(0);">6</a></li>
-							<li class="page" data-page="7"><a href="javascript:void(0);">7</a></li>
-							<li class="page" data-page="8"><a href="javascript:void(0);">8</a></li>
-							<li class="page" data-page="9"><a href="javascript:void(0);">9</a></li>
-							<li class="page" data-page="10"><a
-								href="javascript:void(0);">10</a></li>
-							<li class="page" data-page=""><a href="javascript:void(0);">...</a></li>
-							<li class="last" data-page="35"><a
-								href="javascript:void(0);">下一页 〉</a></li>
-						</ul>
-					</div>
-				</div>
+				<div id="public_pagination"></div>
 			</div>
 		</div>
 	</div>
@@ -111,27 +87,76 @@
 		defaultIndex: 2
 	});
 	
-	var addToShoppingCart = function(value){
-		alert("kjdshgj")
-	}
-	
-	var addToCollection = function(value){
-		alert("kjdshgj")
-	}
-	
+	var page = 1, rows = 2, total = 0, pageCount;
 	var loadShListData = function() {
 		$.ajax({
-			url:'/front/getShListData.ajx', 
+			url:'/front/getShPageData.ajx', 
 			type: 'post',
-			data: {}, 
+			data: {
+				rows : rows,
+				page : page
+			}, 
 			dataType: 'json',
 			success: function(res) {
-				var html = template('merchantList-template', {merchants: res});
+				var html = template('merchantList-template', {merchants: res.rows});
 				$('#merchantList-content').html(html);
+				pagination(res, 'public_pagination');
 			}
 		});
 	}
 	loadShListData();
+	
+	var pagination = function(data, divID){
+		pageCount = data.pageCount;
+		page = data.pageIndex;
+		total = data.total - ((pageCount-1) * rows);
+		var paginationHtml = '<div class="shops_proc_list clearfix">' +
+								'<div class="pic_page_style clearfix">' +
+									'<ul class="page_example pagination" style="margin-left: 294px;">';
+		if ( page > 2 ) paginationHtml += '<li class="page" data-page="1"><a href="javascript:pagination_selectPage(1);">首页</a></li>';
+		if(page == 1) paginationHtml += '<li class="page disabled"><a href="javascript:pagination_upPage();">上一页</a></li>';
+		else paginationHtml += '<li class="page"><a href="javascript:pagination_upPage();">上一页</a></li>';
+		if ( page > 3 && page > data.pageCount - 2 ){
+			paginationHtml += '<li class="page"><a>...</a></li>';
+		}
+		for (var i = 1; i <= data.pageCount; i++){
+			if ((i >= page - 2 && i <= page + 2 )){
+				if (i == page){
+					paginationHtml += '<li class="page active"><a href="javascript:pagination_selectPage('+ i +');">'+ i +'</a></li>';
+				} else {
+					paginationHtml += '<li class="page"><a href="javascript:pagination_selectPage('+ i +');">'+ i +'</a></li>';
+				}
+			}
+		}
+		if (page < data.pageCount && page != data.pageCount - 1 ) paginationHtml += '<li><a>...</a></li>';
+		if(page == pageCount) paginationHtml += '<li class="page disabled"><a href="javascript:pagination_downPage();">下一页</a></li>';
+		else paginationHtml += '<li class="page"><a href="javascript:pagination_downPage();">下一页</a></li>';
+		paginationHtml += '</ul></div></div>';
+		document.getElementById(divID).innerHTML = paginationHtml;
+		
+	};
+
+	var pagination_selectPage = function(pageIndex){
+		page = pageIndex;
+		loadShListData();
+		$("html, body").animate({scrollTop : 0}, 100);
+	};
+
+	var pagination_upPage = function(){
+		if(page > 1){
+			page--;
+			loadShListData();
+			$("html, body").animate({scrollTop : 0}, 100);
+		}
+	};
+
+	var pagination_downPage = function(){
+		if(page < pageCount){
+			page++;
+			loadShListData();
+			$("html, body").animate({scrollTop : 0}, 100);
+		}
+	};
 	
 </script>
 </html>

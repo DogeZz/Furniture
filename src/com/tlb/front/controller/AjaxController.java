@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tlb.common.PageParam;
 import com.tlb.entity.TTlbYh;
 import com.tlb.front.service.AjaxService;
 
@@ -49,10 +50,10 @@ public class AjaxController {
 		return null;
 	}
 	
-	@RequestMapping(value = "/front/getShListData.ajx")
+	@RequestMapping(value = "/front/getShPageData.ajx")
 	public String getShListData(HttpServletResponse response, HttpServletRequest request,
-			@RequestParam(defaultValue = "") String name) throws Exception {
-		String res = this.ajaxService.toGetShListData(name);
+			PageParam page, @RequestParam(defaultValue = "") String name) throws Exception {
+		String res = this.ajaxService.toGetShPageData(page, name);
 		response.getWriter().print(res);
 		return null;
 	}
@@ -61,6 +62,22 @@ public class AjaxController {
 	public String getShData(HttpServletResponse response, HttpServletRequest request,
 			String shid) throws Exception {
 		String res = this.ajaxService.toGetShData(shid);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/addToAttention.ajx")
+	public String addToAttention(HttpServletResponse response, HttpServletRequest request,
+			String yhid, String shid) throws Exception {
+		String res = this.ajaxService.addToAttention(yhid, shid);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/addToCollection.ajx")
+	public String addToCollection(HttpServletResponse response, HttpServletRequest request,
+			String yhid, String jjid) throws Exception {
+		String res = this.ajaxService.addToCollection(yhid, jjid);
 		response.getWriter().print(res);
 		return null;
 	}

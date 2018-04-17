@@ -18,16 +18,6 @@
 </head>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$(".q_code ").hover(function() {
-			$(this).find(".q_code_layer").addClass("hover").css("display", "block");
-		}, function() {
-			$(this).find(".q_code_layer").removeClass("hover").css("display", "none");
-		});
-		$(".diagram").hover(function() {
-			$(this).addClass("hover");
-		}, function() {
-			$(this).removeClass("hover");
-		});
 		$(".product").hover(function() {
 			$(this).addClass("hover");
 			$(this).find(".operating").animate({

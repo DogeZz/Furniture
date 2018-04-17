@@ -14,9 +14,10 @@ public class TTlbYhsc extends BaseEntity {
 
 	private static final long serialVersionUID = 3612744673007372078L;
 
-	private String yhscid; // 用户收藏
+	private String yhscid; // 用户收藏id
 	private String yhid; // 用户id
-	private String shid; // 商户id
+	private String jjid; // 家具id
+	private Boolean zt; // 状态（ 0、取消收藏 1、收藏）
 
 	@Id
 	@GeneratedValue(generator = "uuid")
@@ -40,12 +41,20 @@ public class TTlbYhsc extends BaseEntity {
 	}
 
 	@Column(length = 32)
-	public String getShid() {
-		return shid;
+	public String getJjid() {
+		return jjid;
 	}
 
-	public void setShid(String shid) {
-		this.shid = shid;
+	public void setJjid(String jjid) {
+		this.jjid = jjid;
+	}
+
+	public Boolean getZt() {
+		return zt;
+	}
+
+	public void setZt(Boolean zt) {
+		this.zt = zt;
 	}
 
 }

@@ -17,6 +17,9 @@
 <script src="/views/front/js/css3-mediaqueries.js"  type="text/javascript"></script>
 <![endif]-->
 <title>店铺首页</title>
+<style type="text/css">
+	.merchant_attention{padding: 3px 15px;background-image: url(../images/images_album.png);background-position: -128px -2px;background-repeat: no-repeat;}
+</style>
 </head>
 <body>
 	<div class="Background_color">
@@ -27,7 +30,7 @@
 				<div id="merchantDetail-content">
 					<script type="text/html" id="merchantDetail-template">
 						<div class="Shop_header">
-							<div class="Shop_header_top"  style="cursor: pointer;">
+							<div class="Shop_header_top">
 								<img src="{{merchant.shbjt}}" onerror="javascript:this.src='/views/front/images/shop_img_03.png';"width="1200px" height="275px"/>
 								<div class="shop_Into">
 									<div class="shop_logo">
@@ -36,7 +39,7 @@
 									<span class="name">{{merchant.shmc}}</span>
 									<div class="shop_fx_sc" style="padding-left: 120px;">
 										<a href="#" class="Store_data"><em class="icon_user"></em>&nbsp;{{merchant.shdjl}}</a>
-										<a href="#" class="Store_data"><em class="icon_Collection"></em>收藏</a>
+										<a href="javascript:addToAttention('{{merchant.shid}}');" class="Store_data"><em class="merchant_attention"></em>关注</a>
 										<a href="#" class="Store_data"><em class="icon_shareit"></em>分享</a>
 									</div>
 								</div>
@@ -55,8 +58,8 @@
 							<div class="pic_img textalign">
 								<a href="#"><img src="/views/front/images/product/p-2.jpg"></a>
 								<div class="operating" style="bottom: -30px;">
-									<a href="#" class="pic_cart">加入购物车</a><a href="#"
-										class="Collection">收藏</a>
+									<a href="#" class="pic_cart">加入购物车</a>
+									<a href="javascript:addToCollection();" class="Collection">收藏</a>
 								</div>
 							</div>
 							<p class="pic_nme">
@@ -65,28 +68,7 @@
 							<p class="pic_price">￥2310.00</p>
 						</li>
 					</ul>
-					<div class="pic_page_style clearfix">
-						<ul class="page_example pagination" style="margin-left: 294px;">
-							<li></li>
-							<li class="first disabled" data-page="1"><a
-								href="javascript:void(0);"> 〈 上一页 </a></li>
-							<li class="page active" data-page="1"><a
-								href="javascript:void(0);">1</a></li>
-							<li class="page" data-page="2"><a href="javascript:void(0);">2</a></li>
-							<li class="page" data-page="3"><a href="javascript:void(0);">3</a></li>
-							<li class="page" data-page="4"><a href="javascript:void(0);">4</a></li>
-							<li class="page" data-page="5"><a href="javascript:void(0);">5</a></li>
-							<li class="page" data-page="6"><a href="javascript:void(0);">6</a></li>
-							<li class="page" data-page="7"><a href="javascript:void(0);">7</a></li>
-							<li class="page" data-page="8"><a href="javascript:void(0);">8</a></li>
-							<li class="page" data-page="9"><a href="javascript:void(0);">9</a></li>
-							<li class="page" data-page="10"><a
-								href="javascript:void(0);">10</a></li>
-							<li class="page" data-page=""><a href="javascript:void(0);">...</a></li>
-							<li class="last" data-page="35"><a
-								href="javascript:void(0);">下一页 〉</a></li>
-						</ul>
-					</div>
+					<div id="public_pagination"></div>
 				</div>
 			</div>
 		</div>
@@ -129,13 +111,51 @@
 	}
 	
 	var addToCollection = function(value){
-		alert("kjdshgj")
+		if(isNull(sessionStorage.getItem("username"))){
+			layer.msg("请先登录！");
+			return false;
+		}
+		$.ajax({
+			url:'/front/addToCollection.ajx', 
+			type: 'post',
+			data: {
+				yhid: sessionStorage.getItem("username"),
+				jjid: value
+			}, 
+			dataType: 'json',
+			success: function(res) {
+				layer.msg(res.title);
+			}
+		});
 	}
-	var loadShListData = function() {
+	
+	var addToAttention = function(value){
+		if(isNull(sessionStorage.getItem("username"))){
+			layer.msg("请先登录！");
+			return false;
+		}
+		$.ajax({
+			url:'/front/addToAttention.ajx', 
+			type: 'post',
+			data: {
+				yhid: sessionStorage.getItem("username"),
+				shid: value
+			}, 
+			dataType: 'json',
+			success: function(res) {
+				layer.msg(res.title);
+			}
+		});
+	}
+	
+	var loadShData = function() {
 		$.ajax({
 			url:'/front/getShData.ajx', 
 			type: 'post',
-			data: {shid: getAttribute("shid")}, 
+			data: {
+				shid: getAttribute("shid"),
+				username: sessionStorage.getItem("username")
+			}, 
 			dataType: 'json',
 			success: function(res) {
 				var html = template('merchantDetail-template', {merchant: res});
@@ -143,6 +163,72 @@
 			}
 		});
 	}
-	loadShListData();
+	loadShData();
+	
+	var loadShJjPageData = function() {
+		$.ajax({
+			url:'/front/getShJjPageData.ajx', 
+			type: 'post',
+			data: {shid: getAttribute("shid")}, 
+			dataType: 'json',
+			success: function(res) {
+// 				var html = template('merchantDetail-template', {merchant: res});
+// 				$('#merchantDetail-content').html(html);
+				pagination(res, 'public_pagination');
+			}
+		});
+	}
+	loadShJjPageData();
+	
+	var pagination = function(data, divID){
+		pageCount = data.pageCount;
+		page = data.pageIndex;
+		total = data.total - ((pageCount-1) * rows);
+		var paginationHtml = '<div class="pic_page_style clearfix">' +
+								'<ul class="page_example pagination" style="margin-left: 294px;">';
+		if ( page > 2 ) paginationHtml += '<li class="page" data-page="1"><a href="javascript:pagination_selectPage(1);">首页</a></li>';
+		if(page == 1) paginationHtml += '<li class="page disabled"><a href="javascript:pagination_upPage();">上一页</a></li>';
+		else paginationHtml += '<li class="page"><a href="javascript:pagination_upPage();">上一页</a></li>';
+		if ( page > 3 && page > data.pageCount - 2 ){
+			paginationHtml += '<li class="page"><a>...</a></li>';
+		}
+		for (var i = 1; i <= data.pageCount; i++){
+			if ((i >= page - 2 && i <= page + 2 )){
+				if (i == page){
+					paginationHtml += '<li class="page active"><a href="javascript:pagination_selectPage('+ i +');">'+ i +'</a></li>';
+				} else {
+					paginationHtml += '<li class="page"><a href="javascript:pagination_selectPage('+ i +');">'+ i +'</a></li>';
+				}
+			}
+		}
+		if (page < data.pageCount && page != data.pageCount - 1 ) paginationHtml += '<li><a>...</a></li>';
+		if(page == pageCount) paginationHtml += '<li class="page disabled"><a href="javascript:pagination_downPage();">下一页</a></li>';
+		else paginationHtml += '<li class="page"><a href="javascript:pagination_downPage();">下一页</a></li>';
+		paginationHtml += '</ul></div>';
+		document.getElementById(divID).innerHTML = paginationHtml;
+		
+	};
+
+	var pagination_selectPage = function(pageIndex){
+		page = pageIndex;
+		loadShJjPageData();
+		$("html, body").animate({scrollTop : 0}, 100);
+	};
+
+	var pagination_upPage = function(){
+		if(page > 1){
+			page--;
+			loadShJjPageData();
+			$("html, body").animate({scrollTop : 0}, 100);
+		}
+	};
+
+	var pagination_downPage = function(){
+		if(page < pageCount){
+			page++;
+			loadShJjPageData();
+			$("html, body").animate({scrollTop : 0}, 100);
+		}
+	};
 </script>
 </html>

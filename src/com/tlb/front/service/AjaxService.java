@@ -1,5 +1,6 @@
 package com.tlb.front.service;
 
+import com.tlb.common.PageParam;
 import com.tlb.entity.TTlbYh;
 
 public interface AjaxService {
@@ -35,10 +36,11 @@ public interface AjaxService {
 
 	/**
 	 * 获取所有商户信息.
+	 * @param page 分页参数
 	 * @param name 关键字
 	 * @return 数据
 	 */
-	public String toGetShListData(String name);
+	public String toGetShPageData(PageParam page, String name);
 
 	/**
 	 * 获取单个商户实体.
@@ -46,5 +48,21 @@ public interface AjaxService {
 	 * @return 数据
 	 */
 	public String toGetShData(String shid);
+
+	/**
+	 * 添加或修改用户关注.
+	 * @param yhid 用户id
+	 * @param shid 商户id
+	 * @return 数据
+	 */
+	public String addToAttention(String yhid, String shid);
+
+	/**
+	 * 添加或修改用户收藏.
+	 * @param yhid 用户id
+	 * @param jjid 家具id
+	 * @return 数据
+	 */
+	public String addToCollection(String yhid, String jjid);
 
 }

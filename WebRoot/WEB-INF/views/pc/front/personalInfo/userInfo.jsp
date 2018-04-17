@@ -25,7 +25,13 @@
 		background:#000;
 		display:none;
 	}
-	
+	.changesjhm{
+		color:blue;
+		
+	}
+	.changesjhm:HOVER{
+		color:green;	
+	}
 </style>
    <!--个人资料-->
 <div class="right_content clearfix">
@@ -75,7 +81,7 @@
 					<span class="Add_info">
 						<input name="sjhm" type="text" class="text_add" disabled style="width:150px; border:none;" value="{{user.sjhm}}" />
 					</span>
-					<a href="#">&nbsp;&nbsp;<font color="blue">修改手机号码</font></a>
+					<a href="#" class="changesjhm">&nbsp;&nbsp;修改手机号码</a>
 				</li>
 				<li>
 					<label class="label_name"><i>*</i>用户类型：</label>
@@ -145,7 +151,6 @@
 				var html = template('personalInfo-userInfo-template', {user: res});
 				$('#personalInfo-userInfo-content').html(html);
 				userInfo_editHdMoveenter();
-				xgsjhm_moveenter();
 			}
 		});
 	};
@@ -155,13 +160,6 @@
 		    $(".personalInfo_edithd").show();    
 		}).on("mouseleave", function () {
 		    $(".personalInfo_edithd").hide();
-		});
-	}
-	var xgsjhm_moveenter = function(){
-		$("front").on("mouseenter", function () {
-		    $("front").show();    
-		}).on("mouseleave", function () {
-		    $("front").hide();
 		});
 	}	                 
 </script>

@@ -15,12 +15,14 @@ import com.tlb.common.PageParam;
 import com.tlb.common.Pager;
 import com.tlb.dao.TTlbDdDao;
 import com.tlb.dao.TTlbDzDao;
+import com.tlb.dao.TTlbGwcDao;
 import com.tlb.dao.TTlbJjDao;
 import com.tlb.dao.TTlbShDao;
 import com.tlb.dao.TTlbYhDao;
 import com.tlb.dao.TTlbYhgzDao;
 import com.tlb.dao.TTlbYhscDao;
 import com.tlb.entity.TTlbDd;
+import com.tlb.entity.TTlbGwc;
 import com.tlb.entity.TTlbJj;
 import com.tlb.entity.TTlbSh;
 import com.tlb.entity.TTlbYh;
@@ -52,6 +54,9 @@ public class AjaxServiceImpl implements AjaxService{
 	
 	@Resource
 	private TTlbDdDao tTlbDdDao;
+	
+	@Resource
+	private TTlbGwcDao tTlbGwcDao;
 
 	@Transactional(readOnly = true)
 	public String getLoginResult(String username, String password) {
@@ -230,5 +235,40 @@ public class AjaxServiceImpl implements AjaxService{
 		}
 		return JsonUtil.toRes("签收成功");
 	}
+	
+	@Transactional(readOnly = true)
+	public String getGwcPageData(PageParam page, String username) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		Pager<List<Map<String, Object>>> pager = this.tTlbGwcDao.getTTlbGwcs(page, tTlbYh.getYhid());
+		return JsonUtil.toStringFromObject(pager.putMapObject());
+	}
+	
+	@Transactional
+	public String saveBasket(String username, String jjid, int sl) {
+		TTlbGwc tTlbGwc = this.tTlbGwcDao.getTTlbGwcByJjid(jjid);
+		if (tTlbGwc == null) {
+			TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+			tTlbGwc = new TTlbGwc();
+			tTlbGwc.setYhid(tTlbYh.getYhid());
+			tTlbGwc.setJjid(jjid);
+			tTlbGwc.setSl(sl);
+			tTlbGwc.setZt(0);
+			this.tTlbGwcDao.saveTTlbGwc(tTlbGwc);
+		} else {
+			tTlbGwc.setSl(tTlbGwc.getSl() + sl);
+			this.tTlbGwcDao.saveTTlbGwc(tTlbGwc);
+		}
+		return JsonUtil.toRes("添加成功", tTlbGwc.getGwcid());
+	}
+
+	@Transactional(readOnly = true)
+	public String getGwcData(String gwcid) {
+		List<Map<String, Object>> list = this.tTlbGwcDao.getTTlbGwcForMap(gwcid);
+		if (list.size() != 0) {
+			return JsonUtil.toStringFromObject(list.get(0));
+		}
+		return null;
+	}
+
 	
 }

@@ -20,7 +20,7 @@ public class TTlbDd extends BaseEntity {
 	private String dzid; // 地址id
 	private Integer sl; // 数量
 	private Double ze; // 总额
-	private int ddzt; // 订单状态
+	private int ddzt; // 订单状态（0、待付款 1、待发货2、待收货 3、已收货4、删除）
 	private String sszb; // 所属组别
 
 	@Id

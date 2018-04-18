@@ -249,7 +249,19 @@
 			layer.msg("请先登录！");
 			return false;
 		}
-		window.location.href = "/front/basket.fjsp?jjid=" + urlJjid;
+		$.ajax({
+			url:'/front/saveBasket.ajx', 
+			type: 'post',
+			data: { 
+				jjid : urlJjid,
+				username : sessionStorage.getItem("username"),
+				sl : $(".mui-amount-input").val()
+			}, 
+			dataType: 'json',
+			success: function(res) {
+				window.location.href = "/front/basket.fjsp?gwcid="+ res.msg;
+			}
+		});
 	}
 	
 	var ShowDiv = function(name, id) {

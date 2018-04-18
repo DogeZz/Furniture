@@ -102,10 +102,10 @@
 	var form = $('body').find('form');
 	form.validate({
 		submitHandler: function(f) {
-		   var $this = $('#jjxq');
+		   console.log($('#jjxq'))
 		   var isZsnrInput = $('input[name="jjxq"]');
-		   var editor = "<input type='hidden' name='" + $this.attr("name") + "' value='" + $this.code() + "' />";
-		   form.append(editor);
+// 		   var editor = "<input type='hidden' name='" + $this.attr("name") + "' value='" + $this.code() + "' />";
+// 		   form.append(editor);
 			$.ajax({
 				url : '/admin/furniture.do?save',
 				type: 'post',

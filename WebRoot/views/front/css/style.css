@@ -700,7 +700,7 @@ img {max-width: none;}
 .cart_style  .cart_pic{  border:1px solid #dddddd; margin:15px 0px; width:100%}
 .cart_style  .cart_pic td{ padding:10px;}
 .cart_style  .cart_pic td .img{ width:80px; height:80px; float:left }
-.cart_style  .cart_pic td .name{ width:260px; float:left; padding:0px 10px}
+.cart_style  .cart_pic td .name{ width:260px; float:left; padding:20px 10px}
 .cart_style  .cart_pic td .name a{ font-size:12px}
 .cart_style  .cart_pic td .classification{ width:100px; float:left; color:#999; font-size:12px}
 .cart_style  .cart_pic td.cart_price{ color:#000; font-weight:bold}

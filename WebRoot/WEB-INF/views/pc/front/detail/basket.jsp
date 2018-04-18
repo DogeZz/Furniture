@@ -25,24 +25,28 @@
 			<div class="Confirmation_prompt">
 				<i class="icon_Confirmation"></i>商品已经成功加入购物车
 			</div>
-			<div class="left_commodity clearfix">
+			<div class="left_commodity clearfix" id="basket-content">
+				<script type="text/html" id="basket-template">
 				<p class="img">
-					<img src="images/product/p-2.jpg" width="80px" height="80px" />
+					<img src="{{basket.jjtp}}" width="80px" height="80px" />
 				</p>
 				<p class="name">
-					<a href="#">格杰仕真皮床双人床1.8米现代简约婚床皮艺床1.5米软包欧式床定制</a> <span
-						class="specification">颜色：蓝色/尺寸：XL/数量：2</span>
+					<a href="#">{{basket.jjbt}}</a> 
+					<span class="specification">数量：{{basket.sl}}</span>
 				</p>
+				</script>
 			</div>
 			<div class="right_operating">
-				<a href="#" class="View_lik">查看商品详情</a> <a href="购物车.html"
-					class="cart_btn">去购物车结算<i class="icon_jiantou"></i></a>
+				<a href="javascript:window.history.go(-1);" class="View_lik">查看商品详情</a> 
+				<a href="/front/shoppingCart.fjsp" class="cart_btn">去购物车结算<i class="icon_jiantou"></i></a>
 			</div>
 		</div>
 	</div>
 	<%@include file="../public/footer.jsp"%>
 </body>
 <script type="text/javascript" src="/views/front/public.js?v=1"></script>
+<script type="text/javascript" src="/views/common/until.js"></script>
+<script src="/views/common/template-web.js"></script>
 <script type="text/javascript">
 
 	$("#nav").slide({
@@ -57,19 +61,23 @@
 		defaultIndex: 1
 	});
 
-	var loadShJjPageData = function(){
+	var urlGwcid = getAttribute("gwcid");
+	
+	var loadGwcData = function(){
 		$.ajax({
-			url:'/front/getShJjPageData.ajx', 
+			url:'/front/getGwcData.ajx', 
 			type: 'post',
-			data: {shid: getAttribute("shid")}, 
+			data: {
+				gwcid: urlGwcid
+			}, 
 			dataType: 'json',
 			success: function(res) {
-// 				var html = template('merchantDetail-template', {merchant: res});
-// 				$('#merchantDetail-content').html(html);
+				var html = template('basket-template', {basket: res});
+				$('#basket-content').html(html);
 			}
 		});
 	}
-	loadShJjPageData();
+	loadGwcData();
 
 </script>
 </html>

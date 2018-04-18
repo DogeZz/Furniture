@@ -15,12 +15,11 @@
 	<div class="Background_color">
 		<div class="user_lanmu">
 			<div class="user_style nav">
-				<a href="#" class="user_logo"><img src="/views/front/images/user_logo_03.png" /></a>
+				<a href="/front/homePage.fjsp" class="user_logo"><img src="/views/front/images/user_logo_03.png" /></a>
 				<div class="navitems">
 					<ul class="">
 						<li><a href="#">首页</a></li>
 						<li><a href="#">账户设置</a></li>
-						<li><a href="#">消息</a></li>
 					</ul>
 				</div>
 				<div class="cart_shop">
@@ -103,7 +102,7 @@
 												{{else if $value.ddzt == 2}}
 												<a href="javascript:toSign('{{$value.ddid}}');" class="payment_btn sign">签收</a>
 												{{/if}}
-												<a href="javascript:toDelete('{{$value.ddid}}');#" class="payment_btn">删除订单</a>
+												<a href="javascript:toDelete('{{$value.ddid}}');" class="payment_btn">删除订单</a>
 											</td>
 										</tr>
 									</tbody>

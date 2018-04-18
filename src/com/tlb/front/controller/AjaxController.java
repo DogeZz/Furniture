@@ -145,4 +145,28 @@ public class AjaxController {
 		response.getWriter().print(res);
 		return null;
 	}
+	
+	@RequestMapping(value = "/front/getGwcPageData.ajx")
+	public String getGwcPageData(HttpServletResponse response, HttpServletRequest request,
+			String username, PageParam page) throws Exception {
+		String res = this.ajaxService.getGwcPageData(page, username);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/saveBasket.ajx")
+	public String saveBasket(HttpServletResponse response, HttpServletRequest request,
+			String username, String jjid, int sl) throws Exception {
+		String res = this.ajaxService.saveBasket(username, jjid, sl);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/getGwcData.ajx")
+	public String getGwcData(HttpServletResponse response, HttpServletRequest request,
+			String gwcid) throws Exception {
+		String res = this.ajaxService.getGwcData(gwcid);
+		response.getWriter().print(res);
+		return null;
+	}
 }

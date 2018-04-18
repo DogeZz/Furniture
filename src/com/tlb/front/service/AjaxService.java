@@ -126,4 +126,28 @@ public interface AjaxService {
 	 */
 	public String toDelete(String ddid);
 
+	/**
+	 * 购物车数据.
+	 * @param page
+	 * @param username
+	 * @return
+	 */
+	public String getGwcPageData(PageParam page, String username);
+
+	/**
+	 * 添加到购物车.
+	 * @param username
+	 * @param jjid
+	 * @param sl
+	 * @return
+	 */
+	public String saveBasket(String username, String jjid, int sl);
+
+	/**
+	 * 获取单个购物车数据.
+	 * @param gwcid
+	 * @return
+	 */
+	public String getGwcData(String gwcid);
+
 }

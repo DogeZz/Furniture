@@ -9,7 +9,7 @@
 <script src="/views/front/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/views/front/js/layer/layer.js"></script>
-<script src="../views/common/template-web.js"></script>
+<script src="/views/common/template-web.js"></script>
 <!--[if lt IE 9]>
 <script src="/views/front/js/html5shiv.js" type="text/javascript"></script>
 <script src="/views/front/js/respond.min.js"></script>

@@ -105,4 +105,44 @@ public class AjaxController {
 		response.getWriter().print(res);
 		return null;
 	}
+	
+	@RequestMapping(value = "/front/buySubmit.ajx")
+	public String buySubmit(HttpServletResponse response, HttpServletRequest request,
+			String username, String jjid, int sl, double ze, String dzid) throws Exception {
+		String res = this.ajaxService.buySubmit(username, jjid, sl, ze, dzid);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/getDdPageData.ajx")
+	public String getDdPageData(HttpServletResponse response, HttpServletRequest request,
+			String username, PageParam page) throws Exception {
+		String res = this.ajaxService.getDdPageData(username, page);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/toPay.ajx")
+	public String toPay(HttpServletResponse response, HttpServletRequest request,
+			String ddid) throws Exception {
+		String res = this.ajaxService.toPay(ddid);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/toSign.ajx")
+	public String toSign(HttpServletResponse response, HttpServletRequest request,
+			String ddid) throws Exception {
+		String res = this.ajaxService.toSign(ddid);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/toDelete.ajx")
+	public String toDelete(HttpServletResponse response, HttpServletRequest request,
+			String ddid) throws Exception {
+		String res = this.ajaxService.toDelete(ddid);
+		response.getWriter().print(res);
+		return null;
+	}
 }

@@ -58,4 +58,14 @@ public interface FrontService {
 	 * 添加购物车成功页.
 	 */
 	public Map<String, Object> toBasket();
+
+	/**
+	 * 我的订单页.
+	 */
+	public Map<String, Object> toMyOrder();
+	
+	/**
+	 * 购物车页.
+	 */
+	public Map<String, Object> toShoppingCart();
 }

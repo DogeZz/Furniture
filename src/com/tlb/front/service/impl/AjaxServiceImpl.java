@@ -1,5 +1,6 @@
 package com.tlb.front.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tlb.common.JsonUtil;
 import com.tlb.common.PageParam;
 import com.tlb.common.Pager;
+import com.tlb.dao.TTlbDdDao;
 import com.tlb.dao.TTlbDzDao;
 import com.tlb.dao.TTlbJjDao;
 import com.tlb.dao.TTlbShDao;
 import com.tlb.dao.TTlbYhDao;
 import com.tlb.dao.TTlbYhgzDao;
 import com.tlb.dao.TTlbYhscDao;
+import com.tlb.entity.TTlbDd;
 import com.tlb.entity.TTlbJj;
 import com.tlb.entity.TTlbSh;
 import com.tlb.entity.TTlbYh;
@@ -46,6 +49,9 @@ public class AjaxServiceImpl implements AjaxService{
 	
 	@Resource
 	private TTlbDzDao tTlbDzDao;
+	
+	@Resource
+	private TTlbDdDao tTlbDdDao;
 
 	@Transactional(readOnly = true)
 	public String getLoginResult(String username, String password) {
@@ -170,6 +176,59 @@ public class AjaxServiceImpl implements AjaxService{
 		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(yhid);
 		List<Map<String, Object>> map = this.tTlbDzDao.getTTlbDzsByYhid(tTlbYh.getYhid());
 		return JsonUtil.toString(map);
+	}
+
+	@Transactional
+	public String buySubmit(String username, String jjid, int sl, double ze, String dzid) {
+		Date date = new Date();
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		TTlbDd tTlbDd = new TTlbDd();
+		tTlbDd.setYhid(tTlbYh.getYhid());
+		tTlbDd.setJjid(jjid);
+		tTlbDd.setSl(sl);
+		tTlbDd.setZe(ze);
+		tTlbDd.setDzid(dzid);
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		tTlbDd.setSszb(encoder.encodePassword(String.valueOf(date.getTime()), username));
+		this.tTlbDdDao.saveTTlbDd(tTlbDd);
+		return JsonUtil.toRes("订单成功");
+	}
+
+	@Transactional(readOnly = true)
+	public String getDdPageData(String username, PageParam page) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		Pager<List<Map<String, Object>>> pager = this.tTlbDdDao.getTTlbYhListByYhid(page, tTlbYh.getYhid());
+		return JsonUtil.toString(pager.putMapObject());
+	}
+
+	@Transactional
+	public String toPay(String ddid) {
+		TTlbDd tTlbDd = this.tTlbDdDao.getTTlbDd(ddid);
+		if (tTlbDd != null) {
+			tTlbDd.setDdzt(1);
+			this.tTlbDdDao.saveTTlbDd(tTlbDd);
+		}
+		return JsonUtil.toRes("付款成功");
+	}
+
+	@Transactional
+	public String toSign(String ddid) {
+		TTlbDd tTlbDd = this.tTlbDdDao.getTTlbDd(ddid);
+		if (tTlbDd != null) {
+			tTlbDd.setDdzt(3);
+			this.tTlbDdDao.saveTTlbDd(tTlbDd);
+		}
+		return JsonUtil.toRes("签收成功");
+	}
+	
+	@Transactional
+	public String toDelete(String ddid) {
+		TTlbDd tTlbDd = this.tTlbDdDao.getTTlbDd(ddid);
+		if (tTlbDd != null) {
+			tTlbDd.setDdzt(4);
+			this.tTlbDdDao.saveTTlbDd(tTlbDd);
+		}
+		return JsonUtil.toRes("签收成功");
 	}
 	
 }

@@ -83,4 +83,16 @@ public class FrontController {
 		Map<String, Object> model = this.frontService.toBasket();
 		return new ModelAndView(model.get("url").toString(), model);
 	}
+	
+	@RequestMapping(value = "/front/myOrder.fjsp")
+	public ModelAndView myOrder(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		Map<String, Object> model = this.frontService.toMyOrder();
+		return new ModelAndView(model.get("url").toString(), model);
+	}
+	
+	@RequestMapping(value = "/front/shoppingCart.fjsp")
+	public ModelAndView shoppingCart(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		Map<String, Object> model = this.frontService.toShoppingCart();
+		return new ModelAndView(model.get("url").toString(), model);
+	}
 }

@@ -4,11 +4,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="/views/front/css/common.css" type="text/css" rel="stylesheet" />
-<link href="/views/front/css/style.css" type="text/css" rel="stylesheet" />
+<link href="/views/front/css/style.css?v=44" type="text/css" rel="stylesheet" />
 <script src="/views/front/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/views/front/js/jquery.imagezoom.min.js"></script>
-<script type="text/javascript" src="/views/front/js/layer/layer.js"></script>
+<script type="text/javascript" src="/views/common/layer/layer.js"></script>
 <!--[if lt IE 9]>
 <script src="/views/front/js/html5shiv.js" type="text/javascript"></script>
 <script src="/views/front/js/respond.min.js"></script>
@@ -17,18 +17,6 @@
 <title>结算</title>
 </head>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#fold_btn").click(function() {
-			var active = $(this).attr("active");
-			$(".addresses_content").slideToggle("slow");
-			if ($(this).hasClass('active')) {
-				$(this).removeClass('active').find("i").attr("class", "icon_Expand");
-			} else {
-				$(this).addClass('active').find("i").attr("class", "icon_hide")
-
-			}
-		});
-	})
 	//字数限制
 	function checkLength(which) {
 		var maxChars = 45; //
@@ -84,22 +72,23 @@
 					{{each addrs}}
 					{{if $value.sfmr}}
 					<div class="address clearfix">
-						<a href="" class="Select_address determine" id="" aria-checked="true">张天师 <i class="icon_Select"></i></a> 
-						<span class="info">江苏南京雨花台区郁金香路2号郁金香软件大厦6楼;&nbsp;18903456789</span>
+						<a href="" class="Select_address determine" id="" aria-checked="true">{{$value.zsxm}} <i class="icon_Select"></i></a> 
+						<input class="data_mrdz" value="{{$value.dzid}}" type="hidden">
+						<span class="info mrdz">{{$value.shdz}}&nbsp;{{$value.sjhm}}</span>
 					</div>
-					{{else}}
 					<div class="More_addresses">
-						<a href="javascript:ovid()" id="fold_btn" class="title_name">更多地址
+						<a href="javascript:;" id="fold_btn" class="title_name">更多地址
 						<i class="icon_Expand"></i></a>
+					{{else}}
 						<div class="addresses_content">
 							<div class="address clearfix">
-								<a href="javascript:ovid()" class="Select_address" id="" aria-checked="true">张天师 江苏 
+								<a href="javascript:ovid()" class="Select_address" id="" aria-checked="true">{{$value.zsxm}} 
 								<i class="icon_Select"></i></a> 
-								<span class="info">江苏南京雨花台区郁金香路2号郁金香软件大厦6楼&nbsp;;&nbsp;18903456789</span>
+								<span class="info">{{$value.shdz}}&nbsp;{{$value.sjhm}}</span>
 							</div>
 						</div>
-					</div>
 					{{/if}}
+					</div>
 					{{/each}}
 					</script>
 				</div>
@@ -109,25 +98,24 @@
 						<span>支付方式</span>
 					</div>
 					<div class="Pay_list clearfix">
-						<a href="javascript:ovid()" class="Select_address determine" id="" aria-checked="true">支付宝<i class="icon_Select"></i></a>
+						<a href="javascript:;" class="Select_address determine" id="" aria-checked="true">支付宝<i class="icon_Select"></i></a>
 					</div>
 				</div>
 				<!--送货清单-->
 				<div class="shopping_list">
-					<div class="title_name clearfix marginbottom">
-						<span>送货清单</span><a href="#">返回并修改购物车</a>
-					</div>
 					<div class="product_list">
 						<table>
-							<tbody>
+							<tbody id="jj-content">
+								<script type="text/html" id="jj-template">
 								<tr>
 									<td width="690px">
-										<p class="img"> <img src="/views/front/images/product/p-7.jpg" width="90px" height="90" /></p>
-										<p class="pic_name"><a href="#">黑白调 电脑椅子办公椅家用电竞椅可躺人体工学椅 白色</a></p>
+										<p class="img"> <img src="{{jj.jjtp}}" width="90px" height="90" /></p>
+										<p class="pic_name"><a href="#">{{jj.jjbt}}</a></p>
 									</td>
-									<td width="150px" class="price">￥234</td>
+									<td width="150px" class="price">￥{{jj.jjjg}}</td>
 									<td width="150px">X1</td>
 								</tr>
+								</script>
 							</tbody>
 						</table>
 						<div class="Remarks">
@@ -144,11 +132,11 @@
 				<div class="clearfix">
 					<div class="Orders_submit">
 						<div class="total">
-							<span>总金额</span><span class="total_Amount">￥2345.00</span>
+							<span>总金额</span><span class="total_Amount">￥</span>
 						</div>
-						<div class="Order_address">张天师&nbsp;江苏南京雨花台区郁金香路2号郁金香软件大厦6楼&nbsp;18903456789</div>
+						<div class="Order_address"></div>
 						<div>
-							<input name="" type="submit" value="提交订单" class="submit_Order" />
+							<input name="" type="submit" value="提交订单" onclick="submit()" class="submit_Order" />
 						</div>
 					</div>
 				</div>
@@ -159,9 +147,12 @@
 </body>
 <script type="text/javascript" src="/views/front/public.js"></script>
 <script type="text/javascript" src="/views/common/until.js"></script>
+<script src="/views/common/template-web.js"></script>
 <script type="text/javascript">
 	
 	var urlJjid = getAttribute("jjid");
+	var urlSl = getAttribute("sl");
+	var ze = 1000;
 	
 	var loadDzData = function() {
 		$.ajax({
@@ -170,7 +161,19 @@
 			data: { yhid : sessionStorage.getItem("username") }, 
 			dataType: 'json',
 			success: function(res) {
-				console.log(res)
+				var html = template('addr-template', {addrs: res});
+				$('#addr-content').append(html);
+				$("#fold_btn").click(function() {
+					var active = $(this).attr("active");
+					$(".addresses_content").slideToggle("slow");
+					if ($(this).hasClass('active')) {
+						$(this).removeClass('active').find("i").attr("class", "icon_Expand");
+					} else {
+						$(this).addClass('active').find("i").attr("class", "icon_hide")
+
+					}
+				});
+				$(".Order_address").html($(".mrdz").html())
 			}
 		});
 	}
@@ -183,18 +186,36 @@
 			data: { jjid : urlJjid }, 
 			dataType: 'json',
 			success: function(res) {
-				console.log(res)
+				var html = template('jj-template', {jj: res});
+				$('#jj-content').append(html);
+				$(".total_Amount").append(res.jjjg * urlSl);
+				ze = res.jjjg * urlSl;
+				
 			}
 		});
 	}
 	loadJjData();
 	
-	var buy = function(){
+	var submit = function(){
 		if(isNull(sessionStorage.getItem("username"))){
 			layer.msg("请先登录！");
 			return false;
 		}
-		window.location.href = "";
+  		$.ajax({
+			url:'/front/buySubmit.ajx', 
+			type: 'post',
+			data: { 
+				jjid : urlJjid,
+				username : sessionStorage.getItem("username"),
+				sl : urlSl,
+				ze : ze,
+				dzid : $(".data_mrdz").val()
+			}, 
+			dataType: 'json',
+			success: function(res) {
+				window.location.href = "/front/myOrder.fjsp";
+			}
+		}); 
 	}
 </script>
 </html>

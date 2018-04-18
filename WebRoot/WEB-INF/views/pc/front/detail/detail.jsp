@@ -54,33 +54,6 @@
 								<a href="/views/front/images/product/01.jpg">
 								<img src="/views/front/images/product/01_mid.jpg" alt="展品细节展示放大镜特效" rel="/views/front/images/product/01.jpg" class="jqzoom" /></a>
 							</div>
-							<ul class="tb-thumb" id="thumblist">
-								<li class="tb-selected">
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/views/front/images/product/01_small.jpg" mid="/views/front/images/product/01_mid.jpg" big="/views/front/images/product/01.jpg"></a>
-									</div>
-								</li>
-								<li>
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/views/front/images/product/02_small.jpg" mid="/views/front/images/product/02_mid.jpg" big="/views/front/images/product/02.jpg"></a>
-									</div>
-								</li>
-								<li>
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/resource/common/file/2018/04/17/1be3d79a333b45019dda4d82b8264b13.jpg" mid="/resource/common/file/2018/04/17/1be3d79a333b45019dda4d82b8264b13.jpg" big="/resource/common/file/2018/04/17/1be3d79a333b45019dda4d82b8264b13.jpg"></a>
-									</div>
-								</li>
-								<li>
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/views/front/images/product/03_small.jpg" mid="/views/front/images/product/03_mid.jpg" big="/views/front/images/product/03.jpg"></a>
-									</div>
-								</li>
-								<li style="margin-right:0px;">
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/views/front/images/product/04_small.jpg" mid="/views/front/images/product/04_mid.jpg" big="/views/front/images/product/04.jpg"></a>
-									</div>
-								</li>
-							</ul>
 						</div>
 					</div>
 					<div class="Collection">
@@ -102,48 +75,6 @@
 					<dl class="Deadline clearfix">
 						<dt class="label_name">供货期</dt>
 						<dd class="Description content">下单后一天内发货</dd>
-					</dl>
-					<dl class="tb-prop clearfix">
-						<dt class="label_name">颜色分类</dt>
-						<dd class="content">
-							<ul>
-								<li class="tb-selected">
-									<a href="#" role="button" tabindex="0" data-spm-anchor-id="">
-									<span>纯色</span></a><i>已选中</i>
-								</li>
-								<li class="">
-									<a href="#" role="button" tabindex="0" data-spm-anchor-id="">
-									<span>花色</span></a>
-								</li>
-								<li class=""><a href="#" role="button" tabindex="0"
-									data-spm-anchor-id=""><span>玫瑰红</span></a></li>
-								<li class=""><a href="#" role="button" tabindex="0"
-									data-spm-anchor-id=""><span>天蓝色</span></a></li>
-								<li class=""><a href="#" role="button" tabindex="0"
-									data-spm-anchor-id=""><span>金色</span></a></li>
-								<li class=""><a href="#" role="button" tabindex="0"
-									data-spm-anchor-id=""><span>灰白色</span></a></li>
-								<li class=""><a href="#" role="button" tabindex="0"
-									data-spm-anchor-id=""><span>灰白色</span></a></li>
-								<li class=""><a href="#" role="button" tabindex="0"
-									data-spm-anchor-id=""><span>灰白色</span></a></li>
-							</ul>
-						</dd>
-					</dl>
-					<dl class="tb-prop clearfix">
-						<dt class="label_name">规格</dt>
-						<dd class="content">
-							<ul>
-								<li class="tb-selected"><a href="#" role="button"
-									tabindex="0" data-spm-anchor-id=""><span>三杯三碟</span></a><i>已选中</i></li>
-								<li class=""><a href="#" role="button" tabindex="0"
-									data-spm-anchor-id=""><span>三杯三碟</span></a></li>
-								<li class=""><a href="#" role="button" tabindex="0"
-									data-spm-anchor-id=""><span>三杯三碟</span></a></li>
-								<li class=""><a href="#" role="button" tabindex="0"
-									data-spm-anchor-id=""><span>三杯三碟</span></a></li>
-							</ul>
-						</dd>
 					</dl>
 					<dl class="tb-amount tm-clear">
 						<dt class="label_name">数量</dt>
@@ -310,8 +241,8 @@
 			layer.msg("请先登录！");
 			return false;
 		}
-		window.location.href = "/front/buy.fjsp?jjid=" + urlJjid;
-	}
+		window.location.href = "/front/buy.fjsp?jjid=" + urlJjid + "&sl=" + $(".mui-amount-input").val();
+	} 
 	
 	var basket = function(){
 		if(isNull(sessionStorage.getItem("username"))){

@@ -86,4 +86,44 @@ public interface AjaxService {
 	 */
 	public String getDzData(String yhid);
 
+	/**
+	 * 生成订单.
+	 * @param username
+	 * @param jjid
+	 * @param sl
+	 * @param ze
+	 * @param dzid 
+	 * @return
+	 */
+	public String buySubmit(String username, String jjid, int sl, double ze, String dzid);
+
+	/**
+	 * 订单数据.
+	 * @param username
+	 * @param page 
+	 * @return
+	 */
+	public String getDdPageData(String username, PageParam page);
+
+	/**
+	 * 用户付款订单.
+	 * @param ddid
+	 * @return
+	 */
+	public String toPay(String ddid);
+
+	/**
+	 * 用户签收订单.
+	 * @param ddid
+	 * @return
+	 */
+	public String toSign(String ddid);
+
+	/**
+	 * 用户删除订单.
+	 * @param ddid
+	 * @return
+	 */
+	public String toDelete(String ddid);
+
 }

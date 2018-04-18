@@ -7,7 +7,8 @@
 	<script type="text/javascript"src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 	<link href="/views/front/css/common.css" type="text/css"rel="stylesheet" />
 	<link href="/views/front/css/style.css?v=1" type="text/css" rel="stylesheet" />
-	<link href="/views/front/css/z_css.css" type="text/css" rel="stylesheet" />
+	<link href="/views/front/css/z_css.css?v=55" type="text/css" rel="stylesheet" />
+	<script src="/views/common/template-web.js"></script>
 	<!--[if lt IE 9]>
 	<script src="/views/front/js/html5shiv.js" type="text/javascript"></script>
 	<script src="/views/front/js/respond.min.js"></script>
@@ -61,106 +62,27 @@
 	</div>
 	<!--banner轮播  e-->
 
-	<!--场景方案  s-->
-	<div class="wrap_c bgcolor_f9">
-		<div class="i_title">场景方案</div>
-		<div class="clear"></div>
-		<div class="c_main">
-			<div class="c_mianbox1 mar_14">
-				<div class="c_tips">
-					<a href="#">客厅</a>
-					<a href="#">卫生间</a>
-					<a href="#">书房</a>
-					<a href="#">主卧</a>
-					<a href="#">次卧</a>
-					<a href="#">阳台/露台</a>
-					<a href="#">儿童房</a>
-					<a href="#">茶室</a>
-					<a href="#">客厅</a>
-					<a href="#">客厅</a>
-				</div>
-				<div class="c_pic">
-					<a href="#"><img src="/views/front/images/c_img.jpg" /></a>
-				</div>
-			</div>
-			<div class="c_mianbox1 mar_14">
-				<div class="c_pic">
-					<a href="#"><img src="/views/front/images/c_img.jpg" /></a>
-				</div>
-				<div class="c_pic">
-					<a href="#"><img src="/views/front/images/c_img.jpg" /></a>
-				</div>
-			</div>
-			<div class="c_mianbox2 mar_14">
-				<a href="#"><img src="/views/front/images/c_img.jpg" /></a>
-			</div>
-			<div class="c_mianbox1 mar_14">
-				<div class="c_pic">
-					<a href="#"><img src="/views/front/images/c_img.jpg" /></a>
-				</div>
-				<div class="c_pic">
-					<a href="#"><img src="/views/front/images/c_img.jpg" /></a>
-				</div>
-			</div>
-			<div class="c_mianbox1">
-				<div class="c_pic">
-					<a href="#"><img src="/views/front/images/c_img.jpg" /></a>
-				</div>
-				<div class="c_pic">
-					<a href="#"><img src="/views/front/images/c_img.jpg" /></a>
-				</div>
-			</div>
-		</div>
-		<div class="clear"></div>
-	</div>
-	<!--场景方案  e-->
 
 	<!--单品大库  s-->
-	<div class="wrap_p">
+	<div class="wrap_p" >
 		<div class="p_title">单品大库</div>
-		<div class="p_main">
-			<div class="p_box1">
-				<a href="#" class="p_box1pic"><img
-					src="/views/front/images/p_img01.jpg" /></a>
-				<p>
-					<a href="#">锥形木质脚布艺拉扣环抱式沙发 三人位</a>
-				</p>
-				<p class="p_pirce">￥2439</p>
-			</div>
+		<div class="p_main"  style="border-left: none;">
+		<div id="furnitureList-content">
+			<script type="text/html" id="furnitureList-template">
+			{{each furnitures}}
 			<div class="p_box2">
-				<a href="#" class="p_box2pic"><img
-					src="/views/front/images/p_img01.jpg" /></a>
-				<p>
-					<a href="#">锥形木质脚布艺拉扣环抱式沙发 三人位</a>
-				</p>
-				<p class="p_pirce">￥2439</p>
+				<a href="javascript:window.location.href='/front/detail.fjsp?jjid={{$value.jjid}}';" class="p_box2pic"><img src="{{$value.jjtp}}" /></a>
+				<p><a href="#">{{$value.jjbt}}</a></p>
+				<p class="p_pirce">￥{{$value.jjjg}}</p>
 			</div>
-			<div class="p_box2">
-				<a href="#" class="p_box2pic"><img
-					src="/views/front/images/p_img01.jpg" /></a>
-				<p>
-					<a href="#">锥形木质脚布艺拉扣环抱式沙发 三人位</a>
-				</p>
-				<p class="p_pirce">￥2439</p>
-			</div>
-			<div class="p_box2">
-				<a href="#" class="p_box2pic"><img
-					src="/views/front/images/p_img01.jpg" /></a>
-				<p>
-					<a href="#">锥形木质脚布艺拉扣环抱式沙发 三人位</a>
-				</p>
-				<p class="p_pirce">￥2439</p>
-			</div>
-			<div class="p_box2">
-				<a href="#" class="p_box2pic"><img
-					src="/views/front/images/p_img01.jpg" /></a>
-				<p>
-					<a href="#">锥形木质脚布艺拉扣环抱式沙发 三人位</a>
-				</p>
-				<p class="p_pirce">￥2439</p>
-			</div>
+			{{/each}}
+			</script>
 		</div>
+		<div style="clear:both;"></div>
+		</div>
+		<div style="clear:both;"></div>
 	</div>
+	<div onclick="loadMore();" class="loadMore" style="cursor:pointer;font-size:22px;width:1200px;margin:0 auto;height:60px;line-height:60px;text-align:center;border:1px solid #f1f1f1;clear:both;border-top: none;">查看更多</div>
 	<!--单品大库  e-->
 
 	<!--服务流程  s-->
@@ -168,43 +90,11 @@
 		<div class="s_main">
 			<div class="s_title">服务和流程</div>
 			<div class="s_box1">
-				<ul>
-					<li>
-						<p>
-							<img src="/views/front/images/icon_s01.jpg" />
-						</p>
-						<p class="s_tip">知识</p>
-						<p class="s_tip_text">软装饰细节，无论是从视觉到触觉，从感官到心里都彻底温暖起来。</p>
-					</li>
-					<li>
-						<p>
-							<img src="/views/front/images/icon_s02.jpg" />
-						</p>
-						<p class="s_tip">实现</p>
-						<p class="s_tip_text">软装饰细节，无论是从视觉到触觉，从感官到心里都彻底温暖起来。</p>
-					</li>
-					<li>
-						<p>
-							<img src="/views/front/images/icon_s03.jpg" />
-						</p>
-						<p class="s_tip">优势</p>
-						<p class="s_tip_text">软装饰细节，无论是从视觉到触觉，从感官到心里都彻底温暖起来。</p>
-					</li>
-					<li>
-						<p>
-							<img src="/views/front/images/icon_s04.jpg" />
-						</p>
-						<p class="s_tip">服务</p>
-						<p class="s_tip_text">软装饰细节，无论是从视觉到触觉，从感官到心里都彻底温暖起来。</p>
-					</li>
-				</ul>
-			</div>
-			<div class="s_box2">
 				<div class="s_box2_list">
 					<p>
 						<img src="/views/front/images/icon_s05.jpg" />
 					</p>
-					<p>浏览场景</p>
+					<p>浏览商品</p>
 				</div>
 				<div class="s_box2_jt">
 					<img src="/views/front/images/s_jt.jpg" />
@@ -213,7 +103,7 @@
 					<p>
 						<img src="/views/front/images/icon_s06.jpg" />
 					</p>
-					<p>挑选方案</p>
+					<p>挑选家具</p>
 				</div>
 				<div class="s_box2_jt">
 					<img src="/views/front/images/s_jt.jpg" />
@@ -222,7 +112,7 @@
 					<p>
 						<img src="/views/front/images/icon_s07.jpg" />
 					</p>
-					<p>选择套餐</p>
+					<p>选择规格</p>
 				</div>
 				<div class="s_box2_jt">
 					<img src="/views/front/images/s_jt.jpg" />
@@ -259,6 +149,9 @@
 </body>
 <script type="text/javascript" src="/views/front/public.js?v=1"></script>
 <script type="text/javascript">
+	
+	var isEnd = false;
+	
 	$("#nav").slide({
 		type : "menu",
 		titCell : ".nLi",
@@ -284,5 +177,34 @@
 	
 	goToTop("toTop");
 	showTopSearch("showTopSearch");
+	
+	var page = 1, rows = 8;
+	var loadJjListData = function() {
+		$.ajax({
+			url:'/front/getJjPageData.ajx', 
+			type: 'post',
+			data: {
+				rows : rows,
+				page : page
+			},
+			dataType: 'json',
+			success: function(res) {
+				var html = template('furnitureList-template', {furnitures: res.rows});
+				$('#furnitureList-content').append(html);
+				if(res.pageIndex == res.pageCount){
+					inEnd = true;
+					$(".loadMore").remove();
+				}
+			}
+		});
+	}
+	loadJjListData();
+	
+	var loadMore = function(){
+		if(!isEnd){
+			page++;
+			loadJjListData();
+		}
+	}
 </script>
 </html>

@@ -49,11 +49,11 @@ public class FurnitureServiceImpl implements FurnitureService {
 		//新建家具
 		if(tTlbJj == null && (param.getJjid().equals("") || param.getJjid() == null)){
 			param.setJjid(null);
-			param.setSfky(true);
 			param.setSfsc(false);
+			param.setDjl(0);
 			this.tTlbJjDao.saveTTlbJj(param);
 		}else{
-			BeanUtils.copyProperties(param, tTlbJj, new String[]{"jjid","cjsj","sfsc"});
+			BeanUtils.copyProperties(param, tTlbJj, new String[]{"jjid","cjsj","sfsc","djl"});
 			this.tTlbJjDao.saveTTlbJj(tTlbJj);
 		}
 		return JsonUtil.toRes("保存成功");

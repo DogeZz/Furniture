@@ -53,15 +53,15 @@ public class FurnitureController {
 	
 	@RequestMapping(params = "edit")
 	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response,
-			String shid){
-		Map<String, Object> model = this.furnitureService.toEdit(shid);
+			String jjid){
+		Map<String, Object> model = this.furnitureService.toEdit(jjid);
 		return new ModelAndView(model.get("url").toString(),model);
 	}
 	
 	@RequestMapping(params = "delete")
 	public String delete(HttpServletResponse response, HttpServletRequest request,
-			String shid) throws IOException {
-		String res = this.furnitureService.deleteFurniture(shid);
+			String jjid) throws IOException {
+		String res = this.furnitureService.deleteFurniture(jjid);
 		response.getWriter().print(res);
 		return null;		
 	}

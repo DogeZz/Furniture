@@ -48,4 +48,14 @@ public interface FrontService {
 	 * 收货地址.
 	 */
 	public Map<String, Object> toDeliveryAddress();
+
+	/**
+	 * 结算页.
+	 */
+	public Map<String, Object> toBuy();
+
+	/**
+	 * 添加购物车成功页.
+	 */
+	public Map<String, Object> toBasket();
 }

@@ -67,10 +67,24 @@ public class FrontServiceImpl implements FrontService{
 		return map;
 	}
 
-	@Override
+	@Transactional( readOnly = true )
 	public Map<String, Object> toDeliveryAddress() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("url", "/pc/front/personalInfo/deliveryAddress");
+		return map;
+	}
+
+	@Transactional( readOnly = true )
+	public Map<String, Object> toBuy() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("url", "/pc/front/detail/buy");
+		return map;
+	}
+
+	@Transactional( readOnly = true )
+	public Map<String, Object> toBasket() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("url", "/pc/front/detail/basket");
 		return map;
 	}
 }

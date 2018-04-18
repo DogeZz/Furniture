@@ -81,4 +81,28 @@ public class AjaxController {
 		response.getWriter().print(res);
 		return null;
 	}
+	
+	@RequestMapping(value = "/front/getJjPageData.ajx")
+	public String getJjPageData(HttpServletResponse response, HttpServletRequest request,
+			PageParam page) throws Exception {
+		String res = this.ajaxService.getJjPageData(page);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/getJjData.ajx")
+	public String getJjData(HttpServletResponse response, HttpServletRequest request,
+			String jjid) throws Exception {
+		String res = this.ajaxService.getJjData(jjid);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/getDzData.ajx")
+	public String getDzData(HttpServletResponse response, HttpServletRequest request,
+			String yhid) throws Exception {
+		String res = this.ajaxService.getDzData(yhid);
+		response.getWriter().print(res);
+		return null;
+	}
 }

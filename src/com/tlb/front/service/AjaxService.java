@@ -65,4 +65,25 @@ public interface AjaxService {
 	 */
 	public String addToCollection(String yhid, String jjid);
 
+	/**
+	 * 获取家具分页数据.
+	 * @param page 分页参数
+	 * @return 数据
+	 */
+	public String getJjPageData(PageParam page);
+
+	/**
+	 * 获取指定的家具数据.
+	 * @param jjid 家具id
+	 * @return 数据
+	 */
+	public String getJjData(String jjid);
+
+	/**
+	 * 获取指定用户的地址数据.
+	 * @param yhid 用户id
+	 * @return 数据
+	 */
+	public String getDzData(String yhid);
+
 }

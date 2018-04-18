@@ -12,10 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tlb.common.JsonUtil;
 import com.tlb.common.PageParam;
 import com.tlb.common.Pager;
+import com.tlb.dao.TTlbDzDao;
+import com.tlb.dao.TTlbJjDao;
 import com.tlb.dao.TTlbShDao;
 import com.tlb.dao.TTlbYhDao;
 import com.tlb.dao.TTlbYhgzDao;
 import com.tlb.dao.TTlbYhscDao;
+import com.tlb.entity.TTlbJj;
 import com.tlb.entity.TTlbSh;
 import com.tlb.entity.TTlbYh;
 import com.tlb.entity.TTlbYhgz;
@@ -37,6 +40,12 @@ public class AjaxServiceImpl implements AjaxService{
 	
 	@Resource
 	private TTlbYhscDao tTlbYhscDao;
+	
+	@Resource
+	private TTlbJjDao tTlbJjDao;
+	
+	@Resource
+	private TTlbDzDao tTlbDzDao;
 
 	@Transactional(readOnly = true)
 	public String getLoginResult(String username, String password) {
@@ -139,4 +148,28 @@ public class AjaxServiceImpl implements AjaxService{
 		return JsonUtil.toRes("关注成功");
 	}
 
+	@Transactional(readOnly = true)
+	public String getJjPageData(PageParam page) {
+		Pager<TTlbJj> pager = this.tTlbJjDao.getTTlbJjs(page, "");
+		return JsonUtil.toStringFromObject(pager.putMapObject());
+	}
+
+	@Transactional
+	public String getJjData(String jjid) {
+		TTlbJj tTlbJj = this.tTlbJjDao.getTTlbJj(jjid);
+		if (tTlbJj != null) {
+			tTlbJj.setDjl(tTlbJj.getDjl() + 1);
+			this.tTlbJjDao.saveTTlbJj(tTlbJj);
+			return JsonUtil.toStringFromObject(tTlbJj);
+		}
+		return null;
+	}
+
+	@Transactional(readOnly = true)
+	public String getDzData(String yhid) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(yhid);
+		List<Map<String, Object>> map = this.tTlbDzDao.getTTlbDzsByYhid(tTlbYh.getYhid());
+		return JsonUtil.toString(map);
+	}
+	
 }

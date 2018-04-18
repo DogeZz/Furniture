@@ -9,6 +9,7 @@
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/views/front/js/jquery.imagezoom.min.js"></script>
 <script type="text/javascript" src="/views/front/js/layer/layer.js"></script>
+<script src="../views/common/template-web.js"></script>
 <!--[if lt IE 9]>
 <script src="/views/front/js/html5shiv.js" type="text/javascript"></script>
 <script src="/views/front/js/respond.min.js"></script>
@@ -28,7 +29,6 @@
 			$(this).find(".operating").animate({
 				bottom : "-30",
 			}, "fast");
-
 		});
 
 		$('.pagination').css({
@@ -67,7 +67,7 @@
 								</li>
 								<li>
 									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/views/front/images/product/03_small.jpg" mid="/views/front/images/product/03_mid.jpg" big="/views/front/images/product/03.jpg"></a>
+										<a href="#"><img src="/resource/common/file/2018/04/17/1be3d79a333b45019dda4d82b8264b13.jpg" mid="/resource/common/file/2018/04/17/1be3d79a333b45019dda4d82b8264b13.jpg" big="/resource/common/file/2018/04/17/1be3d79a333b45019dda4d82b8264b13.jpg"></a>
 									</div>
 								</li>
 								<li>
@@ -91,18 +91,12 @@
 				<!--购买信息-->
 				<div class="pic_Purchase_operation">
 					<div class="pic_title_name">
-						<h2>优丽美家 台灯遥控卧室床头水晶客厅床头灯护眼温馨创意 金色</h2>
-						<h5>唯美水晶台灯新上架，买一送一（赠送6吋玫瑰相框），惊喜多多</h5>
+						<h2></h2><h5></h5>
 					</div>
-					<!-- <div class="pic_price clearfix">
-     					<p class="clearfix" style="padding:5px 10px; color:#333">团购规则：满500元团购商品，最低2件起购</p>
-     					<p class="clearfix"> <label class="label_name">原价</label><span class="content Original_price"><em>￥</em>99.00</span></p>
-     					<p class="clearfix Tuangou"><label class="label_name">团购价</label><span class="price content"><em>￥</em>59.00</span></p>    
-     				</div> -->
 					<dl class="pic_price putong clearfix">
 						<dt class="label_name">价格</dt>
 						<dd class="price content">
-							<em>￥</em>59.00
+							<em>￥</em>
 						</dd>
 					</dl>
 					<dl class="Deadline clearfix">
@@ -161,16 +155,16 @@
 								<span class="mui-amount-decrease">∨</span>
 							</span> 
 							<span class="mui-amount-unit">件</span>
-							</span> <em id="J_EmStock" class="tb-hidden" style="display: inline;">库存260件</em>
+							</span> <em id="J_EmStock" class="tb-hidden" style="display: inline;">库存<span class="jjsl"></span>件</em>
 							<span id="J_StockTips"></span>
 						</dd>
 					</dl>
 					<div class="purchasing_btn clearfix">
 						<div class="tb-btn-buy tb-btn-sku">
-							<a id="J_LinkBuy" href="#" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" data-spm-anchor-id="">立即购买</a>
+							<a id="J_LinkBuy" href="javascript:buy();" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" data-spm-anchor-id="">立即购买</a>
 						</div>
 						<div class="tb-btn-basket tb-btn-sku ">
-							<a href="#" rel="nofollow" id="J_LinkBasket" role="button"><i class="icon_shop"></i>加入购物车</a>
+							<a href="javascript:basket();" rel="nofollow" id="J_LinkBasket" role="button"><i class="icon_shop"></i>加入购物车</a>
 						</div>
 					</div>
 					<dl class="clearfix">
@@ -190,40 +184,14 @@
 						</dd>
 					</dl>
 				</div>
-				<!--猜你喜欢-->
-				<div class="pic_like">
-					<div class="title_name">
-						<span>猜你喜欢</span>
-					</div>
-					<div class="like_list picScroll-top">
-						<div class="hd">
-							<a href="javascript:ovid()" class="next"></a> <a
-								href="javascript:ovid()" class="prev"></a>
-						</div>
-						<div class="bd">
-							<ul class="picList">
-								<li><a href="#"><img src="/views/front/images/product/p-7.jpg"
-										width="145" height="145" /></a></li>
-								<li><a href="#"><img src="/views/front/images/product/p-8.jpg"
-										width="145" height="145" /></a></li>
-								<li><a href="#"><img src="/views/front/images/product/p-4.jpg"
-										width="145" height="145" /></a></li>
-								<li><a href="#"><img src="/views/front/images/product/p-2.jpg"
-										width="145" height="145" /></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
 			</div>
 			<!--信息-->
 			<div class=" clearfix">
 				<div class="left_Package">
-					<!--入住店铺-->
 					<div class="Shop_info">
 						<img src="/views/front/images/dp_logo.jpg" width="150" height="100" />
 						<h3>简约家居旗舰店</h3>
 						<div class="link_btn">
-							<a href="#" class="reservation">预约</a> 
 							<a href="#" class="shops_link">进店</a>
 						</div>
 					</div>
@@ -292,6 +260,7 @@
 	<%@include file="../public/footer.jsp"%>
 </body>
 <script type="text/javascript" src="/views/front/public.js"></script>
+<script type="text/javascript" src="/views/common/until.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(".jqzoom").imagezoom();
@@ -314,6 +283,43 @@
 	$(".slideTxtBox").slide({
 		trigger : "click"
 	});
+	
+	var urlJjid = getAttribute("jjid");
+	
+	var loadJjData = function() {
+		$.ajax({
+			url:'/front/getJjData.ajx', 
+			type: 'post',
+			data: { jjid : urlJjid }, 
+			dataType: 'json',
+			success: function(res) {
+				$(".tb-booth a").attr("href", res.jjtp);
+				$(".tb-booth a img").attr("src", res.jjtp);
+				$(".tb-booth a img").attr("rel", res.jjtp);
+				$(".pic_title_name h2").html(res.jjbt);
+				$(".pic_title_name h5").html(res.jjfbt);
+				$(".price").append(res.jjjg);
+				$(".jjsl").html(res.jjsl);
+			}
+		});
+	}
+	loadJjData();
+	
+	var buy = function(){
+		if(isNull(sessionStorage.getItem("username"))){
+			layer.msg("请先登录！");
+			return false;
+		}
+		window.location.href = "/front/buy.fjsp?jjid=" + urlJjid;
+	}
+	
+	var basket = function(){
+		if(isNull(sessionStorage.getItem("username"))){
+			layer.msg("请先登录！");
+			return false;
+		}
+		window.location.href = "/front/basket.fjsp?jjid=" + urlJjid;
+	}
 	
 	var ShowDiv = function(name, id) {
 		layer.confirm('你确定收藏该商品吗？', {

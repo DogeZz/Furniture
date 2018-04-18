@@ -11,11 +11,11 @@ import com.tlb.entity.TTlbJj;
 public class TTlbJjDaoImpl extends BaseDaoImpl<TTlbJj> implements TTlbJjDao {
 
 	public TTlbJj getTTlbShByjjbt(String jjbt) {
-		return  this.get("from TTlbJj where sfky = true and sfsc = false and jjbt = ? ", jjbt);
+		return  this.get("from TTlbJj where sfsc = false and jjbt = ? ", jjbt);
 	}
 
 	public Pager<TTlbJj> getTTlbJjs(PageParam page, String name) {
-		return this.getForPager("from TTlbJj where sfky = true and sfsc = false and jjbt like ? order by xgsj desc", page, "%" + name + "%");
+		return this.getForPager("from TTlbJj where sfsc = false and jjbt like ? order by xgsj desc", page, "%" + name + "%");
 	}
 
 	public TTlbJj getTTlbJj(String jjid) {

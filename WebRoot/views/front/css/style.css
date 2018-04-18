@@ -850,7 +850,7 @@ img {max-width: none;}
 .shopping_list .product_list table td img{ width:90px; height:90px; float:left; border:1px solid #dddddd; margin-right:10px;}
 .shopping_list .product_list table td .pic_name{ float:left; width:300px;}
 .shopping_list .product_list table td.price{ color:#F60; font-weight:bold}
-.s_detailed_style .Remarks { color:#666; padding:20px 0px; border-bottom:1px solid #dddddd; margin-bottom:20px }
+.s_detailed_style .Remarks { color:#666; padding:20px 0px; margin-bottom:20px }
 .Remarks .add_Remarks{ width:500px; border:1px solid #dddddd; height:30px; line-height:30px; font-size:12px; margin-right:5px;}
 .s_detailed_style  .invoice_content{ padding:20px;}
 .invoice_content .xinxi span{ margin:0px 10px;}

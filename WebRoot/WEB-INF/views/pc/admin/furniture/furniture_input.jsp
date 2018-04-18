@@ -9,12 +9,17 @@
     <link href="/views/common/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/views/common/animate.min.css" rel="stylesheet">
     <link href="/views/common/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/views/common/summernote/summernote.css" rel="stylesheet">
+    <link href="/views/common/summernote/summernote-bs3.css" rel="stylesheet">
     
     <script src="/views/admin/js/jquery-3.2.1.min.js"></script>
     <script src="/views/common/bootstrap/js/bootstrap.min.js"></script>
     <script src="/views/common/jquery.validate.min.js"></script>
     <script src="/views/common/layer/layer.js"></script>
-    <script src="../views/common/template-web.js"></script>
+    <script src="/views/common/summernote/summernote.min.js"></script>
+	<script src="/views/common/summernote/lang/summernote-zh-CN.js"></script>
+    <script src="/views/common/template-web.js"></script>
+    <script src="/views/common/until.js"></script>
     
 </head>
 <body class="gray-bg" style="padding-left: 20px;">
@@ -26,6 +31,7 @@
 	        <div class="ibox-content">
 	            <form action="" method="post" class="form-horizontal">
 	            	<input type="hidden" name="jjid" value="${data.jjid}">
+	            	<input type="hidden" name="shid" value="${data.shid}">
 	                <div class="form-group">
 	                    <label class="col-sm-1 control-label">家具标题：</label>
 	                    <div class="col-sm-6">
@@ -34,9 +40,9 @@
 	                </div>
 	                <div class="hr-line-dashed"></div>
 	                <div class="form-group">
-	                    <label class="col-sm-1 control-label">数量</label>
+	                    <label class="col-sm-1 control-label">数量：</label>
 	                    <div class="col-sm-2">
-	                        <input type="number" class="form-control" name="shsl" value="${data.shsl}" required>
+	                        <input type="number" class="form-control" name="jjsl" value="${data.jjsl}" required>
 	                    </div>
 	                </div>
 	                <div class="hr-line-dashed"></div>
@@ -55,7 +61,7 @@
 	                </div>
 	                <div class="hr-line-dashed"></div>
 	                <div class="form-group">
-	                    <label class="col-sm-1 control-label">家具图片</label>
+	                    <label class="col-sm-1 control-label">家具图片：</label>
 	                    <div class="col-sm-11">
 	                    	<img id="furniture-txImg" src="${data.jjtp}" onerror="Javascript:this.src='/views/admin/imgs/User-005.png';" style="max-width:450px;max-height:250px;margin-right:15px;">
 	                    	<button class="btn btn-primary" type="button" onclick="furniture_uploadImg(0)">上传图片</button>
@@ -71,9 +77,9 @@
 	                </div>
 	                <div class="hr-line-dashed"></div>
 	                <div class="form-group">
-	                    <label class="col-sm-1 control-label">家具详情：</label>
-	                    <div class="col-sm-6">
-	                        <textarea class="form-control" name="jjxq" rows="5" placeholder="输入家具详情" >${data.jjxq}</textarea>
+	                    <label class="col-sm-1 control-label">家具详情</label>
+	                    <div class="col-sm-10">
+                         	<div id="jjxq" name="jjxq" class="summernote">${data.jjxq}</div>
 	                    </div>
 	                </div>
 	                <div class="hr-line-dashed"></div>
@@ -93,11 +99,13 @@
 </body>
 <script type="text/javascript">
 
-	var shid = $("input[name = shid]").val();
-	
 	var form = $('body').find('form');
 	form.validate({
 		submitHandler: function(f) {
+		   var $this = $('#jjxq');
+		   var isZsnrInput = $('input[name="jjxq"]');
+		   var editor = "<input type='hidden' name='" + $this.attr("name") + "' value='" + $this.code() + "' />";
+		   form.append(editor);
 			$.ajax({
 				url : '/admin/furniture.do?save',
 				type: 'post',
@@ -168,6 +176,26 @@
 			}
 		});
 	}
+    
+    $('#jjxq').summernote({
+		lang : 'zh-CN',
+		height : 400,
+		toolbar : [ [ "style", [ "style" ] ],
+				[ "fontsize", [ "fontsize" ] ],
+				[ "fontname", [ "fontname" ] ],
+				[ "font", [ "bold", "italic", "underline", "clear" ] ],
+				[ "color", [ "color" ] ],
+				[ "para", [ "ul", "ol", "paragraph" ] ],
+				[ "height", [ "height" ] ], [ "table", [ "table" ] ],
+				[ "insert", [ "picture", "video" ] ],
+				[ "view", [ "fullscreen", "codeview" ] ],
+				[ "help", [ "help" ] ] ],
+		onImageUpload : function(files, editor, $editable) {
+			sysUtils.summernoteUploadImg(files[0], editor, $editable);
+		}
+	});
+	
+	$('#jjxq').keyup();
 </script>
 </html>
  

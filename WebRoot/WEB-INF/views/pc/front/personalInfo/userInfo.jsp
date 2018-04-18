@@ -53,7 +53,7 @@
 		        <li style="height:100%;overflow:hidden;">
 		       		<label class="personalInfo_hdLabel" >当前头像：</label>
 		       		<div class="personalInfo_img">     
-		            	<a href=""><img src="{{user.yhtx}}" onerror="javascript:this.src='//wwc.alicdn.com/avatar/getAvatar.do?userId=2698210082&width=80&height=80&type=sns';" style="width:100%; height:100px;"/></a>
+		            	<a href=""><img src="{{user.yhtx}}" onerror="javascript:this.src='/views/front/images/12.jpg';" style="width:100%; height:100%;"/></a>
 		        		<a href="//i.taobao.com/user/headset.htm" class="personalInfo_edithd">编辑头像</a>
 		        	</div>  
 		        </li>
@@ -109,17 +109,14 @@
 		</script>
 		</div>
 			<!--头像设置-->
-			<div style="margin-bottom:50px;">
-                <button class="btn_save" type="button" id="user-uploadImgBtn" >上传图片</button>
-                <input id="user-img-input" type="hidden" class="form-control" name="yhtx" value="${data.yhtx}">
-			</div>
+		<ul>
 			<div style="margin-bottom:50px;">
                 <button class="btn_save" type="button" id="user-uploadImgBtn" >上传图片</button>
                 <input id="user-img-input" type="hidden" class="form-control" name="yhtx" value="${data.yhtx}">
 			</div>
 			<span style="color:#b7a9a4;">选择一张本地图片上传为头像，仅支持JPG、PNG图片文件</span>
-			<div style="width:260px; height:260px; line-height:220px; text-align:center; background:#e6e6e6; margin-top:10px;display:block;">
-				<img id="user-img" src="{{user.yhtx}}" onerror="javascript:this.src='//wwc.alicdn.com/avatar/getAvatar.do?userId=2698210082&width=80&height=80&type=sns';" style="width:250px; height:250px; margin-right:15px;">		
+			<div style="width:260px; height:260px; line-height:220px; text-align:center; border: 4px solid #e6e6e6; background:#e6e6e6; margin-top:10px;">
+				<img id="user-img" src="" onerror="javascript:this.src='//wwc.alicdn.com/avatar/getAvatar.do?userId=2698210082&width=80&height=80&type=sns';" style=" width:250px; height:250px;">		
 			</div>
 			<div style="margin-top:30px;">
                 <input class="btn_save" type="submit" id="" value="提交" />
@@ -127,6 +124,7 @@
 			<form method="post" enctype="multipart/form-data" id="userData-edit-upload">
 				<input type="file" name="upload" class="user-fmtimg" style="display:none;" onchange="userInput_imgurl(this.value)"/>
 			</form>
+		</ul>
 		</div>
 		</div>
 	</div>

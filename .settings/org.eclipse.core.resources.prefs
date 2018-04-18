@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//WebRoot/WEB-INF/views/pc/admin/user/user_list.jsp=UTF-8
 encoding//WebRoot/WEB-INF/views/pc/front/homePage/homePage.jsp=UTF-8
+encoding//WebRoot/WEB-INF/views/pc/front/homePage/login.jsp=UTF-8
+encoding//WebRoot/WEB-INF/views/pc/front/public/header.jsp=UTF-8
 encoding//WebRoot/homePage/homePage.jsp=UTF-8
 encoding//WebRoot/loginPage/denied.jsp=UTF-8
 encoding//WebRoot/loginPage/login.jsp=UTF-8

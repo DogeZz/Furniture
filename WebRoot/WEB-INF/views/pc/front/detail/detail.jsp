@@ -130,8 +130,7 @@
 							</ul>
 						</div>
 						<div class="bd">
-							<ul class="Introduction">
-							</ul>
+							<ul class="Introduction"></ul>
 						</div>
 					</div>
 				</DIV>
@@ -181,6 +180,7 @@
 				$(".pic_title_name h5").html(res.jjfbt);
 				$(".price").append(res.jjjg);
 				$(".jjsl").html(res.jjsl);
+				$(".Introduction").html(res.jjxq);
 			}
 		});
 	}

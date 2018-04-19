@@ -102,6 +102,7 @@ public class TTlbJj extends BaseEntity {
 		this.jjlx = jjlx;
 	}
 
+	@Column(columnDefinition = "Text")
 	public String getJjxq() {
 		return jjxq;
 	}

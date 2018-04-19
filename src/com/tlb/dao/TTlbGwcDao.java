@@ -21,7 +21,7 @@ public interface TTlbGwcDao extends BaseDao<TTlbGwc>{
 	public void saveTTlbGwc(TTlbGwc tTlbGwc);
 
 	/**
-	 * 获取购物车单体数据.
+	 * 获取购物车数据.
 	 */
 	public List<Map<String, Object>> getTTlbGwcForMap(String gwcid);
 
@@ -29,5 +29,15 @@ public interface TTlbGwcDao extends BaseDao<TTlbGwc>{
 	 * 根据jjid获取指定数据.
 	 */
 	public TTlbGwc getTTlbGwcByJjid(String jjid);
+
+	/**
+	 * 获取购物车单体数据.
+	 */
+	public TTlbGwc getTTlbGwc(String gwcid);
+
+	/**
+	 * 获取购物车数据.
+	 */
+	public Pager<List<Map<String, Object>>> getTTlbGwcsByName(PageParam page, String name);
 
 }

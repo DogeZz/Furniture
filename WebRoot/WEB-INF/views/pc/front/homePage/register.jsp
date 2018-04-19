@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,7 +154,7 @@
 			success: function(res) {
 				if(res.success){
 					layer.msg(res.title);
-					setTimeout(function(){window.location.href = '/front/login.fjsp';},2000);
+					setTimeout(function(){window.location.href = '/front/login.fjsp?aaa=1';},2000);
 				}
 			},
 			error: function(data) {

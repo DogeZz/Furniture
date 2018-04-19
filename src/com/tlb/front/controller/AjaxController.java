@@ -169,4 +169,36 @@ public class AjaxController {
 		response.getWriter().print(res);
 		return null;
 	}
+	
+	@RequestMapping(value = "/front/toJia.ajx")
+	public String toJia(HttpServletResponse response, HttpServletRequest request,
+			String gwcid) throws Exception {
+		String res = this.ajaxService.toJia(gwcid);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/toJian.ajx")
+	public String toJian(HttpServletResponse response, HttpServletRequest request,
+			String gwcid) throws Exception {
+		String res = this.ajaxService.toJian(gwcid);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/toSubmitBilling.ajx")
+	public String toSubmitBilling(HttpServletResponse response, HttpServletRequest request,
+			String gwcids, String username) throws Exception {
+		String res = this.ajaxService.toSubmitBilling(gwcids, username);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/toDeleteGwc.ajx")
+	public String toDeleteGwc(HttpServletResponse response, HttpServletRequest request,
+			String gwcid) throws Exception {
+		String res = this.ajaxService.toDeleteGwc(gwcid);
+		response.getWriter().print(res);
+		return null;
+	}
 }

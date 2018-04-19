@@ -383,7 +383,7 @@ input[type="color"] {
     border-color: #88c523;
 }
 /**************************产品介绍图片***************************/
-.left_pic_ad{ width:420px;  float: left; height:580px; position:relative}
+.left_pic_ad{ width:420px;  float: left; height:490px; position:relative}
 .tb-booth {
     border: 1px solid #CDCDCD;
     position: relative;
@@ -468,8 +468,8 @@ img {max-width: none;}
 }
 .addcart .icon_Collection.icon{background-position: -60px -145px;}
 /*************************/
-.ptc_detailed { height:580px; margin-bottom:20px; border-bottom:1px solid #dddddd; background-color:#FFF}
-.pic_Purchase_operation{ padding:0px 20px; position:relative; height:580px; border-right:1px solid #dddddd; width:512px; float:left}
+.ptc_detailed { margin-bottom:20px; border-bottom:1px solid #dddddd; background-color:#FFF}
+.pic_Purchase_operation{ padding:0px 100px; position:relative; height:490px; float:left}
 .pic_Purchase_operation .content{ float:left; width:391px;}
 .pic_Purchase_operation dl.Pay_by{ border:0px;}
 .pic_Purchase_operation  .Deadline{ color:#999; border-bottom:1px dotted #dddddd; height:35px; line-height:30px; margin-bottom:20px;}

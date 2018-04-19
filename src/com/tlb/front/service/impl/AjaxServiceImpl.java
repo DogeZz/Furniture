@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tlb.common.JsonUtil;
+import com.tlb.common.NullUtils;
 import com.tlb.common.PageParam;
 import com.tlb.common.Pager;
 import com.tlb.dao.TTlbDdDao;
@@ -270,5 +271,61 @@ public class AjaxServiceImpl implements AjaxService{
 		return null;
 	}
 
+	@Transactional
+	public String toJia(String gwcid) {
+		TTlbGwc tTlbGwc = this.tTlbGwcDao.getTTlbGwc(gwcid);
+		if (tTlbGwc != null) {
+			tTlbGwc.setSl(tTlbGwc.getSl() + 1);
+			this.tTlbGwcDao.saveTTlbGwc(tTlbGwc);
+		}
+		return JsonUtil.toStringFromObject(tTlbGwc);
+	}
+
+	@Transactional
+	public String toJian(String gwcid) {
+		TTlbGwc tTlbGwc = this.tTlbGwcDao.getTTlbGwc(gwcid);
+		if (tTlbGwc != null) {
+			tTlbGwc.setSl(tTlbGwc.getSl() - 1);
+			this.tTlbGwcDao.saveTTlbGwc(tTlbGwc);
+		}
+		return JsonUtil.toStringFromObject(tTlbGwc);
+	}
+
+	@Transactional
+	public String toSubmitBilling(String gwcids, String username) {
+		Date date = new Date();
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		String[] gwcidss = gwcids.split("、");
+		for (String gwcid : gwcidss) {
+			TTlbDd tTlbDd = new TTlbDd();
+			if (NullUtils.isNotEmpty(gwcid)) {
+				TTlbGwc tTlbGwc = this.tTlbGwcDao.getTTlbGwc(gwcid);
+				if (tTlbGwc != null) {
+					TTlbJj tTlbJj = this.tTlbJjDao.getTTlbJj(tTlbGwc.getJjid());
+					tTlbDd.setDdzt(1);
+					tTlbDd.setJjid(tTlbGwc.getJjid());
+					tTlbDd.setSl(tTlbGwc.getSl());
+					tTlbDd.setYhid(tTlbYh.getYhid());
+					tTlbDd.setZe(tTlbGwc.getSl() * tTlbJj.getJjjg());
+					Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+					tTlbDd.setSszb(encoder.encodePassword(String.valueOf(date.getTime()), username));
+					this.tTlbDdDao.saveTTlbDd(tTlbDd);
+					tTlbGwc.setZt(1);
+					this.tTlbGwcDao.saveTTlbGwc(tTlbGwc);
+				}
+			}
+		}
+		return JsonUtil.toRes("结算成功");
+	}
+
+	@Transactional
+	public String toDeleteGwc(String gwcid) {
+		if (NullUtils.isNotEmpty(gwcid)) {
+			TTlbGwc tTlbGwc = this.tTlbGwcDao.getTTlbGwc(gwcid);
+			tTlbGwc.setZt(2);
+			this.tTlbGwcDao.saveTTlbGwc(tTlbGwc);
+		}
+		return JsonUtil.toRes("删除成功");
+	}
 	
 }

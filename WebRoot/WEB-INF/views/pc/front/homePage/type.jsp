@@ -31,21 +31,6 @@
 								<a href="#">美式家具</a>
 								<a href="#">欧式家具</a>
 								<a href="#">现代家具</a>
-								<a href="#">新古典系列家具</a>
-							</div>
-						</li>
-						<li><label class="filter_name">区域分类</label>
-							<div class="filter_link">
-								<a href="#">主卧</a>
-								<a href="#">客厅</a>
-								<a href="#">厨房</a>
-								<a href="#">卫生间</a> 
-								<a href="#">阳台</a>
-								<a href="#">次卧</a>
-								<a href="#">衣帽间</a>
-								<a href="#">书房</a>
-								<a href="#">卫生间</a>
-								<a href="#">其他</a>
 							</div>
 						</li>
 						<li><label class="filter_name">材料分类</label>
@@ -53,11 +38,6 @@
 								<a href="#">实木家具</a>
 								<a href="#">板式家具</a>
 								<a href="#">软体家具</a>
-								<a href="#">藤编家具</a>
-								<a href="#">竹编家具</a>
-								<a href="#">钢木家具</a>
-								<a href="#">玻璃家具</a>
-								<a href="#">大理石家具</a>
 								<a href="#">其他</a>
 							</div>
 						</li>
@@ -67,10 +47,6 @@
 								<a href="#">桌椅</a>
 								<a href="#">衣柜</a>
 								<a href="#">灯具</a>
-								<a href="#" class="Select">美式</a>
-								<a href="#">欧式</a>
-								<a href="#">中式</a>
-								<a href="#">日式</a>
 							</div>
 						</li>
 						<li><label class="filter_name">档次分类</label>

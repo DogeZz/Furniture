@@ -24,4 +24,9 @@ public interface TTlbDdDao extends BaseDao<TTlbDd>{
 	 */
 	public TTlbDd getTTlbDd(String ddid);
 
+	/**
+	 * 获取分页数据.
+	 */
+	public Pager<List<Map<String, Object>>> getTTlbDds(PageParam page, String name);
+
 }

@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="/views/front/css/common.css" type="text/css" rel="stylesheet" />
-<link href="/views/front/css/style.css" type="text/css" rel="stylesheet" />
+<link href="/views/front/css/style.css?v=99" type="text/css" rel="stylesheet" />
 <script src="/views/front/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/views/front/js/jquery.imagezoom.min.js"></script>
@@ -107,12 +107,6 @@
 						<dd>
 							<i class="icon_zfb"></i>支付宝
 						</dd>
-						<dd>
-							<i class="icon_weixin"></i>微信之烦恼
-						</dd>
-						<dd>
-							<i class="icon_yinlian"></i>银联支付
-						</dd>
 					</dl>
 				</div>
 			</div>
@@ -127,60 +121,16 @@
 						</div>
 					</div>
 
-					<div class="Package_list">
-						<div class="title_name">
-							<span>套系参考</span>
-						</div>
-						<ul class="list">
-							<li><a href="#"><img src="/views/front/images/product/01_small.jpg"
-									width="150px" height="150px" /><span class="Package_price">￥45.60</span></a></li>
-							<li><a href="#"><img src="/views/front/images/product/01_small.jpg"
-									width="150px" height="150px" /><span class="Package_price">￥45.60</span></a></li>
-							<li><a href="#"><img src="/views/front/images/product/01_small.jpg"
-									width="150px" height="150px" /><span class="Package_price">￥45.60</span></a></li>
-							<li><a href="#"><img src="/views/front/images/product/01_small.jpg"
-									width="150px" height="150px" /><span class="Package_price">￥45.60</span></a></li>
-							<li><a href="#"><img src="/views/front/images/product/01_small.jpg"
-									width="150px" height="150px" /><span class="Package_price">￥45.60</span></a></li>
-							<li><a href="#"><img src="/views/front/images/product/01_small.jpg"
-									width="150px" height="150px" /><span class="Package_price">￥45.60</span></a></li>
-							<li><a href="#"><img src="/views/front/images/product/01_small.jpg"
-									width="150px" height="150px" /><span class="Package_price">￥45.60</span></a></li>
-						</ul>
-					</div>
 				</div>
 				<DIV class="right_detailed r_f">
 					<div class="slideTxtBox">
 						<div class="hd">
 							<ul>
 								<li><em class="jt"></em>商品详细</li>
-								<li><em class="jt"></em>陈设点评</li>
-								<li><em class="jt"></em>用户评论<span class="Quantity">345</span></li>
 							</ul>
 						</div>
 						<div class="bd">
 							<ul class="Introduction">
-							</ul>
-							<ul class="Evaluation">
-							</ul>
-							<ul class="comment_style">
-								<li class="comment_list clearfix">
-									<div class="comment_Avatar">
-										<div class="user_Avatar">
-											<div class="Avatar_bg"></div>
-											<img src="/views/front/images/touxiang.jpg" width="60" height="60">
-										</div>
-										<h3>张天师</h3>
-									</div>
-									<div class="comment_info">
-										<p class="comments">非常不错的手机，做工质感极好，颜值爆表，而且在一众去掉logo基本分不出区别的手机中绝对鹤立鸡群。另外个人觉得后背的moto蝙蝠标识有些不容易看到，如果弄成类似macbook那样发光logo的话，个人愿意多出一千大洋～系统方面确实更加偏向原生android,在易用性方面跟国内一众rom有差距，不过至少对我是绝对够用了。相机启动拍照保存都很快。电池不出众不过快冲非常好用。</p>
-										<p class="Basic_Information">
-											<span>件数：2件</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>商品名称：摩托罗拉
-												Moto Z(XT1650-05) 模块化手机 流金黑 移动联通电信4G手机 双卡双待</span>
-										</p>
-									</div>
-									<div class="comment_time">2016-10-24</div>
-								</li>
 							</ul>
 						</div>
 					</div>

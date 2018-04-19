@@ -150,4 +150,33 @@ public interface AjaxService {
 	 */
 	public String getGwcData(String gwcid);
 
+	/**
+	 * 指定的购物车数量加一.
+	 * @param gwcid
+	 * @return
+	 */
+	public String toJia(String gwcid);
+
+	/**
+	 * 指定的购物车数量减一.
+	 * @param gwcid
+	 * @return
+	 */
+	public String toJian(String gwcid);
+
+	/**
+	 * 购物车结算.
+	 * @param gwcids
+	 * @param username
+	 * @return
+	 */
+	public String toSubmitBilling(String gwcids, String username);
+
+	/**
+	 * 删除购物车.
+	 * @param gwcid
+	 * @return
+	 */
+	public String toDeleteGwc(String gwcid);
+
 }

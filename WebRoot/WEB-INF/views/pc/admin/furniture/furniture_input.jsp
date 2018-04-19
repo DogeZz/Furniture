@@ -12,7 +12,7 @@
     <link href="/views/common/summernote/summernote.css" rel="stylesheet">
     <link href="/views/common/summernote/summernote-bs3.css" rel="stylesheet">
     
-    <script src="/views/admin/js/jquery-3.2.1.min.js"></script>
+    <script src="/views/common/jquery.min.js"></script>
     <script src="/views/common/bootstrap/js/bootstrap.min.js"></script>
     <script src="/views/common/jquery.validate.min.js"></script>
     <script src="/views/common/layer/layer.js"></script>
@@ -58,6 +58,17 @@
 	                    <div class="col-sm-6">
 	                        <input class="form-control" name="jjlx" placeholder="输入家具类型" value="${data.jjlx}">
 	                    </div>
+	                    <div class="col-sm-offset-1 col-sm-11">
+	                        <label class="checkbox-inline">
+							 	<input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+							</label>
+							<label class="checkbox-inline">
+							  	<input type="checkbox" id="inlineCheckbox2" value="option2"> 2
+							</label>
+							<label class="checkbox-inline">
+							  	<input type="checkbox" id="inlineCheckbox3" value="option3"> 3
+							</label>
+	                    </div>
 	                </div>
 	                <div class="hr-line-dashed"></div>
 	                <div class="form-group">
@@ -102,28 +113,31 @@
 	var form = $('body').find('form');
 	form.validate({
 		submitHandler: function(f) {
-		   console.log($('#jjxq'))
-		   var isZsnrInput = $('input[name="jjxq"]');
-// 		   var editor = "<input type='hidden' name='" + $this.attr("name") + "' value='" + $this.code() + "' />";
-// 		   form.append(editor);
-			$.ajax({
-				url : '/admin/furniture.do?save',
-				type: 'post',
-				data : $(f).serialize(),
-				dataType : 'json',
-				success: function(res) {
-				    layer.msg(res.title);
-				    if(res.success){
-				    	setTimeout(function(){ furnitureInput_back(); }, 1000);
-				    }
-				},
-				error: function(data) {
-					layer.msg(data);
-				}
-			});
+			var markupStr = $('#jjxq').summernote('code');
+		     var editor = "<input type='hidden' name='jjxq' value='" + markupStr + "' />";
+		     form.append(editor);
+	         submitForm(f);
 		}
 	});
-
+	
+	var submitForm = function(f){
+		$.ajax({
+			url : '/admin/furniture.do?save',
+			type: 'post',
+			data : $(f).serialize(),
+			dataType : 'json',
+			success: function(res) {
+			    layer.msg(res.title);
+			    if(res.success){
+			    	setTimeout(function(){ furnitureInput_back(); }, 1000);
+			    }
+			},
+			error: function(data) {
+				layer.msg(data);
+			}
+		});
+	}
+	
 	var furnitureInput_back = function(){
 		window.history.back();
 	};
@@ -191,11 +205,10 @@
 				[ "view", [ "fullscreen", "codeview" ] ],
 				[ "help", [ "help" ] ] ],
 		onImageUpload : function(files, editor, $editable) {
-			sysUtils.summernoteUploadImg(files[0], editor, $editable);
+			summernoteUploadImg(files[0], editor, $editable);
 		}
 	});
 	
-	$('#jjxq').keyup();
 </script>
 </html>
  

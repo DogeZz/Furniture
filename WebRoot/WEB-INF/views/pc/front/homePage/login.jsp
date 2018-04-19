@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +8,7 @@
 <script src="/views/front/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/views/front/js/layer/layer.js"></script>
+<script type="text/javascript" src="/views/common/until.js"></script>
 <title>会员登录</title>
 <!--[if lt IE 9]>
 <script src="/views/front/js/html5shiv.js" type="text/javascript"></script>
@@ -100,7 +100,10 @@
 					if(res.success){
 						 layer.msg(res.title);
 						 sessionStorage.setItem("username", username);
-						 window.location.href = '/front/homePage.fjsp';
+						 if(getAttribute("aaa") != null || getAttribute("aaa") != "" || getAttribute("aaa") != undefined)
+						 	window.location.href = '/front/homePage.fjsp';
+						 else
+						 	window.history.back();
 					} else {
 						layer.tips(res.title, '.submitbtn', {tips: 1});
 					}

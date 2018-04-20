@@ -52,9 +52,32 @@
     </div>
 </body>
 <script type="text/javascript">
+	
+	var lxid = $("input[name = lxid]").val();
+	
+	$.validator.addMethod("checkLxmcExist", function(value, element, param){
+	    var res = true;
+	    $.ajax({
+	        type:"POST",
+	        async: false, 
+	        url:"/admin/furnitureType.do?checkLxmcExist",
+	        dataType : 'json',
+	        data: {
+	        	lxid : lxid,
+	        	lxmc : value
+	        },
+	        success:function(data){
+	       		res = !data.success;
+	        }
+	    });
+	    return res;
+	},"<font color='#E47068'>类型名称已存在</font>");
 
 	var form = $('body').find('form');
 	form.validate({
+		rules : {
+	        lxmc : {checkLxmcExist : true},
+	    },
 		submitHandler: function(f) {
 			$.ajax({
 				url : '/admin/furnitureType.do?save',

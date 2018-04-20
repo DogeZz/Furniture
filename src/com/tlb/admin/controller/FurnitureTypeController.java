@@ -43,7 +43,7 @@ public class FurnitureTypeController {
 		return new ModelAndView(model.get("url").toString(),model);
 	}
 	
-	@RequestMapping(params = "checklxmcExist")
+	@RequestMapping(params = "checkLxmcExist")
 	public String checkFurnitureTypenameExist(HttpServletResponse response, HttpServletRequest request,
 			String lxmc, String lxid) throws IOException {
 		String res = this.furnitureTypeService.checklxmcExist(lxmc, lxid);

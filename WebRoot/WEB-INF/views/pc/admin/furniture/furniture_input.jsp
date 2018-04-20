@@ -58,16 +58,14 @@
 	                    <div class="col-sm-6">
 	                        <input class="form-control" name="jjlx" placeholder="输入家具类型" value="${data.jjlx}">
 	                    </div>
-	                    <div class="col-sm-offset-1 col-sm-11">
+	                    <div class="col-sm-offset-1 col-sm-11" id="lx-content">
+	                    	<script type="text/html" id="lx-template">
+							{{ each lxs}}
 	                        <label class="checkbox-inline">
-							 	<input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+							 	<input type="checkbox" value="{{$value.lxmc}}"> {{$value.lxmc}}
 							</label>
-							<label class="checkbox-inline">
-							  	<input type="checkbox" id="inlineCheckbox2" value="option2"> 2
-							</label>
-							<label class="checkbox-inline">
-							  	<input type="checkbox" id="inlineCheckbox3" value="option3"> 3
-							</label>
+							{{/each}}
+							</script>
 	                    </div>
 	                </div>
 	                <div class="hr-line-dashed"></div>
@@ -142,19 +140,29 @@
 		window.history.back();
 	};
 	
-// 	var furniture_initDatas = function() {
-// 		$.ajax({
-// 			url:'/admin/user.do?users',
-// 			type: 'post',
-// 			data: { shid: shid},
-// 			dataType: 'json',
-// 			success: function(res) {
-// 				var html = template('furniture-userList-template', {users: res});
-// 				$('#furniture-userList-content').html(html);
-// 			}
-// 		});
-// 	};
-// 	furniture_initDatas();
+	var furniture_initLxDatas = function() {
+		$.ajax({
+			url:'/admin/furniture.do?lxs',
+			type: 'post',
+			data: {},
+			dataType: 'json',
+			success: function(res) {
+				var html = template('lx-template', {lxs: res});
+				$('#lx-content').html(html);
+				$("input[type = checkbox]").click(function(){
+					var _obj = $("input[type = checkbox]");
+					var lx = "";
+					for(var i = 0; i < _obj.length-1; i++){
+						if(_obj[i].checked){
+							lx += _obj[i].value + "、";
+						}
+					}
+					$("input[name = jjlx]").val(lx);
+				})
+			}
+		});
+	};
+	furniture_initLxDatas();
 	
 	var furniture_uploadImg = function(value){
     	$(".furniture-fmtimg").click();

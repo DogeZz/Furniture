@@ -65,4 +65,11 @@ public class FurnitureController {
 		response.getWriter().print(res);
 		return null;		
 	}
+	
+	@RequestMapping(params = "lxs")
+	public String lxs(HttpServletResponse response, HttpServletRequest request) throws IOException {
+		String res = this.furnitureService.getLxs();
+		response.getWriter().print(res);
+		return null;		
+	}
 }

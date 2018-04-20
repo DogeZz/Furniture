@@ -48,5 +48,7 @@ public interface FurnitureService {
 	 * 
 	 */
 	public String deleteFurniture(String jjid);
+
+	public String getLxs();
 	
 }

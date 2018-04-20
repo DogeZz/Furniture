@@ -1,6 +1,7 @@
 package com.tlb.admin.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -14,7 +15,9 @@ import com.tlb.common.JsonUtil;
 import com.tlb.common.PageParam;
 import com.tlb.common.Pager;
 import com.tlb.dao.TTlbJjDao;
+import com.tlb.dao.TTlbJjlxDao;
 import com.tlb.entity.TTlbJj;
+import com.tlb.entity.TTlbJjlx;
 
 @Component
 @SuppressWarnings("unchecked")
@@ -22,6 +25,9 @@ public class FurnitureServiceImpl implements FurnitureService {
 	
 	@Resource
 	private TTlbJjDao tTlbJjDao;
+	
+	@Resource
+	private TTlbJjlxDao tTlbJjlxDao;
 	
 	@Transactional(readOnly = true)
 	public Map<String, Object> toList() {
@@ -74,6 +80,12 @@ public class FurnitureServiceImpl implements FurnitureService {
 		tTlbJj.setSfsc(true);
 		this.tTlbJjDao.saveTTlbJj(tTlbJj);
 		return JsonUtil.toRes("删除成功");
+	}
+
+	@Transactional(readOnly=true)
+	public String getLxs() {
+		List<TTlbJjlx> list = this.tTlbJjlxDao.getFurnitureTypeList();
+		return JsonUtil.toString(list);
 	}
 
 }

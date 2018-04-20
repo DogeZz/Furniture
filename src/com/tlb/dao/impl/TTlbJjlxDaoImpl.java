@@ -22,7 +22,7 @@ public class TTlbJjlxDaoImpl extends BaseDaoImpl<TTlbJjlx> implements TTlbJjlxDa
 	}
 	
 	public TTlbJjlx getTTlbJjlxByLxmc(String lxmc) {
-		return this.get("from TTblJjlx where sfsc = false and lxmc = ?", lxmc);
+		return this.get("from TTlbJjlx where sfsc = false and lxmc = ?", lxmc);
 		
 	}
 

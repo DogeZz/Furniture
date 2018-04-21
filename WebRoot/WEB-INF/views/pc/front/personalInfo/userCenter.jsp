@@ -9,9 +9,7 @@
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <title>用户中心-首页</title>
 <style type="text/css">
-	.header_operating a:HOVER{
-		color: #fff;
-	}
+	.header_operating a:HOVER{ color: #fff !important;}
 </style>
 </head>
 <body>
@@ -33,7 +31,7 @@
 					<span class="header_touxiang">
 						<img src="/views/front/images/touxiang_03.png" />
 					</span> 
-					<a href="/front/login.fjsp" class="">登录</a>
+					<a href="/front/login.fjsp">登录</a>
 					<a href="/front/register.fjsp">注册</a>
 				</div>
 			</div>

@@ -182,4 +182,11 @@ public interface AjaxService {
 
 	public String getTypeJjPageData(PageParam page, String lx1, String keyword, String lx2, String lx3, String lx4);
 
+	/**
+	 * 修改用户信息.
+	 * @param username 用户名
+	 * @return 数据
+	 */
+	public String saveInfo(String username);
+
 }

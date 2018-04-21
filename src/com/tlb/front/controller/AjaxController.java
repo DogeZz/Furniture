@@ -209,4 +209,13 @@ public class AjaxController {
 		response.getWriter().print(res);
 		return null;
 	}
+	
+	@RequestMapping(value = "/frontveInfo.ajx")
+	public String saveInfo(HttpServletResponse response, HttpServletRequest request, 
+			String username) throws Exception {
+		String res = this.ajaxService.saveInfo(username);
+		response.getWriter().print(res);
+		return null;
+	}
+
 }

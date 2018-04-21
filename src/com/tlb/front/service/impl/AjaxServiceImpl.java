@@ -355,4 +355,22 @@ public class AjaxServiceImpl implements AjaxService{
 		return JsonUtil.toStringFromObject(pager.putMapObject());
 	}
 	
+	@Transactional
+	public String saveInfo(String username) {
+		/*Date date = new Date();
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		TTlbDd tTlbDd = new TTlbDd();
+		tTlbDd.setYhid(tTlbYh.getYhid());
+		tTlbDd.setJjid(jjid);
+		tTlbDd.setSl(sl);
+		tTlbDd.setZe(ze);
+		tTlbDd.setDzid(dzid);
+		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		tTlbDd.setSszb(encoder.encodePassword(String.valueOf(date.getTime()), username));
+		this.tTlbDdDao.saveTTlbDd(tTlbDd);
+		return JsonUtil.toRes("订单成功");*/
+		return null;
+	}
+
+	
 }

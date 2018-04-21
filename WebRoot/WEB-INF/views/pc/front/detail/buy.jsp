@@ -173,7 +173,18 @@
 
 					}
 				});
-				$(".Order_address").html($(".mrdz").html())
+				$(".Order_address").html($(".mrdz").html());
+				$(".orderDz").click(function(){
+					var id = $(this).attr("value");
+					var zsxm = $(this).html();
+					var dz = $(this).siblings("span").eq(0).html();
+					$(this).attr("value", $(".data_mrdz").val());
+					$(this).html($(".data_mrdz").siblings("a").eq(0).html());
+					$(this).siblings("span").eq(0).html($(".data_mrdz").siblings("span").eq(0).html());
+					$(".data_mrdz").val(id);
+					$(".data_mrdz").siblings("a").eq(0).html(zsxm);
+					$(".data_mrdz").siblings("span").eq(0).html(dz);
+				});
 			}
 		});
 	}

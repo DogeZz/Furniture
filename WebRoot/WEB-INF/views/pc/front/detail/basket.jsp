@@ -61,6 +61,7 @@
 	});
 
 	var urlGwcid = getAttribute("gwcid");
+	var urlSl = getAttribute("sl");
 	
 	var loadGwcData = function(){
 		$.ajax({
@@ -71,6 +72,7 @@
 			}, 
 			dataType: 'json',
 			success: function(res) {
+				res.sl = urlSl;
 				var html = template('basket-template', {basket: res});
 				$('#basket-content').html(html);
 			}

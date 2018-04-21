@@ -188,8 +188,8 @@ public class AjaxController {
 	
 	@RequestMapping(value = "/front/toSubmitBilling.ajx")
 	public String toSubmitBilling(HttpServletResponse response, HttpServletRequest request,
-			String gwcids, String username) throws Exception {
-		String res = this.ajaxService.toSubmitBilling(gwcids, username);
+			String gwcids, String username, String dzid) throws Exception {
+		String res = this.ajaxService.toSubmitBilling(gwcids, username, dzid);
 		response.getWriter().print(res);
 		return null;
 	}
@@ -198,6 +198,14 @@ public class AjaxController {
 	public String toDeleteGwc(HttpServletResponse response, HttpServletRequest request,
 			String gwcid) throws Exception {
 		String res = this.ajaxService.toDeleteGwc(gwcid);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/getTypeJjPageData.ajx")
+	public String getTypeJjPageData(HttpServletResponse response, HttpServletRequest request,
+			PageParam page, String keyword, String lx1, String lx2, String lx3, String lx4) throws Exception {
+		String res = this.ajaxService.getTypeJjPageData(page, lx1, keyword, lx2, lx3, lx4);
 		response.getWriter().print(res);
 		return null;
 	}

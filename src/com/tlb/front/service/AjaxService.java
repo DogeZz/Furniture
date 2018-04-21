@@ -168,9 +168,10 @@ public interface AjaxService {
 	 * 购物车结算.
 	 * @param gwcids
 	 * @param username
+	 * @param dzid 
 	 * @return
 	 */
-	public String toSubmitBilling(String gwcids, String username);
+	public String toSubmitBilling(String gwcids, String username, String dzid);
 
 	/**
 	 * 删除购物车.
@@ -178,5 +179,7 @@ public interface AjaxService {
 	 * @return
 	 */
 	public String toDeleteGwc(String gwcid);
+
+	public String getTypeJjPageData(PageParam page, String lx1, String keyword, String lx2, String lx3, String lx4);
 
 }

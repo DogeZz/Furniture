@@ -68,4 +68,9 @@ public interface FrontService {
 	 * 购物车页.
 	 */
 	public Map<String, Object> toShoppingCart();
+
+	/**
+	 * 用户中心页.
+	 */
+	public Map<String, Object> toUserCenter();
 }

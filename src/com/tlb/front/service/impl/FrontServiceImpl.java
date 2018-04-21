@@ -101,4 +101,11 @@ public class FrontServiceImpl implements FrontService{
 		map.put("url", "/pc/front/personalInfo/shoppingCart");
 		return map;
 	}
+
+	@Transactional( readOnly = true )
+	public Map<String, Object> toUserCenter() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("url", "/pc/front/personalInfo/userCenter");
+		return map;
+	}
 }

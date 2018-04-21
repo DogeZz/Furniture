@@ -80,10 +80,10 @@
 						<dt class="label_name">数量</dt>
 						<dd id="J_Amount content">
 							<span class="tb-amount-widget mui-amount-wrap "> 
-							<input type="text" class="tb-text mui-amount-input" value="1" maxlength="8" title="请输入购买量"> 
+							<input type="text" name="gmsl" readOnly class="tb-text mui-amount-input" value="1" maxlength="8" title="请输入购买量"> 
 							<span class="mui-amount-btn clearfix"> 
-								<span class="mui-amount-increase">∧</span> 
-								<span class="mui-amount-decrease">∨</span>
+								<span class="mui-amount-increase" onclick="jia()">∧</span> 
+								<span class="mui-amount-decrease" onclick="jian()">∨</span>
 							</span> 
 							<span class="mui-amount-unit">件</span>
 							</span> <em id="J_EmStock" class="tb-hidden" style="display: inline;">库存<span class="jjsl"></span>件</em>
@@ -192,7 +192,7 @@
 			return false;
 		}
 		window.location.href = "/front/buy.fjsp?jjid=" + urlJjid + "&sl=" + $(".mui-amount-input").val();
-	} 
+	}
 	
 	var basket = function(){
 		if(isNull(sessionStorage.getItem("username"))){
@@ -209,19 +209,45 @@
 			}, 
 			dataType: 'json',
 			success: function(res) {
-				window.location.href = "/front/basket.fjsp?gwcid="+ res.msg;
+				window.location.href = "/front/basket.fjsp?gwcid="+ res.msg + "&sl=" + $("input[name = gmsl]").val();
 			}
 		});
 	}
 	
+	var jia = function(){
+		if(parseInt($("input[name = gmsl]").val()) < parseInt($(".jjsl").html()))
+			$("input[name = gmsl]").val(parseInt($("input[name = gmsl]").val()) + 1);
+	}
+	
+	var jian = function(){
+		if(parseInt($("input[name = gmsl]").val()) > 1){
+			$("input[name = gmsl]").val(parseInt($("input[name = gmsl]").val()) - 1);
+		}
+	}
+	
 	var ShowDiv = function(name, id) {
+		if(isNull(sessionStorage.getItem("username"))){
+			layer.msg("请先登录！");
+			return false;
+		}
 		layer.confirm('你确定收藏该商品吗？', {
 			btn : [ '确认', '取消' ] //按钮
 		}, function() {
-			layer.msg('收藏成功！', {
-				icon : 1
+			$.ajax({
+				url:'/front/addToCollection.ajx', 
+				type: 'post',
+				data: {
+					yhid: sessionStorage.getItem("username"),
+					jjid: urlJjid
+				}, 
+				dataType: 'json',
+				success: function(res) {
+					layer.msg('收藏成功！', {
+						icon : 1
+					});
+					$("#h1").html("<i class='icon_Collection icon'></i>已收藏");
+				}
 			});
-			$("#h1").html("<i class='icon_Collection icon'></i>已收藏");
 		});
 	}
 </script>

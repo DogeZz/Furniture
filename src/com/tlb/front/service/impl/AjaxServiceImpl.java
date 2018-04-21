@@ -143,21 +143,24 @@ public class AjaxServiceImpl implements AjaxService{
 	}
 
 	@Transactional
-	public String addToCollection(String yhid, String jjid) {
-		TTlbYhsc tTlbYhsc = this.tTlbYhscDao.getTTlbYhscByYhidAndJjid(yhid, jjid);
-		if (tTlbYhsc == null) { //新建
-			tTlbYhsc = new TTlbYhsc();
-			tTlbYhsc.setYhid(yhid);
-			tTlbYhsc.setJjid(jjid);
-			tTlbYhsc.setZt(true);
-			this.tTlbYhscDao.saveTTlbYhsc(tTlbYhsc);
-		} else {
-			if (!tTlbYhsc.getZt()) {
+	public String addToCollection(String username, String jjid) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		if (tTlbYh != null) {
+			TTlbYhsc tTlbYhsc = this.tTlbYhscDao.getTTlbYhscByYhidAndJjid(tTlbYh.getYhid(), jjid);
+			if (tTlbYhsc == null) { //新建
+				tTlbYhsc = new TTlbYhsc();
+				tTlbYhsc.setYhid(tTlbYh.getYhid());
+				tTlbYhsc.setJjid(jjid);
 				tTlbYhsc.setZt(true);
 				this.tTlbYhscDao.saveTTlbYhsc(tTlbYhsc);
+			} else {
+				if (!tTlbYhsc.getZt()) {
+					tTlbYhsc.setZt(true);
+					this.tTlbYhscDao.saveTTlbYhsc(tTlbYhsc);
+				}
 			}
 		}
-		return JsonUtil.toRes("关注成功");
+		return JsonUtil.toRes("收藏成功");
 	}
 
 	@Transactional(readOnly = true)
@@ -211,6 +214,13 @@ public class AjaxServiceImpl implements AjaxService{
 	public String toPay(String ddid) {
 		TTlbDd tTlbDd = this.tTlbDdDao.getTTlbDd(ddid);
 		if (tTlbDd != null) {
+			TTlbJj tTlbJj = this.tTlbJjDao.getTTlbJj(tTlbDd.getJjid());
+			if (tTlbJj.getJjsl() - tTlbDd.getSl() >= 0) {
+				tTlbJj.setJjsl(tTlbJj.getJjsl() - tTlbDd.getSl());
+				this.tTlbJjDao.saveTTlbJj(tTlbJj);
+			}else {
+				return JsonUtil.toRes("手速太慢，商品已售完！");
+			}
 			tTlbDd.setDdzt(1);
 			this.tTlbDdDao.saveTTlbDd(tTlbDd);
 		}
@@ -234,7 +244,7 @@ public class AjaxServiceImpl implements AjaxService{
 			tTlbDd.setDdzt(4);
 			this.tTlbDdDao.saveTTlbDd(tTlbDd);
 		}
-		return JsonUtil.toRes("签收成功");
+		return JsonUtil.toRes("删除成功");
 	}
 	
 	@Transactional(readOnly = true)
@@ -292,8 +302,9 @@ public class AjaxServiceImpl implements AjaxService{
 	}
 
 	@Transactional
-	public String toSubmitBilling(String gwcids, String username) {
+	public String toSubmitBilling(String gwcids, String username, String dzid) {
 		Date date = new Date();
+		boolean flag = false;
 		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
 		String[] gwcidss = gwcids.split("、");
 		for (String gwcid : gwcidss) {
@@ -302,18 +313,28 @@ public class AjaxServiceImpl implements AjaxService{
 				TTlbGwc tTlbGwc = this.tTlbGwcDao.getTTlbGwc(gwcid);
 				if (tTlbGwc != null) {
 					TTlbJj tTlbJj = this.tTlbJjDao.getTTlbJj(tTlbGwc.getJjid());
-					tTlbDd.setDdzt(1);
-					tTlbDd.setJjid(tTlbGwc.getJjid());
-					tTlbDd.setSl(tTlbGwc.getSl());
-					tTlbDd.setYhid(tTlbYh.getYhid());
-					tTlbDd.setZe(tTlbGwc.getSl() * tTlbJj.getJjjg());
-					Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-					tTlbDd.setSszb(encoder.encodePassword(String.valueOf(date.getTime()), username));
-					this.tTlbDdDao.saveTTlbDd(tTlbDd);
-					tTlbGwc.setZt(1);
-					this.tTlbGwcDao.saveTTlbGwc(tTlbGwc);
+					if (tTlbJj.getJjsl() - tTlbGwc.getSl() >= 0) {
+						tTlbJj.setJjsl(tTlbJj.getJjsl() - tTlbGwc.getSl());
+						this.tTlbJjDao.saveTTlbJj(tTlbJj);
+						tTlbDd.setDdzt(1);
+						tTlbDd.setJjid(tTlbGwc.getJjid());
+						tTlbDd.setSl(tTlbGwc.getSl());
+						tTlbDd.setYhid(tTlbYh.getYhid());
+						tTlbDd.setZe(tTlbGwc.getSl() * tTlbJj.getJjjg());
+						tTlbDd.setDzid(dzid);
+						Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+						tTlbDd.setSszb(encoder.encodePassword(String.valueOf(date.getTime()), username));
+						this.tTlbDdDao.saveTTlbDd(tTlbDd);
+						tTlbGwc.setZt(1);
+						this.tTlbGwcDao.saveTTlbGwc(tTlbGwc);
+					}else {
+						flag = true;
+					}
 				}
 			}
+		}
+		if(flag){
+			return JsonUtil.toRes("库存不足");
 		}
 		return JsonUtil.toRes("结算成功");
 	}
@@ -326,6 +347,12 @@ public class AjaxServiceImpl implements AjaxService{
 			this.tTlbGwcDao.saveTTlbGwc(tTlbGwc);
 		}
 		return JsonUtil.toRes("删除成功");
+	}
+
+	@Transactional(readOnly = true)
+	public String getTypeJjPageData(PageParam page, String lx1, String keyword, String lx2, String lx3, String lx4) {
+		Pager<TTlbJj> pager = this.tTlbJjDao.getTTlbJjs(page, keyword, lx1, lx2, lx3, lx4);
+		return JsonUtil.toStringFromObject(pager.putMapObject());
 	}
 	
 }

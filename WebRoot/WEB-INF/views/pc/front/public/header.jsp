@@ -7,10 +7,9 @@
 			</div>
 			<div class="Search_style l_f">
 				<div class="select">
-					<select id="homePage_search">
-						<option value="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品&nbsp;&nbsp;&nbsp;</option>
-						<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;店铺&nbsp;&nbsp;&nbsp;</option>
-					</select>
+<!-- 					<select id="homePage_search"> -->
+						<h3 style="height:35px; line-height:35px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品&nbsp;&nbsp;&nbsp;</h3>
+<!-- 					</select> -->
 				</div>
 				<input type="text" class="add_Search" /> 
 				<input type="button" class="submit_Search" onclick="header_toSearch(0)"/>
@@ -33,7 +32,7 @@
 			<ul class="menu" id="nav">
 				<li class="nLi"><a href="/front/homePage.fjsp">网站首页</a></li>
 				<li class="nLi"><a href="/front/type.fjsp">分类搜索</a></li>
-				<li class="nLi"><a href="/front/merchantList.fjsp">商店列表</a></li>
+<!-- 				<li class="nLi"><a href="/front/merchantList.fjsp">商店列表</a></li> -->
 			</ul>
 		</div>
 	</div>

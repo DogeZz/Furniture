@@ -30,4 +30,6 @@ public interface TTlbJjDao extends BaseDao<TTlbJj> {
 	 * 保存家具.
 	 */
 	public void saveTTlbJj(TTlbJj tTlbJj);
+
+	public Pager<TTlbJj> getTTlbJjs(PageParam page, String keyword, String lx1, String lx2, String lx3, String lx4);
 }

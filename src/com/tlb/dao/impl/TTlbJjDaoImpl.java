@@ -25,5 +25,9 @@ public class TTlbJjDaoImpl extends BaseDaoImpl<TTlbJj> implements TTlbJjDao {
 	public void saveTTlbJj(TTlbJj tTlbJj) {
 		this.saveOrUpdate(tTlbJj);
 	}
+
+	public Pager<TTlbJj> getTTlbJjs(PageParam page, String keyword, String lx1, String lx2, String lx3, String lx4) {
+		return this.getForPager("from TTlbJj where sfsc = false and (jjbt like ? and jjlx like ? and jjlx like ? and jjlx like ? and jjlx like ?) order by xgsj desc", page, "%" + keyword + "%", "%" + lx1 + "%", "%" + lx2 + "%", "%" + lx3 + "%", "%" + lx4 + "%");
+	}
 	
 }

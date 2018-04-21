@@ -94,15 +94,19 @@
 											</td>
 											<td width="110" class="Order_price">￥{{$value.ze}}</td>
 											<td width="100" class="order_status textalign">
-												<a href="#" class="payment">{{if $value.ddzt == 0}}待付款{{else if $value.ddzt == 1}}等待发货{{else if $value.ddzt == 2}}待收货{{else}}已签收{{/if}}</a> 
-												<a href="#" class="track"><em class="icon_cart"></em>跟踪<i></i></a></td>
+												<a class="payment">{{if $value.ddzt == 0}}待付款{{else if $value.ddzt == 1}}等待发货{{else if $value.ddzt == 2}}待收货{{else}}已签收{{/if}}</a> 
+												<a class="track"><em class="icon_cart"></em>跟踪<i></i></a></td>
 											<td class="textalign" width="150">
 												{{if $value.ddzt == 0}}
 												<a href="javascript:toPay('{{$value.ddid}}');" class="payment_btn pay">付款</a>
 												{{else if $value.ddzt == 2}}
 												<a href="javascript:toSign('{{$value.ddid}}');" class="payment_btn sign">签收</a>
 												{{/if}}
-												<a href="javascript:toDelete('{{$value.ddid}}');" class="payment_btn">删除订单</a>
+												{{if $value.ddzt == 0}}
+												<a href="javascript:toDelete('{{$value.ddid}}', 1);" class="payment_btn">取消订单</a>
+												{{else if $value.ddzt == 3}}
+												<a href="javascript:toDelete('{{$value.ddid}}');" class="payment_btn sign">删除订单</a>
+												{{/if}}
 											</td>
 										</tr>
 									</tbody>
@@ -248,7 +252,7 @@
 		});
 	}
 	
-	var toDelete = function(value){
+	var toDelete = function(value, type){
   		$.ajax({
 			url:'/front/toDelete.ajx', 
 			type: 'post',
@@ -257,7 +261,11 @@
 			},
 			dataType: 'json',
 			success: function(res) {
-				layer.msg(res.title);
+				if(type == 1){
+					layer.msg("取消成功");
+				}else{
+					layer.msg(res.title);
+				}
 				page = 1;
 				loadDdListData();
 			}

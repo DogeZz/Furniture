@@ -14,7 +14,7 @@ public class TTlbJj extends BaseEntity {
 
 	private static final long serialVersionUID = -3936554156197762593L;
 	private String jjid; // 家具id
-	private String shid; // 商店id
+//	private String shid; // 商店id
 	private String jjbt; // 家具标题
 	private String jjfbt; // 家具标题
 	private Integer jjsl; // 家具数量
@@ -38,13 +38,13 @@ public class TTlbJj extends BaseEntity {
 		this.jjid = jjid;
 	}
 
-	public String getShid() {
-		return shid;
-	}
-
-	public void setShid(String shid) {
-		this.shid = shid;
-	}
+//	public String getShid() {
+//		return shid;
+//	}
+//
+//	public void setShid(String shid) {
+//		this.shid = shid;
+//	}
 
 	public String getJjbt() {
 		return jjbt;

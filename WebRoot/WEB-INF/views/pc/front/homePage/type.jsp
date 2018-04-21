@@ -18,7 +18,44 @@
 </head>
 <body>
 	<div class="Background_color">
-		<%@include file="../public/header.jsp"%>
+		<div class="header">
+			<div class="header_top">
+				<div class="top_info clearfix">
+					<div class="logo_style l_f">
+						<a href="/front/homePage.fjsp"><img src="/views/front/images/logo.jpg" /></a>
+					</div>
+					<div class="Search_style l_f">
+						<div class="select">
+		<!-- 					<select id="homePage_search"> -->
+								<h3 style="height:35px; line-height:35px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品&nbsp;&nbsp;&nbsp;</h3>
+		<!-- 					</select> -->
+						</div>
+						<input type="text" class="add_Search" /> 
+						<input type="button" class="submit_Search" onclick="header_Search()"/>
+					</div>
+					<div class="Cart_user r_f">
+						<div class="Cart_Quantity">
+							<span class="number">0</span>
+						</div>
+						<div class="header_operating l_f">
+							<span class="header_touxiang">
+								<img src="/views/front/images/touxiang_03.png" />
+							</span> 
+							<a href="/front/login.fjsp">登录</a>
+							<a href="/front/register.fjsp">注册</a>
+						</div>
+					</div>
+				</div>
+				<div class="header_menu">
+					<!--菜单导航栏-->
+					<ul class="menu" id="nav">
+						<li class="nLi"><a href="/front/homePage.fjsp">网站首页</a></li>
+						<li class="nLi"><a href="/front/type.fjsp">分类搜索</a></li>
+		<!-- 				<li class="nLi"><a href="/front/merchantList.fjsp">商店列表</a></li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
 		<!--产品列表-->
 		<div class="content_style clearfix">
 			<div class="page_Style">
@@ -26,56 +63,64 @@
 				<div class="filter_style clearfix">
 					<ul>
 						<li><label class="filter_name">风格分类</label>
-							<div class="filter_link">
-								<a href="#" class="Select">中式家具</a>
-								<a href="#">美式家具</a>
-								<a href="#">欧式家具</a>
-								<a href="#">现代家具</a>
+							<div class="filter_link jjlx1">
+								<a href="javascript:changeLx1('', 0);" class="Select">全部</a>
+								<a href="javascript:changeLx1('中式家具', 1);">中式家具</a>
+								<a href="javascript:changeLx1('美式家具', 2);">美式家具</a>
+								<a href="javascript:changeLx1('欧式家具', 3);">欧式家具</a>
+								<a href="javascript:changeLx1('现代家具', 4);">现代家具</a>
 							</div>
 						</li>
 						<li><label class="filter_name">材料分类</label>
-							<div class="filter_link">
-								<a href="#">实木家具</a>
-								<a href="#">板式家具</a>
-								<a href="#">软体家具</a>
-								<a href="#">其他</a>
+							<div class="filter_link jjlx2">
+								<a href="javascript:changeLx2('', 0);" class="Select">全部</a>
+								<a href="javascript:changeLx2('实木家具', 1);">实木家具</a>
+								<a href="javascript:changeLx2('板式家具', 2);">板式家具</a>
+								<a href="javascript:changeLx2('软体家具', 3);">软体家具</a>
+								<a href="javascript:changeLx2('其他', 4);">其他</a>
 							</div>
 						</li>
 						<li><label class="filter_name">种类分类</label>
-							<div class="filter_link">
-								<a href="#" class="Select">床</a>
-								<a href="#">桌椅</a>
-								<a href="#">衣柜</a>
-								<a href="#">灯具</a>
+							<div class="filter_link jjlx3">
+								<a href="javascript:changeLx3('', 0);" class="Select">全部</a>
+								<a href="javascript:changeLx3('床', 1);">床</a>
+								<a href="javascript:changeLx3('桌椅', 2);">桌椅</a>
+								<a href="javascript:changeLx3('衣柜', 3);">衣柜</a>
+								<a href="javascript:changeLx3('灯具', 4);">灯具</a>
 							</div>
 						</li>
 						<li><label class="filter_name">档次分类</label>
-							<div class="filter_link">
-								<a href="#" class="Select">高档</a>
-								<a href="#">中高档</a>
-								<a href="#">中档</a>
-								<a href="#">中低档</a>
-								<a href="#">低档</a>
+							<div class="filter_link jjlx4">
+								<a href="javascript:changeLx4('', 0);" class="Select">全部</a>
+								<a href="javascript:changeLx4('高档', 1);">高档</a>
+								<a href="javascript:changeLx4('中高档', 2);">中高档</a>
+								<a href="javascript:changeLx4('中档', 3);">中档</a>
+								<a href="javascript:changeLx4('中低档', 4);">中低档</a>
+								<a href="javascript:changeLx4('低档', 5);">低档</a>
 							</div>
 						</li>
 					</ul>
 				</div>
 				<!--产品列表-->
 				<div class="prodcuts_list clearfix">
-					<ul class="prodcuts_style clearfix">
+					<ul class="prodcuts_style clearfix" id="typeJj-content">
+						<script type="text/html" id="typeJj-template">
+						{{each typeJjs}}
 						<li class="product">
 							<div class="pic_img textalign">
-								<a href="#"><img src="/views/front/images/product/p-1.jpg" /></a>
+								<a href="/front/detail.fjsp?jjid={{$value.jjid}}"><img src="{{$value.jjtp}}" /></a>
 								<div class="operating">
-									<a href="javascript:addToShoppingCart();" class="pic_cart">加入购物车</a>
-									<a href="javascript:addToCollection();" class="Collection">收藏</a>
+									<a href="javascript:addToShoppingCart('{{$value.jjid}}');" class="pic_cart">加入购物车</a>
+									<a href="javascript:addToCollection('{{$value.jjid}}');" class="Collection">收藏</a>
 								</div>
 							</div>
 							<p class="pic_nme">
-								<a href="#">A家家具 床 实木床 1.5米1.8米双人床简约软包皮床卧室家具 床 框架床</a>
+								<a href="#">{{$value.jjbt}}</a>
 							</p>
-							<p class="pic_price">￥2310.00</p>
+							<p class="pic_price">￥{{$value.jjjg}}</p>
 						</li>
+						{{/each}}
+						</script>
 					</ul>
 					<div id="public_pagination"></div>
 				</div>
@@ -85,23 +130,11 @@
 	<%@include file="../public/footer.jsp"%>
 </body>
 <script type="text/javascript" src="/views/front/public.js?v=1"></script>
+<script src="/views/common/template-web.js"></script>
 <script type="text/javascript">
 	goToTop("goToTop");
 	showTopSearch("showTopSearch");
 	$(document).ready(function() {
-		$(".product").hover(function() {
-			$(this).addClass("hover");
-			$(this).find(".operating").animate({bottom : "5"}, "fast");
-		}, function() {
-			$(this).removeClass("hover");
-			$(this).find(".operating").animate({bottom : "-30"}, "fast");
-		});
-	
-		$('.pagination').css({"margin-left" : ($(".page_Style").width() - $('.pagination').outerWidth()) / 2});
-		$(window).resize(function() {
-			$('.pagination').css({"margin-left" : ($(".page_Style").width() - $('.pagination').outerWidth()) / 2});
-		});
-		
 		var searchValue = getAttribute("searchValue");
 		if(isNotNull(searchValue)){
 			$(".add_Search").val(searchValue);
@@ -130,15 +163,17 @@
 			return false;
 		}
 		$.ajax({
-			url:'/front/addToShoppingCart.ajx', 
+			url:'/front/saveBasket.ajx', 
 			type: 'post',
 			data: {
-				yhid: sessionStorage.getItem("username"),
-				jjid: value
+				username: sessionStorage.getItem("username"),
+				jjid: value,
+				sl: 1
 			}, 
 			dataType: 'json',
 			success: function(res) {
 				layer.msg(res.title);
+				window.location.href = "/front/basket.fjsp?gwcid="+ res.msg;
 			}
 		});
 	}
@@ -162,21 +197,47 @@
 		});
 	}
 	
-	var loadShJjPageData = function(){
+	var urlSearchValue = getAttribute("searchValue");
+	var lx1 = "";
+	var lx2 = "";
+	var lx3 = "";
+	var lx4 = "";
+	
+	var page = 1, rows = 15, total = 0, pageCount;
+	var loadTypeJjPageData = function(){
 		$.ajax({
-			url:'/front/getShJjPageData.ajx', 
+			url:'/front/getTypeJjPageData.ajx', 
 			type: 'post',
-			data: {shid: getAttribute("shid")}, 
+			data: {
+				page: page,
+				rows: rows,
+				keyword: urlSearchValue,
+				lx1: lx1,
+				lx2: lx2,
+				lx3: lx3,
+				lx4: lx4
+			}, 
 			dataType: 'json',
 			success: function(res) {
-// 				var html = template('merchantDetail-template', {merchant: res});
-// 				$('#merchantDetail-content').html(html);
+				var html = template('typeJj-template', {typeJjs: res.rows});
+				$('#typeJj-content').html(html);
 				pagination(res, 'public_pagination');
+				$(".product").hover(function() {
+					$(this).addClass("hover");
+					$(this).find(".operating").animate({bottom : "5"}, "fast");
+				}, function() {
+					$(this).removeClass("hover");
+					$(this).find(".operating").animate({bottom : "-30"}, "fast");
+				});
+			
+				$('.pagination').css({"margin-left" : ($(".page_Style").width() - $('.pagination').outerWidth()) / 2});
+				$(window).resize(function() {
+					$('.pagination').css({"margin-left" : ($(".page_Style").width() - $('.pagination').outerWidth()) / 2});
+				});
 			}
 		});
-		pagination(res, 'public_pagination');
 	}
-	loadShJjPageData();
+	loadTypeJjPageData();
 	
 	var pagination = function(data, divID){
 		pageCount = data.pageCount;
@@ -229,5 +290,37 @@
 		}
 	};
 	
+	var changeLx1 = function(value, index){
+		lx1 = value;
+		page = 1;
+		loadTypeJjPageData();
+		$(".jjlx1 a").eq(index).addClass("Select").siblings().removeClass("Select");
+	}
+	
+	var changeLx2 = function(value, index){
+		lx2 = value;
+		page = 1;
+		loadTypeJjPageData();
+		$(".jjlx2 a").eq(index).addClass("Select").siblings().removeClass("Select");
+	}
+	
+	var changeLx3 = function(value, index){
+		lx3 = value;
+		page = 1;
+		loadTypeJjPageData();
+		$(".jjlx3 a").eq(index).addClass("Select").siblings().removeClass("Select");
+	}
+	
+	var changeLx4 = function(value, index){
+		lx4 = value;
+		page = 1;
+		loadTypeJjPageData();
+		$(".jjlx4 a").eq(index).addClass("Select").siblings().removeClass("Select");
+	}
+	
+	var header_Search = function(){
+		page = 1;
+		loadTypeJjPageData();
+	}
 </script>
 </html>

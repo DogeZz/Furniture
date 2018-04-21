@@ -24,6 +24,37 @@
 				</div>
 			</div>
 		</div>
+		<!--收货人信息-->
+		<div class="Settlement_style">
+		<div class="s_detailed_style">
+		<div class="Address_info" id="addr-content">
+			<div class="title_name clearfix marginbottom">
+				<span>收货人信息</span><a href="javascript:addAddr();">新增收货地址</a>
+			</div>
+			<script type="text/html" id="addr-template">
+					{{each addrs}}
+					{{if $value.sfmr}}
+					<div class="address clearfix">
+						<a href="" class="Select_address determine" id="" aria-checked="true">{{$value.zsxm}} <i class="icon_Select"></i></a> 
+						<input class="data_mrdz" value="{{$value.dzid}}" type="hidden">
+						<span class="info mrdz">{{$value.shdz}}&nbsp;{{$value.sjhm}}</span>
+					</div>
+					<div class="More_addresses">
+						<a href="javascript:;" id="fold_btn" class="title_name">更多地址
+						<i class="icon_Expand"></i></a>
+					{{else}}
+						<div class="addresses_content">
+							<div class="address clearfix">
+								<a href="javascript:;" value="{{$value.dzid}}" class="Select_address orderDz" id="" aria-checked="true">{{$value.zsxm}} 
+								<i class="icon_Select"></i></a>
+								<span class="info">{{$value.shdz}}&nbsp;{{$value.sjhm}}</span>
+							</div>
+						</div>
+					{{/if}}
+					</div>
+					{{/each}}
+			</script>
+		</div></div></div>
 		<!--购物车-->
 		<div class="cart_style Shopping_list">
 			<table class="table">
@@ -70,6 +101,9 @@
 				</script>
 			</table>
 			<div class="Settlement clearfix">
+				<div class="select-all clearfix">
+				 	<div class="operation"><a href="javascript:deleteAll();" id="send">删除选中的商品</a></div> 
+			    </div>
 				<div class="toolbar_right clearfix">
 					<div class="Quantity l_f marginright">
 						已选择<em class="shopNum">0</em>件商品
@@ -223,7 +257,6 @@
 			layer.msg('请选择商品');
 			return false;
 		}
-		console.log(gwcids);
 		layer.prompt({title: '输入支付密码并确认', formType: 1}, function(pass, index){
 		  	layer.close(index);
 		  	if(pass == "123456"){
@@ -232,7 +265,8 @@
 					type: 'post',
 					data: {
 						gwcids: gwcids,
-						username: sessionStorage.getItem("username")
+						username: sessionStorage.getItem("username"),
+						dzid: $(".data_mrdz").val() 
 					},
 					dataType: 'json',
 					success: function(res) {
@@ -305,6 +339,56 @@
 				$(".shopNum").html(selectNum);
 			}
 		});
+	}
+	
+	var loadDzData = function() {
+		$.ajax({
+			url:'/front/getDzData.ajx', 
+			type: 'post',
+			data: { yhid : sessionStorage.getItem("username") }, 
+			dataType: 'json',
+			success: function(res) {
+				var html = template('addr-template', {addrs: res});
+				$('#addr-content').append(html);
+				$("#fold_btn").click(function() {
+					var active = $(this).attr("active");
+					$(".addresses_content").slideToggle("slow");
+					if ($(this).hasClass('active')) {
+						$(this).removeClass('active').find("i").attr("class", "icon_Expand");
+					} else {
+						$(this).addClass('active').find("i").attr("class", "icon_hide")
+
+					}
+				});
+				$(".orderDz").click(function(){
+					var id = $(this).attr("value");
+					var zsxm = $(this).html();
+					var dz = $(this).siblings("span").eq(0).html();
+					$(this).attr("value", $(".data_mrdz").val());
+					$(this).html($(".data_mrdz").siblings("a").eq(0).html());
+					$(this).siblings("span").eq(0).html($(".data_mrdz").siblings("span").eq(0).html());
+					$(".data_mrdz").val(id);
+					$(".data_mrdz").siblings("a").eq(0).html(zsxm);
+					$(".data_mrdz").siblings("span").eq(0).html(dz);
+				});
+			}
+		});
+	}
+	loadDzData();
+	
+	var deleteAll = function(){
+		var _select = $(".select");
+		var gwcids = "";
+		for(var i = 0; i < _select.length; i++){
+			if(_select[i].checked){
+				toDelete(_select[i].value);
+				gwcids += _select[i].value + "、"
+			}
+		}
+		if(gwcids.length == 0){
+			layer.msg('请选择商品');
+			return false;
+		}
 	}
 </script>
 </html>

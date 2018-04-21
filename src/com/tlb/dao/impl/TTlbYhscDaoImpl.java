@@ -26,4 +26,9 @@ public class TTlbYhscDaoImpl extends BaseDaoImpl<TTlbYhsc> implements TTlbYhscDa
 		return this.get("from TTlbYhsc where yhid = ? and jjid = ? ", yhid, jjid);
 	}
 
+	public Pager<List<Map<String, Object>>> getTTlbYhscsByYhid(PageParam page, String yhid) {
+		return this.getForPagerBySql("select b.yhmc, c.* from t_tlb_yhsc a, t_tlb_yh b, t_tlb_jj c " +
+				"where a.yhid = b.yhid and a.jjid = c.jjid and a.yhid = ? and a.zt = 1 order by a.cjsj desc", page, yhid);
+	}
+
 }

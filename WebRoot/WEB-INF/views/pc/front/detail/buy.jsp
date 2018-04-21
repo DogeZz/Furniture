@@ -66,7 +66,7 @@
 				<!--收货人信息-->
 				<div class="Address_info" id="addr-content">
 					<div class="title_name clearfix marginbottom">
-						<span>收货人信息</span><a href="javascript:addAddr();">新增收货地址</a>
+						<span>收货人信息</span><a href="/front/deliveryAddress.fjsp">新增收货地址</a>
 					</div>
 					<script type="text/html" id="addr-template">
 					{{each addrs}}

@@ -184,9 +184,65 @@ public interface AjaxService {
 
 	/**
 	 * 修改用户信息.
-	 * @param username 用户名
+	 * @param tTlbYh 用户
 	 * @return 数据
 	 */
-	public String saveInfo(String username);
+	public String saveInfo(TTlbYh tTlbYh);
+
+	/**
+	 * 获取用户所有地址.
+	 * @param username
+	 * @return
+	 */
+	public String getDzListData(String username);
+
+	/**
+	 * 设置地址默认.
+	 * @param dzid
+	 * @return
+	 */
+	public String toSetDzDefault(String dzid);
+
+	/**
+	 * 保存或修改收货地址.
+	 * @param username
+	 * @param dzid
+	 * @param zsxm
+	 * @param sjhm
+	 * @param shdz
+	 * @param sfmr
+	 * @return
+	 */
+	public String toSaveAddr(String username, String dzid, String zsxm, String sjhm, String shdz, boolean sfmr);
+
+	/**
+	 * 删除地址.
+	 * @param dzid
+	 * @return
+	 */
+	public String toDeleteAddr(String dzid);
+
+	/**
+	 * 获取用户收藏.
+	 * @param page
+	 * @param username
+	 * @return
+	 */
+	public String getScPageData(PageParam page, String username);
+
+	/**
+	 * 获取指定用户的购物车数量.
+	 * @param username
+	 * @return
+	 */
+	public String getGwcCount(String username);
+
+	/**
+	 * 保存用户头像.
+	 * @param username
+	 * @param yhtx
+	 * @return
+	 */
+	public String saveUserHead(String username, String yhtx);
 
 }

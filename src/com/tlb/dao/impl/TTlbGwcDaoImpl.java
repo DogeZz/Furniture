@@ -40,4 +40,8 @@ public class TTlbGwcDaoImpl extends BaseDaoImpl<TTlbGwc> implements TTlbGwcDao{
 				+ "where a.jjid = b.jjid and a.yhid = c.yhid and a.zt = 0 and (b.jjbt like ? or c.zsxm like ?) order by cjsj desc", page, "%" + name + "%", "%" + name + "%");
 	}
 
+	public int getTTlbGwcCountByYhid(String yhid) {
+		return this.count("from TTlbGwc where yhid = ? and zt = 0", yhid);
+	}
+
 }

@@ -40,4 +40,9 @@ public interface TTlbGwcDao extends BaseDao<TTlbGwc>{
 	 */
 	public Pager<List<Map<String, Object>>> getTTlbGwcsByName(PageParam page, String name);
 
+	/**
+	 * 获取指定用户的购物车数量.
+	 */
+	public int getTTlbGwcCountByYhid(String yhid);
+
 }

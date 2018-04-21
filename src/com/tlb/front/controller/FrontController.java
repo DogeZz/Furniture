@@ -101,4 +101,10 @@ public class FrontController {
 		Map<String, Object> model = this.frontService.toUserCenter();
 		return new ModelAndView(model.get("url").toString(), model);
 	}
+	
+	@RequestMapping(value = "/front/myCollection.fjsp")
+	public ModelAndView myCollection(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		Map<String, Object> model = this.frontService.toMyCollection();
+		return new ModelAndView(model.get("url").toString(), model);
+	}
 }

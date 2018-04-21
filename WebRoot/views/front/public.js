@@ -62,3 +62,16 @@ var header_toSearch = function(index){
 	window.location.href = "/front/type.fjsp?searchValue=" + value;
 }
 
+var getGwcCount = function(selectClass) {
+	$.ajax({
+		url:'/front/getGwcCount.ajx', 
+		type: 'post',
+		data: {
+			username: sessionStorage.getItem("username")
+		}, 
+		dataType: 'json',
+		success: function(res) {
+			$('.'+selectClass).html(res.title);
+		}
+	});
+};

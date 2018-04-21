@@ -31,7 +31,6 @@
 	        <div class="ibox-content">
 	            <form action="" method="post" class="form-horizontal">
 	            	<input type="hidden" name="jjid" value="${data.jjid}">
-	            	<input type="hidden" name="shid" value="${data.shid}">
 	                <div class="form-group">
 	                    <label class="col-sm-1 control-label">家具标题：</label>
 	                    <div class="col-sm-6">

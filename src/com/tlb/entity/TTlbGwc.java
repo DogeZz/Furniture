@@ -18,7 +18,7 @@ public class TTlbGwc extends BaseEntity {
 	private String yhid;
 	private String jjid;
 	private Integer sl;
-	private Integer zt;
+	private Integer zt;//(0、添加到购物车1、购买了、2、删除了)
 
 	@Id
 	@GeneratedValue(generator = "uuid")

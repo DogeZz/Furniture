@@ -73,4 +73,9 @@ public interface FrontService {
 	 * 用户中心页.
 	 */
 	public Map<String, Object> toUserCenter();
+
+	/**
+	 * 收藏页.
+	 */
+	public Map<String, Object> toMyCollection();
 }

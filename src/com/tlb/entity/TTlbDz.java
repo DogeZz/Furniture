@@ -16,13 +16,15 @@ public class TTlbDz extends BaseEntity {
 
 	private String dzid; // 地址id
 	private String yhid; // 用户id
+	private String shr; // 收货人
+	private String shsjhm; // 收货人手机号码
 	private String shdz; // 收货地址
 	private Boolean sfmr; // 是否默认
 	private Boolean sfky; // 是否可用
 
 	@Id
-	@GeneratedValue(generator="uuid")
-	@GenericGenerator(name = "uuid",strategy="uuid")
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid")
 	@Column(length = 32, nullable = false)
 	public String getDzid() {
 		return dzid;
@@ -63,6 +65,22 @@ public class TTlbDz extends BaseEntity {
 
 	public void setSfky(Boolean sfky) {
 		this.sfky = sfky;
+	}
+
+	public String getShr() {
+		return shr;
+	}
+
+	public void setShr(String shr) {
+		this.shr = shr;
+	}
+
+	public String getShsjhm() {
+		return shsjhm;
+	}
+
+	public void setShsjhm(String shsjhm) {
+		this.shsjhm = shsjhm;
 	}
 
 }

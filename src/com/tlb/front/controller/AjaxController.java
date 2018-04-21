@@ -210,12 +210,67 @@ public class AjaxController {
 		return null;
 	}
 	
-	@RequestMapping(value = "/frontveInfo.ajx")
+	@RequestMapping(value = "/front/saveInfo.ajx")
 	public String saveInfo(HttpServletResponse response, HttpServletRequest request, 
+			TTlbYh tTlbYh) throws Exception {
+		String res = this.ajaxService.saveInfo(tTlbYh);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/saveUserHead.ajx")
+	public String saveUserHead(HttpServletResponse response, HttpServletRequest request, 
+			String username, String yhtx) throws Exception {
+		String res = this.ajaxService.saveUserHead(username, yhtx);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/getDzListData.ajx")
+	public String getDzListData(HttpServletResponse response, HttpServletRequest request, 
 			String username) throws Exception {
-		String res = this.ajaxService.saveInfo(username);
+		String res = this.ajaxService.getDzListData(username);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/toSetDzDefault.ajx")
+	public String toSetDzDefault(HttpServletResponse response, HttpServletRequest request, 
+			String dzid) throws Exception {
+		String res = this.ajaxService.toSetDzDefault(dzid);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/toSaveAddr.ajx")
+	public String toSaveAddr(HttpServletResponse response, HttpServletRequest request, 
+			String username, String dzid, String zsxm, String sjhm, String shdz, boolean sfmr) throws Exception {
+		String res = this.ajaxService.toSaveAddr(username, dzid, zsxm, sjhm, shdz, sfmr);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/toDeleteAddr.ajx")
+	public String toDeleteAddr(HttpServletResponse response, HttpServletRequest request, 
+			String dzid) throws Exception {
+		String res = this.ajaxService.toDeleteAddr(dzid);
 		response.getWriter().print(res);
 		return null;
 	}
 
+	@RequestMapping(value = "/front/getScPageData.ajx")
+	public String getScPageData(HttpServletResponse response, HttpServletRequest request, 
+			PageParam page, String username) throws Exception {
+		String res = this.ajaxService.getScPageData(page, username);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/getGwcCount.ajx")
+	public String getGwcCount(HttpServletResponse response, HttpServletRequest request, 
+			String username) throws Exception {
+		String res = this.ajaxService.getGwcCount(username);
+		response.getWriter().print(res);
+		return null;
+	}
 }

@@ -14,8 +14,7 @@
 <body style="min-height:700px;">
 	<div class="shopping_cart" style="min-height:600px;">
 		<div class="cart_top clearfix">
-			<a href="/front/homePage.fjsp"><img
-				src="/views/front/images/logo.jpg" /></a> <span class="title_name">购物车</span>
+			<a href="/front/homePage.fjsp"><img src="/views/front/images/logo.jpg" /></a> <span class="title_name">购物车</span>
 			<div class="Cart_user r_f" style="margin-top:25px;">
 				<div class="header_operating l_f">
 					<span class="header_touxiang"> <img src="/views/front/images/touxiang_03.png" /></span> 
@@ -29,7 +28,7 @@
 		<div class="s_detailed_style">
 		<div class="Address_info" id="addr-content">
 			<div class="title_name clearfix marginbottom">
-				<span>收货人信息</span><a href="javascript:addAddr();">新增收货地址</a>
+				<span>收货人信息</span><a href="/front/deliveryAddress.fjsp">新增收货地址</a>
 			</div>
 			<script type="text/html" id="addr-template">
 					{{each addrs}}

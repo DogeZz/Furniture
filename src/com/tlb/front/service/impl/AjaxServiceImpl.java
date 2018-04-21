@@ -23,6 +23,7 @@ import com.tlb.dao.TTlbYhDao;
 import com.tlb.dao.TTlbYhgzDao;
 import com.tlb.dao.TTlbYhscDao;
 import com.tlb.entity.TTlbDd;
+import com.tlb.entity.TTlbDz;
 import com.tlb.entity.TTlbGwc;
 import com.tlb.entity.TTlbJj;
 import com.tlb.entity.TTlbSh;
@@ -58,7 +59,7 @@ public class AjaxServiceImpl implements AjaxService{
 	
 	@Resource
 	private TTlbGwcDao tTlbGwcDao;
-
+	
 	@Transactional(readOnly = true)
 	public String getLoginResult(String username, String password) {
 		if (!(username.equals("") || username == null)) {
@@ -356,21 +357,117 @@ public class AjaxServiceImpl implements AjaxService{
 	}
 	
 	@Transactional
-	public String saveInfo(String username) {
-		/*Date date = new Date();
+	public String saveInfo(TTlbYh param) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(param.getYhid());
+		if (tTlbYh != null) {
+			tTlbYh.setXb(param.getXb());
+			tTlbYh.setQq(param.getQq());
+			tTlbYh.setSjhm(param.getSjhm());
+			tTlbYh.setYhjj(param.getYhjj());
+			tTlbYh.setYhnc(param.getYhnc());
+			this.tTlbYhDao.saveTTlbYh(tTlbYh);
+		}
+		return JsonUtil.toRes("修改成功");
+	}
+
+	@Transactional(readOnly = true)
+	public String getDzListData(String username) {
 		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
-		TTlbDd tTlbDd = new TTlbDd();
-		tTlbDd.setYhid(tTlbYh.getYhid());
-		tTlbDd.setJjid(jjid);
-		tTlbDd.setSl(sl);
-		tTlbDd.setZe(ze);
-		tTlbDd.setDzid(dzid);
-		Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		tTlbDd.setSszb(encoder.encodePassword(String.valueOf(date.getTime()), username));
-		this.tTlbDdDao.saveTTlbDd(tTlbDd);
-		return JsonUtil.toRes("订单成功");*/
+		if (tTlbYh != null) {
+			List<Map<String, Object>> list = this.tTlbDzDao.getTTlbDzsByYhid(tTlbYh.getYhid());
+			return JsonUtil.toString(list);
+		}
 		return null;
 	}
 
+	@Transactional
+	public String toSetDzDefault(String dzid) {
+		TTlbDz tTlbDz = this.tTlbDzDao.getTTlbDz(dzid);
+		if (tTlbDz != null) {
+			TTlbDz tTlbDz2 = this.tTlbDzDao.getTTlbDdByYhidAndMr(tTlbDz.getYhid(), true);
+			if (tTlbDz2 != null) {
+				tTlbDz2.setSfmr(false);
+				this.tTlbDzDao.saveTTlbDz(tTlbDz2);
+			}
+			tTlbDz.setSfmr(true);
+			this.tTlbDzDao.saveTTlbDz(tTlbDz);
+		}
+		return JsonUtil.toRes("设置成功");
+	}
+
+	@Transactional
+	public String toSaveAddr(String username, String dzid, String zsxm, String sjhm, String shdz, boolean sfmr) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		if (tTlbYh != null) {
+			if (sfmr) {
+				TTlbDz tTlbDz2 = this.tTlbDzDao.getTTlbDdByYhidAndMr(tTlbYh.getYhid(), true);
+				if (tTlbDz2 != null) {
+					tTlbDz2.setSfmr(false);
+					this.tTlbDzDao.saveTTlbDz(tTlbDz2);
+				}
+			}
+			if (NullUtils.isEmpty(dzid)) { //新建
+				TTlbDz tTlbDz = new TTlbDz();
+				tTlbDz.setYhid(tTlbYh.getYhid());
+				tTlbDz.setSfky(true);
+				tTlbDz.setSfmr(sfmr);
+				tTlbDz.setShdz(shdz);
+				tTlbDz.setShr(zsxm);
+				tTlbDz.setShsjhm(sjhm);
+				this.tTlbDzDao.saveTTlbDz(tTlbDz);
+			} else {
+				TTlbDz tTlbDz = this.tTlbDzDao.getTTlbDz(dzid);
+				if (tTlbDz != null) {
+					tTlbDz.setShdz(shdz);
+					tTlbDz.setSfmr(sfmr);
+					tTlbDz.setShr(zsxm);
+					tTlbDz.setShsjhm(sjhm);
+					this.tTlbDzDao.saveTTlbDz(tTlbDz);
+				}
+			}
+		}
+		return JsonUtil.toRes("保存成功");
+	}
+
+	@Transactional
+	public String toDeleteAddr(String dzid) {
+		TTlbDz tTlbDz = this.tTlbDzDao.getTTlbDz(dzid);
+		if (tTlbDz != null) {
+			tTlbDz.setSfky(false);
+			this.tTlbDzDao.saveTTlbDz(tTlbDz);
+		}
+		return JsonUtil.toRes("删除成功");
+	}
+
+	@Transactional(readOnly = true)
+	public String getScPageData(PageParam page, String username) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		if (tTlbYh != null) {
+			Pager<List<Map<String, Object>>> pager = this.tTlbYhscDao.getTTlbYhscsByYhid(page, tTlbYh.getYhid());
+			return JsonUtil.toStringFromObject(pager.putMapObject());
+		}
+		return "";
+	}
+
+	@Transactional(readOnly = true)
+	public String getGwcCount(String username) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		if (tTlbYh != null) {
+			int count = this.tTlbGwcDao.getTTlbGwcCountByYhid(tTlbYh.getYhid());
+			return JsonUtil.toRes("" + count);
+		}
+		return JsonUtil.toRes("0");
+	}
+
+	@Transactional
+	public String saveUserHead(String username, String yhtx) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		if (tTlbYh != null) {
+			tTlbYh.setYhtx(yhtx);
+			this.tTlbYhDao.saveTTlbYh(tTlbYh);
+			return JsonUtil.toRes("修改成功");
+		}
+		return JsonUtil.toRes("修改失败");
+	}
 	
 }

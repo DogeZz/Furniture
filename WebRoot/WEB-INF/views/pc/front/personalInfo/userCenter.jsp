@@ -16,7 +16,7 @@
 	<div class="Background_color">
 		<div class="user_lanmu">
 			<div class="user_style nav">
-				<a href="#" class="user_logo"><img src="/views/front/images/user_logo_03.png" /></a>
+				<a href="/front/homePage.fjsp" class="user_logo"><img src="/views/front/images/user_logo_03.png" /></a>
 				<div class="navitems" style="width: 520px;">
 					<ul class="">
 						<li><a href="/front/userCenter.fjsp">首页</a></li>
@@ -51,7 +51,7 @@
 						<dl>
 							<dt>我的收藏</dt>
 							<dd>
-								<a href="/front/myCollection.fjsp">单品</a>
+								<a href="/front/myCollection.fjsp">商品</a>
 							</dd>
 						</dl>
 						<dl>
@@ -60,7 +60,7 @@
 								<a href="/front/personalInfo.fjsp">个人资料</a>
 							</dd>
 							<dd>
-								<a href="#">地址管理</a>
+								<a href="/front/deliveryAddress.fjsp">地址管理</a>
 							</dd>
 							<dd>
 								<a href="#">修改密码</a>
@@ -97,8 +97,12 @@
 					<div class="Collection user_Section">
 						<div class="title_name">我的收藏</div>
 						<ul class="Section_list clearfix">
-							<li><a href="#"><img src="/views/front/images/icon_user_05.png" />
-								<h3>商品</h3></a></li>
+							<li>
+								<a href="#">
+									<img src="/views/front/images/icon_user_05.png" />
+									<h3>商品</h3>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>

@@ -62,6 +62,38 @@
 	        }}
 	    ]
 	});
+	var messageList_add = function() {
+		$(this)[0].location.href = 'message.do?add';
+	};
+	
+	var messageList_edit = function(value) {
+		$(this)[0].location.href = 'message.do?edit&ggid=' + value;
+	};
+	
+	var messageList_delete = function(value) {
+		var index = layer.open({
+			title: '提示',
+			icon: 0,
+			btn: ['确定', '取消'],
+			content: '您确定要删除该公告吗？',
+			cancel: function() {},
+			yes: function() {
+				$.ajax({
+					url : '/admin/message.do?delete',
+					type: 'post',
+					data : {ggid: value},
+					dataType : 'json',
+					success : function(res) {
+						if(res.success) {
+							$('#messageList-grid').bootstrapTable('refresh');
+							layer.close(index);
+							layer.msg(res.title);
+						}
+					}
+				});				
+			}
+		});
+	};
 
 </script>
 </html>

@@ -22,28 +22,28 @@ public interface MessageService {
 	String getMessageDatas(PageParam page, String name);
 
 	/*
-	 * 家具添加页索引
+	 * 公告添加页索引
 	 * @return 页面
 	 */
 	Map<String, Object> toAdd();
 
 	/*
-	 * 保存家具
-	 * @param param 家具实体类
+	 * 保存公告
+	 * @param param 公告实体类
 	 * @return 数据
 	 */
 	String saveMessage(TTlbGg param);
 
 	/*
-	 * 家具修改页索引
-	 * @param jjid 家具id
+	 * 公告修改页索引
+	 * @param ggid 公告id
 	 * @return 页面+数据
 	 */
 	Map<String, Object> toEdit(String ggid);
 
 	/*
 	 * 删除公告
-	 * @param jjid 家具id
+	 * @param ggid 公告id
 	 * @return 数据
 	 */
 	String deleteMessage(String ggid);

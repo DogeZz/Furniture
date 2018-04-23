@@ -16,7 +16,7 @@ public class TTlbGg extends BaseEntity{
 	private String ggid; // 类型id
 	private String ggbt; // 公告标题
 	private String ggnr; // 公告内容
-	private boolean sfsc; // 是否删除
+	private boolean ggsfsc; // 公告是否删除
 	
 	@Id
 	@GeneratedValue(generator = "uuid")
@@ -47,11 +47,12 @@ public class TTlbGg extends BaseEntity{
 		this.ggnr = ggnr;
 	}
 	
-	public boolean isSfsc() {
-		return sfsc;
+	public boolean isGgsfsc() {
+		return ggsfsc;
 	}
-	
-	public void setSfsc(boolean sfsc) {
-		this.sfsc = sfsc;
+
+	public void setGgsfsc(boolean ggsfsc) {
+		this.ggsfsc = ggsfsc;
 	}
+
 }

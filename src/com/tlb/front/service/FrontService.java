@@ -78,4 +78,9 @@ public interface FrontService {
 	 * 收藏页.
 	 */
 	public Map<String, Object> toMyCollection();
+
+	/**
+	 * 修改密码页.
+	 */
+	public Map<String, Object> toChangePwd();
 }

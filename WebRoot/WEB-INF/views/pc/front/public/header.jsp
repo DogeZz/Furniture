@@ -15,9 +15,9 @@
 				<input type="button" class="submit_Search" onclick="header_toSearch(0)"/>
 			</div>
 			<div class="Cart_user r_f">
-				<div class="Cart_Quantity">
-					<span class="number">0</span>
-				</div>
+				<a href="javascript:window.location.href='/front/shoppingCart.fjsp';" class="Cart_Quantity" >
+					<span class="digital number">0</span>
+				</a>
 				<div class="header_operating l_f">
 					<span class="header_touxiang">
 						<img src="/views/front/images/touxiang_03.png" />

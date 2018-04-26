@@ -8,9 +8,12 @@
 <script src="/views/front/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/views/front/js/layer/layer.js"></script>
-<title>收藏</title>
+<script src="/views/common/template-web.js"></script>
+<title>用户中心-收藏</title>
 <style type="text/css">
 	.header_operating a:HOVER{ color: #fff !important;}
+	#menu a:HOVER{color: #8ec82d !important;}
+	.navitems ul li:HOVER {margin-top: 2px;}
 </style>
 </head>
 <body>
@@ -25,7 +28,7 @@
 					</ul>
 				</div>
 				<div class="cart_shop" style="float:left;cursor: pointer;" onclick="window.location.href='/front/shoppingCart.fjsp'">
-					<em class="icon_cart"><span class="digital">1</span></em>我的购物车
+					<em class="icon_cart"><span class="digital">0</span></em>我的购物车
 				</div>
 				<div class="Cart_user r_f" style="margin-top:25px;width: auto;">
 				<div class="header_operating l_f">
@@ -64,7 +67,7 @@
 								<a href="/front/deliveryAddress.fjsp">地址管理</a>
 							</dd>
 							<dd>
-								<a href="#">修改密码</a>
+								<a href="/front/changePwd.fjsp">修改密码</a>
 							</dd>
 						</dl>
 					</div>
@@ -78,20 +81,20 @@
 								<tbody id="collectionList-content">
 									<script type="text/html" id="collectionList-template">
 									{{each collections}}
-									{{if ($index+1)%4 == 1}}
+									{{if $index%4 == 0}}
 									<tr>
 										<td>
 											<a href="/front/detail.fjsp?jjid={{$value.jjid}}" class="name"> 
 											<img src="{{$value.jjtp}}" width="140px" height="140px;" />
-											<h4>{{$value.jjbt}}</h4>
+											<h4 style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;word-break: break-all;">{{$value.jjbt}}</h4>
 											</a>
 											<h3 class="price"style="margin-left: 20px;">￥{{$value.jjjg}}</h3>
 										</td>
-									{{else if ($index+1)%4 == 3}}
+									{{else if $index%4 == 3}}
 										<td>
 											<a href="/front/detail.fjsp?jjid={{$value.jjid}}" class="name"> 
 											<img src="{{$value.jjtp}}" width="140px" height="140px;" />
-											<h4>{{$value.jjbt}}</h4>
+											<h4 style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;word-break: break-all;">{{$value.jjbt}}</h4>
 											</a>
 											<h3 class="price" style="margin-left: 20px;">￥{{$value.jjjg}}</h3>
 										</td>
@@ -100,7 +103,7 @@
 										<td>
 											<a href="/front/detail.fjsp?jjid={{$value.jjid}}" class="name"> 
 												<img src="{{$value.jjtp}}" width="140px" height="140px;" />
-												<h4>{{$value.jjbt}}</h4>
+												<h4 style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;word-break: break-all;">{{$value.jjbt}}</h4>
 											</a>
 											<h3 class="price" style="margin-left: 20px;">￥{{$value.jjjg}}</h3>
 										</td>
@@ -119,8 +122,7 @@
 		<%@include file="../public/footer.jsp"%>
 	</div>
 </body>
-<script type="text/javascript" src="/views/front/public.js?v=11"></script>
-<script src="/views/common/template-web.js"></script>
+<script type="text/javascript" src="/views/front/public.js"></script>
 <script type="text/javascript">
 	getGwcCount("digital");
 	var page = 1, rows = 12, total = 0, pageCount;

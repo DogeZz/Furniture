@@ -33,7 +33,7 @@
 	            	<input type="hidden" name="jjid" value="${data.jjid}">
 	                <div class="form-group">
 	                    <label class="col-sm-1 control-label">家具标题：</label>
-	                    <div class="col-sm-6">
+	                    <div class="col-sm-11">
 	                        <input type="text" class="form-control" name="jjbt" value="${data.jjbt}" placeholder="输入家具标题" required>
 	                    </div>
 	                </div>
@@ -61,7 +61,7 @@
 	                    	<script type="text/html" id="lx-template">
 							{{ each lxs}}
 	                        <label class="checkbox-inline">
-							 	<input type="checkbox" value="{{$value.lxmc}}"> {{$value.lxmc}}
+							 	<input type="checkbox" value="{{$value.lxmc}}" style="margin-top: 0px;"> {{$value.lxmc}}
 							</label>
 							{{/each}}
 							</script>
@@ -157,7 +157,14 @@
 						}
 					}
 					$("input[name = jjlx]").val(lx);
-				})
+				});
+				var _checkbox = $("input[type = checkbox]");
+				var lx = $("input[name = jjlx]").val();
+			    for(var i = 0; i < _checkbox.length; i++){
+			    	if(lx.indexOf(_checkbox[i].defaultValue) >= 0){
+			    		_checkbox[i].checked = true;
+			    	}
+			    }
 			}
 		});
 	};

@@ -45,4 +45,6 @@ public interface TTlbGwcDao extends BaseDao<TTlbGwc>{
 	 */
 	public int getTTlbGwcCountByYhid(String yhid);
 
+	public TTlbGwc getTTlbGwcByJjid(String jjid, String yhid);
+
 }

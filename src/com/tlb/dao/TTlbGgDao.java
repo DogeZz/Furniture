@@ -25,5 +25,11 @@ public interface TTlbGgDao extends BaseDao<TTlbGg> {
 	 * 获取所有公告.
 	 */
 	public Pager<TTlbGg> getTTlbGgs(PageParam page,String name);
+
+	/**
+	 * 获取最后一个修改的公告.
+	 * @return
+	 */
+	public TTlbGg getTTlbGgByTop();
 	
 }

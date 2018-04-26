@@ -14,6 +14,7 @@ import com.tlb.admin.service.UploadService;
 @Controller
 @RequestMapping(value = "/admin/upload.do")
 public class UploadController {
+	
 	@Resource
 	private UploadService uploadService;
 	

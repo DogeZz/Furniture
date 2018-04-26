@@ -13,7 +13,7 @@
 <script src="/views/common/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/views/front/js/layer/layer.js"></script>
-<title>个人注册</title>
+<title>一家一世界-个人注册</title>
 <style type="text/css">
 	.label_name i{color:red;}
 	.content_style{margin-top: 0;}

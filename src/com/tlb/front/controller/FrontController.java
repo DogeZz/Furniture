@@ -107,4 +107,10 @@ public class FrontController {
 		Map<String, Object> model = this.frontService.toMyCollection();
 		return new ModelAndView(model.get("url").toString(), model);
 	}
+	
+	@RequestMapping(value = "/front/changePwd.fjsp")
+	public ModelAndView changePwd(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		Map<String, Object> model = this.frontService.toChangePwd();
+		return new ModelAndView(model.get("url").toString(), model);
+	}
 }

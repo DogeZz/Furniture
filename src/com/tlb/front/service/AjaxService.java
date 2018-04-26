@@ -75,9 +75,10 @@ public interface AjaxService {
 	/**
 	 * 获取指定的家具数据.
 	 * @param jjid 家具id
+	 * @param username 
 	 * @return 数据
 	 */
-	public String getJjData(String jjid);
+	public String getJjData(String jjid, String username);
 
 	/**
 	 * 获取指定用户的地址数据.
@@ -101,9 +102,10 @@ public interface AjaxService {
 	 * 订单数据.
 	 * @param username
 	 * @param page 
+	 * @param zt 
 	 * @return
 	 */
-	public String getDdPageData(String username, PageParam page);
+	public String getDdPageData(String username, PageParam page, Integer zt);
 
 	/**
 	 * 用户付款订单.
@@ -180,7 +182,7 @@ public interface AjaxService {
 	 */
 	public String toDeleteGwc(String gwcid);
 
-	public String getTypeJjPageData(PageParam page, String lx1, String keyword, String lx2, String lx3, String lx4);
+	public String getTypeJjPageData(PageParam page, String lx1, String keyword, String lx2, String lx3, String lx4, String username);
 
 	/**
 	 * 修改用户信息.
@@ -244,5 +246,35 @@ public interface AjaxService {
 	 * @return
 	 */
 	public String saveUserHead(String username, String yhtx);
+
+	/**
+	 * 修改密码.
+	 * @param username
+	 * @param jmm
+	 * @param xmm
+	 * @return
+	 */
+	public String toChangePwd(String username, String jmm, String xmm);
+
+	/**
+	 * 获取轮播图数据.
+	 * @param page
+	 * @return
+	 */
+	public String getLbtData(PageParam page);
+
+	/**
+	 * 获取所有类型数据.
+	 * @return
+	 */
+	public String getTypeListData();
+
+	/**
+	 * 获取公告数据.
+	 * @return
+	 */
+	public String getGgData();
+
+	public String delToCollection(String yhid, String jjid);
 
 }

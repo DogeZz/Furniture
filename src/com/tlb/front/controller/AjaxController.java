@@ -82,6 +82,14 @@ public class AjaxController {
 		return null;
 	}
 	
+	@RequestMapping(value = "/front/delToCollection.ajx")
+	public String delToCollection(HttpServletResponse response, HttpServletRequest request,
+			String yhid, String jjid) throws Exception {
+		String res = this.ajaxService.delToCollection(yhid, jjid);
+		response.getWriter().print(res);
+		return null;
+	}
+	
 	@RequestMapping(value = "/front/getJjPageData.ajx")
 	public String getJjPageData(HttpServletResponse response, HttpServletRequest request,
 			PageParam page) throws Exception {
@@ -92,8 +100,8 @@ public class AjaxController {
 	
 	@RequestMapping(value = "/front/getJjData.ajx")
 	public String getJjData(HttpServletResponse response, HttpServletRequest request,
-			String jjid) throws Exception {
-		String res = this.ajaxService.getJjData(jjid);
+			String jjid, String username) throws Exception {
+		String res = this.ajaxService.getJjData(jjid, username);
 		response.getWriter().print(res);
 		return null;
 	}
@@ -116,8 +124,8 @@ public class AjaxController {
 	
 	@RequestMapping(value = "/front/getDdPageData.ajx")
 	public String getDdPageData(HttpServletResponse response, HttpServletRequest request,
-			String username, PageParam page) throws Exception {
-		String res = this.ajaxService.getDdPageData(username, page);
+			String username, PageParam page, Integer zt) throws Exception {
+		String res = this.ajaxService.getDdPageData(username, page, zt);
 		response.getWriter().print(res);
 		return null;
 	}
@@ -204,8 +212,8 @@ public class AjaxController {
 	
 	@RequestMapping(value = "/front/getTypeJjPageData.ajx")
 	public String getTypeJjPageData(HttpServletResponse response, HttpServletRequest request,
-			PageParam page, String keyword, String lx1, String lx2, String lx3, String lx4) throws Exception {
-		String res = this.ajaxService.getTypeJjPageData(page, lx1, keyword, lx2, lx3, lx4);
+			PageParam page, String keyword, String lx1, String lx2, String lx3, String lx4, String username) throws Exception {
+		String res = this.ajaxService.getTypeJjPageData(page, lx1, keyword, lx2, lx3, lx4, username);
 		response.getWriter().print(res);
 		return null;
 	}
@@ -270,6 +278,36 @@ public class AjaxController {
 	public String getGwcCount(HttpServletResponse response, HttpServletRequest request, 
 			String username) throws Exception {
 		String res = this.ajaxService.getGwcCount(username);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/toChangePwd.ajx")
+	public String toChangePwd(HttpServletResponse response, HttpServletRequest request, 
+			String username, String jmm, String xmm) throws Exception {
+		String res = this.ajaxService.toChangePwd(username, jmm, xmm);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/getLbtData.ajx")
+	public String getLbtData(HttpServletResponse response, HttpServletRequest request, 
+			PageParam page) throws Exception {
+		String res = this.ajaxService.getLbtData(page);
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/getTypeListData.ajx")
+	public String getTypeListData(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		String res = this.ajaxService.getTypeListData();
+		response.getWriter().print(res);
+		return null;
+	}
+	
+	@RequestMapping(value = "/front/getGgData.ajx")
+	public String getGgData(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		String res = this.ajaxService.getGgData();
 		response.getWriter().print(res);
 		return null;
 	}

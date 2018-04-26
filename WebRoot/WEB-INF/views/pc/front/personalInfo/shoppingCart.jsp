@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,7 +9,9 @@
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/views/front/js/jquery.imagezoom.min.js"></script>
 <script type="text/javascript" src="/views/common/layer/layer.js"></script>
-<title>购物车</title>
+<script type="text/javascript" src="/views/common/until.js"></script>
+<script src="/views/common/template-web.js"></script>
+<title>用户中心-购物车</title>
 </head>
 <body style="min-height:700px;">
 	<div class="shopping_cart" style="min-height:600px;">
@@ -34,7 +36,7 @@
 					{{each addrs}}
 					{{if $value.sfmr}}
 					<div class="address clearfix">
-						<a href="" class="Select_address determine" id="" aria-checked="true">{{$value.zsxm}} <i class="icon_Select"></i></a> 
+						<a href="" class="Select_address determine" id="" aria-checked="true">{{$value.shr}} <i class="icon_Select"></i></a> 
 						<input class="data_mrdz" value="{{$value.dzid}}" type="hidden">
 						<span class="info mrdz">{{$value.shdz}}&nbsp;{{$value.sjhm}}</span>
 					</div>
@@ -44,7 +46,7 @@
 					{{else}}
 						<div class="addresses_content">
 							<div class="address clearfix">
-								<a href="javascript:;" value="{{$value.dzid}}" class="Select_address orderDz" id="" aria-checked="true">{{$value.zsxm}} 
+								<a href="javascript:;" value="{{$value.dzid}}" class="Select_address orderDz" id="" aria-checked="true">{{$value.shr}} 
 								<i class="icon_Select"></i></a>
 								<span class="info">{{$value.shdz}}&nbsp;{{$value.sjhm}}</span>
 							</div>
@@ -69,7 +71,7 @@
 					</tr>
 				</thead>
 			</table>
-			<table class="cart_pic table_list" id="shoppingCartList-content">
+			<table class="cart_pic table_list" id="shoppingCartList-content" style="margin-bottom: 0px">
 				<script type="text/html" id="shoppingCartList-template">
 				{{each shoppingCarts}}
 				<tr id="{{$value.gwcid}}">
@@ -80,7 +82,7 @@
 							<img src="{{$value.jjtp}}" width="80px" height="80px" />
 						</p>
 						<p class="name">
-							<a href="#">{{$value.jjbt}}</a>
+							<a href="/front/detail.fjsp?jjid={{$value.jjid}}">{{$value.jjbt}}</a>
 						</p>
 					</td>
 					<td width="100" valign="center" class="cart_price" value="{{$value.jjjg}}">￥{{$value.jjjg}}</td>
@@ -99,6 +101,9 @@
 				{{/each}}
 				</script>
 			</table>
+			<div class="loadMore" style="width: 100%;height:30px;margin-bottom: 10px; line-height: 30px;border: 1px solid #ccc;border-top: none;text-align: center;cursor: pointer; "onmouseover="this.style.color='green';" onmouseout="this.style.color='black';" onclick="loadMore()">
+				<span>加载更多</span>
+			</div>
 			<div class="Settlement clearfix">
 				<div class="select-all clearfix">
 				 	<div class="operation"><a href="javascript:deleteAll();" id="send">删除选中的商品</a></div> 
@@ -114,13 +119,13 @@
 				<a href="javascript:submitBilling();" class="Submit_billing">去结算</a>
 			</div>
 		</div>
-		<div id="public_pagination"></div>
 	</div>
 	<%@include file="../public/footer.jsp"%>
 </body>
-<script src="/views/common/template-web.js"></script>
-<script type="text/javascript" src="/views/front/public.js?v=1"></script>
+<script type="text/javascript" src="/views/front/public.js"></script>
 <script>
+
+	getGwcCount("digital");
 	var num = 0;
 	var selectNum = 0;
 	var page = 1, rows = 15, total = 0, pageCount;
@@ -137,7 +142,6 @@
 			success: function(res) {
 				var html = template('shoppingCartList-template', {shoppingCarts: res.rows});
 				$('#shoppingCartList-content').html(html);
-				pagination(res, 'public_pagination');
 				$(".select").change(function(){
 					if(this.checked){
 						num += parseFloat($("#"+this.value).find(".statistics")[0].attributes[3].value);
@@ -161,62 +165,15 @@
 						$(".allSelect")[0].checked = true;
 					}
 				});
+				if(res.total <= rows * res.pageIndex){
+					$(".loadMore").hide();
+					$("#shoppingCartList-content").attr("style","margin-bottom:10px;");
+				}
 			}
 		});
 	}
 	loadGwcListData();
 	
-	var pagination = function(data, divID){
-		pageCount = data.pageCount;
-		page = data.pageIndex;
-		total = data.total - ((pageCount-1) * rows);
-		var paginationHtml = '<div class="shops_proc_list clearfix">' +
-								'<div class="pic_page_style clearfix">' +
-									'<ul class="page_example pagination" style="margin-left: 294px;">';
-		if ( page > 2 ) paginationHtml += '<li class="page" data-page="1"><a href="javascript:pagination_selectPage(1);">首页</a></li>';
-		if(page == 1) paginationHtml += '<li class="page disabled"><a href="javascript:pagination_upPage();">上一页</a></li>';
-		else paginationHtml += '<li class="page"><a href="javascript:pagination_upPage();">上一页</a></li>';
-		if ( page > 3 && page > data.pageCount - 2 ){
-			paginationHtml += '<li class="page"><a>...</a></li>';
-		}
-		for (var i = 1; i <= data.pageCount; i++){
-			if ((i >= page - 2 && i <= page + 2 )){
-				if (i == page){
-					paginationHtml += '<li class="page active"><a href="javascript:pagination_selectPage('+ i +');">'+ i +'</a></li>';
-				} else {
-					paginationHtml += '<li class="page"><a href="javascript:pagination_selectPage('+ i +');">'+ i +'</a></li>';
-				}
-			}
-		}
-		if (page < data.pageCount && page != data.pageCount - 1 ) paginationHtml += '<li><a>...</a></li>';
-		if(page == pageCount) paginationHtml += '<li class="page disabled"><a href="javascript:pagination_downPage();">下一页</a></li>';
-		else paginationHtml += '<li class="page"><a href="javascript:pagination_downPage();">下一页</a></li>';
-		paginationHtml += '</ul></div></div>';
-		document.getElementById(divID).innerHTML = paginationHtml;
-		
-	};
-	
-	var pagination_selectPage = function(pageIndex){
-		page = pageIndex;
-		loadGwcListData();
-		$("html, body").animate({scrollTop : 0}, 100);
-	};
-	
-	var pagination_upPage = function(){
-		if(page > 1){
-			page--;
-			loadGwcListData();
-			$("html, body").animate({scrollTop : 0}, 100);
-		}
-	};
-	
-	var pagination_downPage = function(){
-		if(page < pageCount){
-			page++;
-			loadGwcListData();
-			$("html, body").animate({scrollTop : 0}, 100);
-		}
-	};
 	
 	var allSelect = function(){
 		if($(".allSelect")[0].checked){ 
@@ -256,6 +213,10 @@
 			layer.msg('请选择商品');
 			return false;
 		}
+		if(isNull($(".data_mrdz").val())){
+  			layer.msg('请先选择收货地址');
+  			return false;
+  		}
 		layer.prompt({title: '输入支付密码并确认', formType: 1}, function(pass, index){
 		  	layer.close(index);
 		  	if(pass == "123456"){
@@ -269,8 +230,12 @@
 					},
 					dataType: 'json',
 					success: function(res) {
-						layer.msg(res.title);
-						window.location.href = "/front/myOrder.fjsp"
+						if(res.success){
+							layer.msg(res.title);
+							window.location.href = "/front/myOrder.fjsp"
+						}else{
+							layer.msg(res.title);
+						}
 					}
 				});
 		  	}else{
@@ -388,6 +353,11 @@
 			layer.msg('请选择商品');
 			return false;
 		}
+	}
+	
+	var loadMore = function(){
+		page++;
+		loadGwcListData();
 	}
 </script>
 </html>

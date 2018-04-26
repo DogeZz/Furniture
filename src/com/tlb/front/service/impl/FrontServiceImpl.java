@@ -115,4 +115,11 @@ public class FrontServiceImpl implements FrontService{
 		map.put("url", "/pc/front/personalInfo/myCollection");
 		return map;
 	}
+
+	@Transactional( readOnly = true )
+	public Map<String, Object> toChangePwd() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("url", "/pc/front/personalInfo/changePwd");
+		return map;
+	}
 }

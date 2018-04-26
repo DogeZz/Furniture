@@ -18,16 +18,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="../views/admin/js/jquery-3.2.1.min.js"></script>
 <script src="/views/common/layer/layer.js"></script>
 <style type="text/css">
-	body, .left-content, .inner-content, .outter-wp{
-		height: 100%;
-	}
-	.outter-wp{
-		padding: 0;
-		height: 88%;
-	}
-	#menu ul li a, .tooltips{
-		cursor: pointer;
-	}
+	body, .left-content, .inner-content, .outter-wp{ height: 100%; }
+	.outter-wp{ padding: 0; height: 88%; }
+	#menu ul li a, .tooltips{ cursor: pointer; }
 </style>
 </head> 
 <body onload="index_initDatas();"> 
@@ -45,14 +38,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<iframe id="myIframe" width="100%" height="100%" src="/admin/user.do?list" frameborder="0"></iframe>
 			</div>
 			<footer>
-			   <p>Copyright &copy; 2018.Company name All rights reserved.More Templates <a href="#" target="_blank" title="家具网站后台管理系统">家具网站后台管理系统</a> - Collect from <a href="#" title="家具网站后台管理系统" target="_blank">家具网站后台管理系统</a></p>
+			   <p>Copyright &copy; 2018.Company name All rights reserved.More Templates <a href="/homePage/homePage.jsp" title="家具网站后台管理系统">家具网站后台管理系统</a> - Collect from <a href="/homePage/homePage.jsp" title="家具网站后台管理系统">家具网站后台管理系统</a></p>
 			</footer>
 		</div>
 	</div>
 	<div class="sidebar-menu">
 		<header class="logo">
 			<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> 
-			<a href="index.html"> <span id="logo"> <h1>家具网</h1></span></a> 
+			<a href="/homePage/homePage.jsp"> <span id="logo"> <h1>家具网</h1></span></a> 
 			<!--<img id="logo" src="" alt="Logo"/>--> 
 		</header>
 		<div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
@@ -61,8 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  	<a href="#"><img src="{{user.yhtx}}" onerror="javascript:this.src='/views/admin/imgs/User-005.png';" style="width: 80px;height:80px;"></a>
 		  	<a href="#"><span class=" name-caret">{{user.username}}</span></a>
 			<ul>
-				<li><a class="tooltips"><span>个人信息</span><i class="lnr lnr-user"></i></a></li>
-				<li><a class="tooltips"><span>设置</span><i class="lnr lnr-cog"></i></a></li>
+				<li><a onclick="index_changeInfo('{{user.yhid}}')" class="tooltips"><span>个人信息</span><i class="lnr lnr-user"></i></a></li>
 				<li><a class="tooltips" onclick="index_logout()"><span>登出</span><i class="lnr lnr-power-switch"></i></a></li>
 			</ul>
 			</script>
@@ -148,6 +140,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			cancel: function() {}
 		});
 	};
+	
+	var index_changeInfo = function(value){
+		$("#myIframe").attr("src","/admin/user.do?edit&yhid="+value);
+	}
 </script>
 </body>
 </html>

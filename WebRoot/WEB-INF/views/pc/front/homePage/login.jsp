@@ -8,8 +8,8 @@
 <script src="/views/front/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/views/front/js/layer/layer.js"></script>
-<script type="text/javascript" src="/views/common/until.js"></script>
-<title>会员登录</title>
+<script type="text/javascript" src="/views/common/until.js?v=9"></script>
+<title>一家一世界-用户登录</title>
 <!--[if lt IE 9]>
 <script src="/views/front/js/html5shiv.js" type="text/javascript"></script>
 <script src="/views/front/js/respond.min.js"></script>
@@ -45,7 +45,7 @@
 						<input name="" type="submit" class="submitbtn" value="登录" onclick="login()" />
 					</div>
 					<div class="login_prompt">
-						<a href="#">忘记密码？</a><a href="/front/register.fjsp">注册</a>
+						<a href="/front/changePwd.fjsp">忘记密码？</a><a href="/front/register.fjsp">注册</a>
 					</div>
 				</div>
 			</div>
@@ -78,6 +78,9 @@
 				$parent.attr('class', 'frame_style').removeClass(' form_errors');
 			}
 		});
+		if(getCookie("jj_sfzddl")){
+			$(".checkbox")[0].checked = true;
+		}
 	})
 	
 	var login = function(){
@@ -98,6 +101,12 @@
 				},
 				success: function(res) {
 					if(res.success){
+						 if($(".checkbox")[0].checked){
+							 setCookie("jj_sfzddl", true, "d30");
+						 }else{
+							 delCookie("jj_sfzddl");
+						 }
+						 sessionStorage.setItem("jj_yhtx", res.msg);
 						 layer.msg(res.title);
 						 sessionStorage.setItem("username", username);
 						 if(getAttribute("aaa") != null || getAttribute("aaa") != "" || getAttribute("aaa") != undefined)

@@ -52,10 +52,10 @@
 		idField: 'jjid',
 		iconSize: 'outline',
 	    columns: [
-	   		{field: 'jjbt',title: '家具标题', width: 60},
+	   		{field: 'jjbt',title: '家具标题', width: 100},
 	   		{field: 'jjlx',title: '家具类型', width: 60},
-	   		{field: 'jjsl',title: '家具数量', width: 60},
-	   		{field: 'jjjg',title: '家具单价', width: 60},
+	   		{field: 'jjsl',title: '家具数量', width: 40},
+	   		{field: 'jjjg',title: '家具单价', width: 40},
 	   		{field: 'jjtp',title: '家具图片', align: 'center', width: 110, formatter: function(value, row, index) {
 	   			if(value === '' || value === null || value === undefined){value = '/views/admin/imgs/User-005.png';}
 	        	return '<img alt="家具头像" src="'+value+'" onclick="lookImg(\''+ value +'\')" onerror="javascript:this.src=\'/views/admin/imgs/User-005.png\');" style="max-width:100px;max-height:100px;cursor: pointer;">';

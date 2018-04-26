@@ -10,43 +10,15 @@
 <script type="text/javascript" src="/views/common/layer/layer.js"></script>
 <script src="/views/common/template-web.js"></script>
 <script src="/views/common/until.js"></script>
-<title>个人信息-收货地址</title>
+<title>用户中心-收货地址</title>
 </head>
 <style type="text/css">
-	td {
-		text-align: center !important;
-	}
-	.btn_save {
-		background-color: #EFFFE1;
-	    font-family: "新宋体";
-	    border: 1px solid #88c523;
-	    height: 32px;
-	    color: #88c523;
-	    font-size: 14px;
-	    line-height: 30px;
-	    width: 90px;
-	    text-align: center;
-	    border-radius: 3px;
-	    font-weight: bold;
-	    cursor: pointer;
-	    margin: 0px 5px；
-	}
-	.btn_save:HOVER {
-		background-color: #88c523;
-	    font-family: "新宋体";
-	    border: 1px solid #88c523;
-	    height: 32px;
-	    color: #ffffff;
-	    font-size: 14px;
-	    line-height: 30px;
-	    width: 90px;
-	    text-align: center;
-	    border-radius: 3px;
-	    font-weight: bold;
-	    cursor: pointer;
-	    margin: 0px 5px；
-	}
+	td {text-align: center !important;}
+	.btn_save {background-color: #EFFFE1;font-family: "新宋体";border: 1px solid #88c523;height: 32px;color: #88c523;font-size: 14px;line-height: 30px;width: 90px;text-align: center;border-radius: 3px;font-weight: bold;cursor: pointer;margin: 0px 5px;}
+	.btn_save:HOVER {background-color: #88c523;color: #fff;}
 	.header_operating a:HOVER{ color: #fff !important;}
+	#menu a:HOVER{color: #8ec82d !important;}
+	.navitems ul li:HOVER {margin-top: 2px;}
 </style>
 <body>
 	<div class="Background_color">
@@ -60,7 +32,7 @@
 					</ul>
 				</div>
 				<div class="cart_shop" style="float:left;cursor: pointer;" onclick="window.location.href='/front/shoppingCart.fjsp'">
-					<em class="icon_cart"><span class="digital">1</span></em>我的购物车
+					<em class="icon_cart"><span class="digital">0</span></em>我的购物车
 				</div>
 				<div class="Cart_user r_f" style="margin-top:25px;width: auto;">
 				<div class="header_operating l_f">
@@ -99,7 +71,7 @@
 								<a href="/front/deliveryAddress.fjsp">地址管理</a>
 							</dd>
 							<dd>
-								<a href="#">修改密码</a>
+								<a href="/front/changePwd.fjsp">修改密码</a>
 							</dd>
 						</dl>
 					</div>
@@ -136,7 +108,7 @@
 										</tr>
 									</table>
 									<div class="Submit_style align_right">
-										<label><input name="sfmr" type="checkbox" class="checkbox" />默认地址</label>&nbsp;&nbsp;&nbsp;
+										<label style="display:none;"><input name="sfmr" type="checkbox" class="checkbox" />默认地址</label>&nbsp;&nbsp;&nbsp;
 										<input class="btn_save" name="" type="button" onclick="save_address()" value="保存" />
 									</div>
 								</div>
@@ -190,6 +162,8 @@
 </body>
 <script type="text/javascript" src="/views/front/public.js"></script>
 <script type="text/javascript">
+
+	getGwcCount("digital");
 	
 	var addrCount = 0;
 	var loadDdListData = function() {
@@ -240,6 +214,10 @@
 	}
 	
 	var save_address = function(){
+		if(isNull(sessionStorage.getItem("username"))){
+			layer.msg("请先登录！");
+			return false;
+		}
 		if(addrCount >= 10 && isNull($(".addAddrTable").find("input")[0].value)){
 			layer.msg("地址个数已达上限");
 			return false;

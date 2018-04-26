@@ -75,3 +75,6 @@ var getGwcCount = function(selectClass) {
 		}
 	});
 };
+
+var _yhtx = sessionStorage.getItem("jj_yhtx");
+if(_yhtx != null && _yhtx != "" && _yhtx != undefined) $(".header_touxiang img").attr("src", _yhtx);

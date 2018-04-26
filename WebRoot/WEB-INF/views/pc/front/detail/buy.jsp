@@ -9,12 +9,14 @@
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/views/front/js/jquery.imagezoom.min.js"></script>
 <script type="text/javascript" src="/views/common/layer/layer.js"></script>
+<script type="text/javascript" src="/views/common/until.js"></script>
+<script src="/views/common/template-web.js"></script>
 <!--[if lt IE 9]>
 <script src="/views/front/js/html5shiv.js" type="text/javascript"></script>
 <script src="/views/front/js/respond.min.js"></script>
 <script src="/views/front/js/css3-mediaqueries.js"  type="text/javascript"></script>
 <![endif]-->
-<title>结算</title>
+<title>一家一世界-结算</title>
 </head>
 <script type="text/javascript">
 	//字数限制
@@ -82,8 +84,8 @@
 					{{else}}
 						<div class="addresses_content">
 							<div class="address clearfix">
-								<a href="javascript:ovid()" class="Select_address" id="" aria-checked="true">{{$value.zsxm}} 
-								<i class="icon_Select"></i></a> 
+								<a href="javascript:;" value="{{$value.dzid}}" class="Select_address orderDz" id="" aria-checked="true">{{$value.zsxm}} 
+								<i class="icon_Select"></i></a>
 								<span class="info">{{$value.shdz}}&nbsp;{{$value.sjhm}}</span>
 							</div>
 						</div>
@@ -146,10 +148,8 @@
 	<%@include file="../public/footer.jsp"%>
 </body>
 <script type="text/javascript" src="/views/front/public.js"></script>
-<script type="text/javascript" src="/views/common/until.js"></script>
-<script src="/views/common/template-web.js"></script>
 <script type="text/javascript">
-	
+	getGwcCount("digital");
 	var urlJjid = getAttribute("jjid");
 	var urlSl = getAttribute("sl");
 	var ze = 1000;
@@ -212,6 +212,10 @@
 			layer.msg("请先登录！");
 			return false;
 		}
+		if(isNull($(".data_mrdz").val())){
+  			layer.msg('请先选择收货地址');
+  			return false;
+  		}
   		$.ajax({
 			url:'/front/buySubmit.ajx', 
 			type: 'post',

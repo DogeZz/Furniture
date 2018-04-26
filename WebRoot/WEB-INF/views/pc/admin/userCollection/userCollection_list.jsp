@@ -49,7 +49,7 @@
 		iconSize: 'outline',
 	    columns: [
 	   		{field: 'yhmc',title: '用户名', width: 60},
-	   		{field: 'jjmc',title: '家具名称', width: 60},
+	   		{field: 'jjbt',title: '家具标题', width: 180},
 	        {field: 'xgsj', title: '时间', width: 60, formatter: function(value, row, index) {
 	        	return new Date(value.time).Format('yyyy-MM-dd hh:mm:ss');
 	        }}

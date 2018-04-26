@@ -4,18 +4,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="/views/front/css/common.css" type="text/css" rel="stylesheet" />
-<link href="/views/front/css/style.css?v=99" type="text/css" rel="stylesheet" />
+<link href="/views/front/css/style.css?v=11" type="text/css" rel="stylesheet" />
 <script src="/views/front/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/views/front/js/jquery.imagezoom.min.js"></script>
 <script type="text/javascript" src="/views/front/js/layer/layer.js"></script>
-<script src="../views/common/template-web.js"></script>
+<script type="text/javascript" src="/views/common/until.js"></script>
+<script src="/views/common/template-web.js"></script>
 <!--[if lt IE 9]>
 <script src="/views/front/js/html5shiv.js" type="text/javascript"></script>
 <script src="/views/front/js/respond.min.js"></script>
 <script src="/views/front/js/css3-mediaqueries.js"  type="text/javascript"></script>
 <![endif]-->
-<title>产品详细</title>
+<title>一家一世界-产品详细</title>
 </head>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -82,8 +83,8 @@
 							<span class="tb-amount-widget mui-amount-wrap "> 
 							<input type="text" name="gmsl" readOnly class="tb-text mui-amount-input" value="1" maxlength="8" title="请输入购买量"> 
 							<span class="mui-amount-btn clearfix"> 
-								<span class="mui-amount-increase" onclick="jia()">∧</span> 
-								<span class="mui-amount-decrease" onclick="jian()">∨</span>
+								<span class="mui-amount-increase" onclick="jia()" style="-webkit-user-select: none;">∧</span> 
+								<span class="mui-amount-decrease" onclick="jian()" style="-webkit-user-select: none;">∨</span>
 							</span> 
 							<span class="mui-amount-unit">件</span>
 							</span> <em id="J_EmStock" class="tb-hidden" style="display: inline;">库存<span class="jjsl"></span>件</em>
@@ -103,7 +104,7 @@
 						<dd class="content color">质量保证</dd>
 					</dl>
 					<dl class="Pay_by clearfix">
-						<dt class="label_name">支付方式</dt>
+						<dt class="label_name" style="font-size:13px;">支付方式</dt>
 						<dd>
 							<i class="icon_zfb"></i>支付宝
 						</dd>
@@ -112,17 +113,7 @@
 			</div>
 			<!--信息-->
 			<div class=" clearfix">
-				<div class="left_Package">
-					<div class="Shop_info">
-						<img src="/views/front/images/dp_logo.jpg" width="150" height="100" />
-						<h3>简约家居旗舰店</h3>
-						<div class="link_btn">
-							<a href="#" class="shops_link">进店</a>
-						</div>
-					</div>
-
-				</div>
-				<DIV class="right_detailed r_f">
+				<DIV class="right_detailed">
 					<div class="slideTxtBox">
 						<div class="hd">
 							<ul>
@@ -140,8 +131,8 @@
 	<%@include file="../public/footer.jsp"%>
 </body>
 <script type="text/javascript" src="/views/front/public.js"></script>
-<script type="text/javascript" src="/views/common/until.js"></script>
 <script type="text/javascript">
+	getGwcCount("digital");
 	$(document).ready(function() {
 		$(".jqzoom").imagezoom();
 		$("#thumblist li a").click(function() {
@@ -165,12 +156,16 @@
 	});
 	
 	var urlJjid = getAttribute("jjid");
-	
+	var jjjjsl = 0;
+	var jjsfsc = false;
 	var loadJjData = function() {
 		$.ajax({
 			url:'/front/getJjData.ajx', 
 			type: 'post',
-			data: { jjid : urlJjid }, 
+			data: { 
+				jjid : urlJjid,
+				username: sessionStorage.getItem("username")
+			}, 
 			dataType: 'json',
 			success: function(res) {
 				$(".tb-booth a").attr("href", res.jjtp);
@@ -180,7 +175,12 @@
 				$(".pic_title_name h5").html(res.jjfbt);
 				$(".price").append(res.jjjg);
 				$(".jjsl").html(res.jjsl);
+				jjjjsl = res.jjsl;
 				$(".Introduction").html(res.jjxq);
+				if(res.zt){
+					jjsfsc = true;
+					$("#h1").html("<i class='icon_Collection icon'></i>已收藏");
+				}
 			}
 		});
 	}
@@ -189,6 +189,10 @@
 	var buy = function(){
 		if(isNull(sessionStorage.getItem("username"))){
 			layer.msg("请先登录！");
+			return false;
+		}
+		if(jjjjsl <= 0){
+			layer.msg("库存不足");
 			return false;
 		}
 		window.location.href = "/front/buy.fjsp?jjid=" + urlJjid + "&sl=" + $(".mui-amount-input").val();
@@ -230,25 +234,49 @@
 			layer.msg("请先登录！");
 			return false;
 		}
-		layer.confirm('你确定收藏该商品吗？', {
-			btn : [ '确认', '取消' ] //按钮
-		}, function() {
-			$.ajax({
-				url:'/front/addToCollection.ajx', 
-				type: 'post',
-				data: {
-					yhid: sessionStorage.getItem("username"),
-					jjid: urlJjid
-				}, 
-				dataType: 'json',
-				success: function(res) {
-					layer.msg('收藏成功！', {
-						icon : 1
-					});
-					$("#h1").html("<i class='icon_Collection icon'></i>已收藏");
-				}
+		if(jjsfsc){
+			layer.confirm('你确定取消收藏该商品吗？', {
+				btn : [ '确认', '取消' ] //按钮
+			}, function() {
+				$.ajax({
+					url:'/front/delToCollection.ajx', 
+					type: 'post',
+					data: {
+						yhid: sessionStorage.getItem("username"),
+						jjid: urlJjid
+					}, 
+					dataType: 'json',
+					success: function(res) {
+						layer.msg('取消收藏成功！', {
+							icon : 1
+						});
+						jjsfsc = false;
+						$("#h1").html("<i class='icon_Collection'></i>加入收藏</a>");
+					}
+				});
 			});
-		});
+		}else{
+			layer.confirm('你确定收藏该商品吗？', {
+				btn : [ '确认', '取消' ] //按钮
+			}, function() {
+				$.ajax({
+					url:'/front/addToCollection.ajx', 
+					type: 'post',
+					data: {
+						yhid: sessionStorage.getItem("username"),
+						jjid: urlJjid
+					}, 
+					dataType: 'json',
+					success: function(res) {
+						layer.msg('收藏成功！', {
+							icon : 1
+						});
+						jjsfsc = true;
+						$("#h1").html("<i class='icon_Collection icon'></i>已收藏");
+					}
+				});
+			});
+		}
 	}
 </script>
 </html>

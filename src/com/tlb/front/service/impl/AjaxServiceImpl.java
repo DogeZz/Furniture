@@ -16,16 +16,20 @@ import com.tlb.common.PageParam;
 import com.tlb.common.Pager;
 import com.tlb.dao.TTlbDdDao;
 import com.tlb.dao.TTlbDzDao;
+import com.tlb.dao.TTlbGgDao;
 import com.tlb.dao.TTlbGwcDao;
 import com.tlb.dao.TTlbJjDao;
+import com.tlb.dao.TTlbJjlxDao;
 import com.tlb.dao.TTlbShDao;
 import com.tlb.dao.TTlbYhDao;
 import com.tlb.dao.TTlbYhgzDao;
 import com.tlb.dao.TTlbYhscDao;
 import com.tlb.entity.TTlbDd;
 import com.tlb.entity.TTlbDz;
+import com.tlb.entity.TTlbGg;
 import com.tlb.entity.TTlbGwc;
 import com.tlb.entity.TTlbJj;
+import com.tlb.entity.TTlbJjlx;
 import com.tlb.entity.TTlbSh;
 import com.tlb.entity.TTlbYh;
 import com.tlb.entity.TTlbYhgz;
@@ -52,6 +56,9 @@ public class AjaxServiceImpl implements AjaxService{
 	private TTlbJjDao tTlbJjDao;
 	
 	@Resource
+	private TTlbJjlxDao tTlbJjlxDao;
+	
+	@Resource
 	private TTlbDzDao tTlbDzDao;
 	
 	@Resource
@@ -60,6 +67,9 @@ public class AjaxServiceImpl implements AjaxService{
 	@Resource
 	private TTlbGwcDao tTlbGwcDao;
 	
+	@Resource
+	private TTlbGgDao tTlbGgDao;
+	
 	@Transactional(readOnly = true)
 	public String getLoginResult(String username, String password) {
 		if (!(username.equals("") || username == null)) {
@@ -67,7 +77,7 @@ public class AjaxServiceImpl implements AjaxService{
 			if (tTlbYh != null) {
 				Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 				if (tTlbYh.getPassword().equals(encoder.encodePassword(password, username))) {
-					return JsonUtil.toRes("登录成功");
+					return JsonUtil.toRes("登录成功", tTlbYh.getYhtx());
 				} else {
 					return JsonUtil.toResOfFail("账号或密码错误");
 				}
@@ -97,9 +107,10 @@ public class AjaxServiceImpl implements AjaxService{
 		tTlbYh.setIsAccountLocked(false);
 		tTlbYh.setIsCredentialsExpired(false);
 		tTlbYh.setLoginFailureCount(0);
+		tTlbYh.setYhtx("/views/front/images/touxiang_03.png");
 		tTlbYh.setPassword(encoder.encodePassword(tTlbYh.getPassword(), tTlbYh.getUsername()));
 		this.tTlbYhDao.saveTTlbYh(tTlbYh);
-		return JsonUtil.toRes("保存成功");
+		return JsonUtil.toRes("注册成功");
 	}
 
 	@Transactional(readOnly = true)
@@ -171,21 +182,30 @@ public class AjaxServiceImpl implements AjaxService{
 	}
 
 	@Transactional
-	public String getJjData(String jjid) {
+	public String getJjData(String jjid, String username) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		List<Map<String, Object>> list = null;
+		if (tTlbYh != null) {
+			list = this.tTlbJjDao.getTTlbJjWithYhsc(jjid, tTlbYh.getYhid());
+		}else {
+			list = this.tTlbJjDao.getTTlbJjWithYhsc(jjid, "");
+		}
 		TTlbJj tTlbJj = this.tTlbJjDao.getTTlbJj(jjid);
 		if (tTlbJj != null) {
 			tTlbJj.setDjl(tTlbJj.getDjl() + 1);
 			this.tTlbJjDao.saveTTlbJj(tTlbJj);
-			return JsonUtil.toStringFromObject(tTlbJj);
 		}
-		return null;
+		return JsonUtil.toStringFromObject(list.get(0));
 	}
 
 	@Transactional(readOnly = true)
-	public String getDzData(String yhid) {
-		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(yhid);
-		List<Map<String, Object>> map = this.tTlbDzDao.getTTlbDzsByYhid(tTlbYh.getYhid());
-		return JsonUtil.toString(map);
+	public String getDzData(String username) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		if (tTlbYh != null) {
+			List<Map<String, Object>> map = this.tTlbDzDao.getTTlbDzsByYhid(tTlbYh.getYhid());
+			return JsonUtil.toString(map);
+		}
+		return null;
 	}
 
 	@Transactional
@@ -205,10 +225,13 @@ public class AjaxServiceImpl implements AjaxService{
 	}
 
 	@Transactional(readOnly = true)
-	public String getDdPageData(String username, PageParam page) {
+	public String getDdPageData(String username, PageParam page, Integer zt) {
 		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
-		Pager<List<Map<String, Object>>> pager = this.tTlbDdDao.getTTlbYhListByYhid(page, tTlbYh.getYhid());
-		return JsonUtil.toString(pager.putMapObject());
+		if (tTlbYh != null) {
+			Pager<List<Map<String, Object>>> pager = this.tTlbDdDao.getTTlbDdListByYhid(page, tTlbYh.getYhid(), zt);
+			return JsonUtil.toString(pager.putMapObject());
+		}
+		return null;
 	}
 
 	@Transactional
@@ -251,15 +274,21 @@ public class AjaxServiceImpl implements AjaxService{
 	@Transactional(readOnly = true)
 	public String getGwcPageData(PageParam page, String username) {
 		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
-		Pager<List<Map<String, Object>>> pager = this.tTlbGwcDao.getTTlbGwcs(page, tTlbYh.getYhid());
-		return JsonUtil.toStringFromObject(pager.putMapObject());
+		if (tTlbYh != null) {
+			Pager<List<Map<String, Object>>> pager = this.tTlbGwcDao.getTTlbGwcs(page, tTlbYh.getYhid());
+			return JsonUtil.toStringFromObject(pager.putMapObject());
+		}
+		return null;
 	}
 	
 	@Transactional
 	public String saveBasket(String username, String jjid, int sl) {
-		TTlbGwc tTlbGwc = this.tTlbGwcDao.getTTlbGwcByJjid(jjid);
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		if (tTlbYh == null) {
+			return "";
+		}
+		TTlbGwc tTlbGwc = this.tTlbGwcDao.getTTlbGwcByJjid(jjid, tTlbYh.getYhid());
 		if (tTlbGwc == null) {
-			TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
 			tTlbGwc = new TTlbGwc();
 			tTlbGwc.setYhid(tTlbYh.getYhid());
 			tTlbGwc.setJjid(jjid);
@@ -335,7 +364,7 @@ public class AjaxServiceImpl implements AjaxService{
 			}
 		}
 		if(flag){
-			return JsonUtil.toRes("库存不足");
+			return JsonUtil.toResOfFail("库存不足");
 		}
 		return JsonUtil.toRes("结算成功");
 	}
@@ -351,18 +380,26 @@ public class AjaxServiceImpl implements AjaxService{
 	}
 
 	@Transactional(readOnly = true)
-	public String getTypeJjPageData(PageParam page, String lx1, String keyword, String lx2, String lx3, String lx4) {
-		Pager<TTlbJj> pager = this.tTlbJjDao.getTTlbJjs(page, keyword, lx1, lx2, lx3, lx4);
+	public String getTypeJjPageData(PageParam page, String lx1, String keyword, String lx2, String lx3, String lx4, String username) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		Pager<List<Map<String, Object>>> pager = null;
+		if (tTlbYh != null) {
+			pager = this.tTlbJjDao.getTTlbJjs(page, keyword, lx1, lx2, lx3, lx4, tTlbYh.getYhid());
+		}else {
+			pager = this.tTlbJjDao.getTTlbJjs(page, keyword, lx1, lx2, lx3, lx4,"");
+		}
 		return JsonUtil.toStringFromObject(pager.putMapObject());
 	}
 	
 	@Transactional
 	public String saveInfo(TTlbYh param) {
-		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(param.getYhid());
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYhByYhid(param.getYhid());
 		if (tTlbYh != null) {
 			tTlbYh.setXb(param.getXb());
 			tTlbYh.setQq(param.getQq());
-			tTlbYh.setSjhm(param.getSjhm());
+			if (param.getSjhm() != null) {
+				tTlbYh.setSjhm(param.getSjhm());
+			}
 			tTlbYh.setYhjj(param.getYhjj());
 			tTlbYh.setYhnc(param.getYhnc());
 			this.tTlbYhDao.saveTTlbYh(tTlbYh);
@@ -410,7 +447,12 @@ public class AjaxServiceImpl implements AjaxService{
 				TTlbDz tTlbDz = new TTlbDz();
 				tTlbDz.setYhid(tTlbYh.getYhid());
 				tTlbDz.setSfky(true);
-				tTlbDz.setSfmr(sfmr);
+				int size = this.tTlbDzDao.count("from TTlbDz where sfky = true and yhid = ? ", tTlbYh.getYhid());
+				if (size == 0) {
+					tTlbDz.setSfmr(true);
+				}else {
+					tTlbDz.setSfmr(false);
+				}
 				tTlbDz.setShdz(shdz);
 				tTlbDz.setShr(zsxm);
 				tTlbDz.setShsjhm(sjhm);
@@ -468,6 +510,51 @@ public class AjaxServiceImpl implements AjaxService{
 			return JsonUtil.toRes("修改成功");
 		}
 		return JsonUtil.toRes("修改失败");
+	}
+
+	@Transactional
+	public String toChangePwd(String username, String jmm, String xmm) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(username);
+		if (tTlbYh != null) {
+			Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+			if (encoder.encodePassword(jmm, username).equals(tTlbYh.getPassword())) {
+				tTlbYh.setPassword(encoder.encodePassword(xmm, username));
+				this.tTlbYhDao.saveTTlbYh(tTlbYh);
+				return JsonUtil.toRes("修改成功");
+			}
+		}
+		return JsonUtil.toRes("修改失败");
+	}
+
+	@Transactional(readOnly = true)
+	public String getLbtData(PageParam page) {
+		Pager<TTlbJj> pager = this.tTlbJjDao.getTTlbJjsByDj(page);
+		return JsonUtil.toStringFromObject(pager.putMapObject());
+	}
+
+	@Transactional(readOnly = true)
+	public String getTypeListData() {
+		List<TTlbJjlx> list = this.tTlbJjlxDao.getFurnitureTypeList();
+		return JsonUtil.toString(list);
+	}
+
+	@Transactional(readOnly = true)
+	public String getGgData() {
+		TTlbGg tTlbGg = this.tTlbGgDao.getTTlbGgByTop();
+		return JsonUtil.toStringFromObject(tTlbGg);
+	}
+
+	@Transactional
+	public String delToCollection(String yhid, String jjid) {
+		TTlbYh tTlbYh = this.tTlbYhDao.getTTlbYh(yhid);
+		if (tTlbYh != null) {
+			TTlbYhsc tTlbYhsc = this.tTlbYhscDao.getTTlbYhscByYhidAndJjid(tTlbYh.getYhid(), jjid);
+			if (tTlbYhsc.getZt()) {
+				tTlbYhsc.setZt(false);
+				this.tTlbYhscDao.saveTTlbYhsc(tTlbYhsc);
+			}
+		}
+		return JsonUtil.toRes("取消成功");
 	}
 	
 }

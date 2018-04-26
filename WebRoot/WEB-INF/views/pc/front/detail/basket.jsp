@@ -3,13 +3,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>成功加入购物车</title>
+<title>一家一世界-成功加入购物车</title>
 <link href="/views/front/css/common.css" type="text/css" rel="stylesheet" />
 <link href="/views/front/css/style.css" type="text/css" rel="stylesheet" />
 <script src="/views/front/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/views/front/js/jquery.imagezoom.min.js"></script>
 <script type="text/javascript" src="/views/front/js/layer/layer.js"></script>
+<script type="text/javascript" src="/views/common/until.js"></script>
+<script src="/views/common/template-web.js"></script>
 <!--[if lt IE 9]>
 <script src="/views/front/js/html5shiv.js" type="text/javascript"></script>
 <script src="/views/front/js/respond.min.js"></script>
@@ -19,7 +21,7 @@
 <body>
 	<%@include file="../public/header.jsp"%>
 	<!--确认加入购物车-->
-	<div class="content_style clearfix">
+	<div class="content_style clearfix" style="min-height: 460px;">
 		<div class="Confirm_style clearfix">
 			<div class="Confirmation_prompt">
 				<i class="icon_Confirmation"></i>商品已经成功加入购物车
@@ -43,11 +45,9 @@
 	</div>
 	<%@include file="../public/footer.jsp"%>
 </body>
-<script type="text/javascript" src="/views/front/public.js?v=1"></script>
-<script type="text/javascript" src="/views/common/until.js"></script>
-<script src="/views/common/template-web.js"></script>
+<script type="text/javascript" src="/views/front/public.js"></script>
 <script type="text/javascript">
-
+	getGwcCount("digital");
 	$("#nav").slide({
 		type : "menu",
 		titCell : ".nLi",

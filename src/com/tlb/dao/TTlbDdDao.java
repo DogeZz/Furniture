@@ -17,7 +17,7 @@ public interface TTlbDdDao extends BaseDao<TTlbDd>{
 	/**
 	 * 根据yhid获取分页数据.
 	 */
-	public Pager<List<Map<String, Object>>> getTTlbYhListByYhid(PageParam page, String yhid);
+	public Pager<List<Map<String, Object>>> getTTlbDdListByYhid(PageParam page, String yhid, Integer zt);
 
 	/**
 	 * 获取实体.
@@ -28,5 +28,8 @@ public interface TTlbDdDao extends BaseDao<TTlbDd>{
 	 * 获取分页数据.
 	 */
 	public Pager<List<Map<String, Object>>> getTTlbDds(PageParam page, String name);
+
+	public int getCountByJjid(String jjid);
+
 
 }

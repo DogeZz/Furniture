@@ -1,5 +1,8 @@
 package com.tlb.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -31,5 +34,12 @@ public interface TTlbJjDao extends BaseDao<TTlbJj> {
 	 */
 	public void saveTTlbJj(TTlbJj tTlbJj);
 
-	public Pager<TTlbJj> getTTlbJjs(PageParam page, String keyword, String lx1, String lx2, String lx3, String lx4);
+	public Pager<List<Map<String, Object>>> getTTlbJjs(PageParam page, String keyword, String lx1, String lx2, String lx3, String lx4, String yhid);
+
+	public Pager<TTlbJj> getTTlbJjsByDj(PageParam page);
+
+	public List<Map<String, Object>> getTTlbJjWithYhsc(String jjid, String yhid);
+
+	public List<Map<String, Object>> getAllTTlbJjs(String name);
+
 }

@@ -18,6 +18,7 @@
 		<form-login login-page="/loginPage/login.jsp" authentication-failure-url="/loginPage/login.jsp?error=1" />
 		<intercept-url  pattern="/**" access="ROLE_USER_LOGIN" />
 		<intercept-url pattern="/favicon.ico" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<logout logout-url="/logout" logout-success-url="/loginPage/login.jsp" invalidate-session="true"/>
 		<!-- session-management是用来防止多个用户同时登陆一个账号的。 -->
         <session-management>
             <concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />  

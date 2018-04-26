@@ -9,96 +9,65 @@
 <script type="text/javascript" src="/views/front/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/views/front/js/layer/layer.js"></script>
 <script src="/views/common/until.js"></script>
+<script src="/views/common/template-web.js"></script>
 <!--[if lt IE 9]>
 <script src="/views/front/js/html5shiv.js" type="text/javascript"></script>
 <script src="/views/front/js/respond.min.js"></script>
 <script src="/views/front/js/css3-mediaqueries.js"  type="text/javascript"></script>
 <![endif]-->
-<title>单品大全</title>
+<title>一家一世界-单品大全</title>
 </head>
 <body>
 	<div class="Background_color">
-		<div class="header">
-			<div class="header_top">
-				<div class="top_info clearfix">
-					<div class="logo_style l_f">
-						<a href="/front/homePage.fjsp"><img src="/views/front/images/logo.jpg" /></a>
-					</div>
-					<div class="Search_style l_f">
-						<div class="select">
-		<!-- 					<select id="homePage_search"> -->
-								<h3 style="height:35px; line-height:35px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品&nbsp;&nbsp;&nbsp;</h3>
-		<!-- 					</select> -->
-						</div>
-						<input type="text" class="add_Search" /> 
-						<input type="button" class="submit_Search" onclick="header_Search()"/>
-					</div>
-					<div class="Cart_user r_f">
-						<div class="Cart_Quantity">
-							<span class="number">0</span>
-						</div>
-						<div class="header_operating l_f">
-							<span class="header_touxiang">
-								<img src="/views/front/images/touxiang_03.png" />
-							</span> 
-							<a href="/front/login.fjsp">登录</a>
-							<a href="/front/register.fjsp">注册</a>
-						</div>
-					</div>
-				</div>
-				<div class="header_menu">
-					<!--菜单导航栏-->
-					<ul class="menu" id="nav">
-						<li class="nLi"><a href="/front/homePage.fjsp">网站首页</a></li>
-						<li class="nLi"><a href="/front/type.fjsp">分类搜索</a></li>
-		<!-- 				<li class="nLi"><a href="/front/merchantList.fjsp">商店列表</a></li> -->
-					</ul>
-				</div>
-			</div>
-		</div>
+		<%@include file="../public/header.jsp"%>
 		<!--产品列表-->
 		<div class="content_style clearfix">
 			<div class="page_Style">
 				<!--条件筛选-->
 				<div class="filter_style clearfix">
-					<ul>
+					<ul id="type-content">
+						<script type="text/html" id="type-template">
 						<li><label class="filter_name">风格分类</label>
 							<div class="filter_link jjlx1">
-								<a href="javascript:changeLx1('', 0);" class="Select">全部</a>
-								<a href="javascript:changeLx1('中式家具', 1);">中式家具</a>
-								<a href="javascript:changeLx1('美式家具', 2);">美式家具</a>
-								<a href="javascript:changeLx1('欧式家具', 3);">欧式家具</a>
-								<a href="javascript:changeLx1('现代家具', 4);">现代家具</a>
+								<a href="javascript:changeLx1('', 'default1');" class="default1 Select">全部</a>
+								{{each types}}
+								{{if $value.dj >=80 && $value.dj <= 100}}
+								<a href="javascript:changeLx1('{{$value.lxmc}}', '{{$value.lxid}}');" class="{{$value.lxid}}">{{$value.lxmc}}</a>
+								{{/if}}
+								{{/each}}
 							</div>
 						</li>
 						<li><label class="filter_name">材料分类</label>
 							<div class="filter_link jjlx2">
-								<a href="javascript:changeLx2('', 0);" class="Select">全部</a>
-								<a href="javascript:changeLx2('实木家具', 1);">实木家具</a>
-								<a href="javascript:changeLx2('板式家具', 2);">板式家具</a>
-								<a href="javascript:changeLx2('软体家具', 3);">软体家具</a>
-								<a href="javascript:changeLx2('其他', 4);">其他</a>
+								<a href="javascript:changeLx2('', 'default2');" class="default2 Select">全部</a>
+								{{each types}}
+								{{if $value.dj >=60 && $value.dj < 80}}
+								<a href="javascript:changeLx2('{{$value.lxmc}}', '{{$value.lxid}}');" class="{{$value.lxid}}">{{$value.lxmc}}</a>
+								{{/if}}
+								{{/each}}
 							</div>
 						</li>
 						<li><label class="filter_name">种类分类</label>
 							<div class="filter_link jjlx3">
-								<a href="javascript:changeLx3('', 0);" class="Select">全部</a>
-								<a href="javascript:changeLx3('床', 1);">床</a>
-								<a href="javascript:changeLx3('桌椅', 2);">桌椅</a>
-								<a href="javascript:changeLx3('衣柜', 3);">衣柜</a>
-								<a href="javascript:changeLx3('灯具', 4);">灯具</a>
+								<a href="javascript:changeLx3('', 'default3');" class="default3 Select">全部</a>
+								{{each types}}
+								{{if $value.dj >=10 && $value.dj <= 59}}
+								<a href="javascript:changeLx3('{{$value.lxmc}}', '{{$value.lxid}}');" class="{{$value.lxid}}">{{$value.lxmc}}</a>
+								{{/if}}
+								{{/each}}
 							</div>
 						</li>
 						<li><label class="filter_name">档次分类</label>
 							<div class="filter_link jjlx4">
-								<a href="javascript:changeLx4('', 0);" class="Select">全部</a>
-								<a href="javascript:changeLx4('高档', 1);">高档</a>
-								<a href="javascript:changeLx4('中高档', 2);">中高档</a>
-								<a href="javascript:changeLx4('中档', 3);">中档</a>
-								<a href="javascript:changeLx4('中低档', 4);">中低档</a>
-								<a href="javascript:changeLx4('低档', 5);">低档</a>
+								<a href="javascript:changeLx4('', 'default4');" class="default4 Select">全部</a>
+								{{each types}}
+								{{if $value.dj >=1 && $value.dj <= 9}}
+								<a href="javascript:changeLx4('{{$value.lxmc}}', '{{$value.lxid}}');" class="{{$value.lxid}}">{{$value.lxmc}}</a>
+								{{/if}}
+								{{/each}}
 							</div>
 						</li>
+						</script>
 					</ul>
 				</div>
 				<!--产品列表-->
@@ -111,11 +80,15 @@
 								<a href="/front/detail.fjsp?jjid={{$value.jjid}}"><img src="{{$value.jjtp}}" /></a>
 								<div class="operating">
 									<a href="javascript:addToShoppingCart('{{$value.jjid}}');" class="pic_cart">加入购物车</a>
+									{{if $value.zt == 1}}
+									<a href="javascript:;" class="Collection">已收藏</a>
+									{{else}}
 									<a href="javascript:addToCollection('{{$value.jjid}}');" class="Collection">收藏</a>
+									{{/if}}
 								</div>
 							</div>
 							<p class="pic_nme">
-								<a href="#">{{$value.jjbt}}</a>
+								<a href="/front/detail.fjsp?jjid={{$value.jjid}}" style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;word-break: break-all;">{{$value.jjbt}}</a>
 							</p>
 							<p class="pic_price">￥{{$value.jjjg}}</p>
 						</li>
@@ -129,21 +102,29 @@
 	</div>
 	<%@include file="../public/footer.jsp"%>
 </body>
-<script type="text/javascript" src="/views/front/public.js?v=1"></script>
-<script src="/views/common/template-web.js"></script>
+<script type="text/javascript" src="/views/front/public.js"></script>
 <script type="text/javascript">
 	goToTop("goToTop");
 	showTopSearch("showTopSearch");
-	$(document).ready(function() {
-		var searchValue = getAttribute("searchValue");
-		if(isNotNull(searchValue)){
-			$(".add_Search").val(searchValue);
-		}
-		var searchType = getAttribute("searchType");
-		if(isNotNull(searchType)){
-			$("#homePage_search option").eq(searchType-1).attr("selected", "selected");
-		}
-	});
+	getGwcCount("digital");
+	var searchValue = getAttribute("searchValue");
+	if(isNotNull(searchValue)){
+		$(".add_Search").val(searchValue);
+	}
+	
+	var loadTypeListData = function(){
+		$.ajax({
+			url:'/front/getTypeListData.ajx', 
+			type: 'post',
+			data: { }, 
+			dataType: 'json',
+			success: function(res) {
+				var html = template('type-template', {types: res});
+				$('#type-content').html(html);
+			}
+		});
+	}
+	loadTypeListData();
 
 	$("#nav").slide({
 		type : "menu",
@@ -197,13 +178,12 @@
 		});
 	}
 	
-	var urlSearchValue = getAttribute("searchValue");
 	var lx1 = "";
 	var lx2 = "";
 	var lx3 = "";
 	var lx4 = "";
 	
-	var page = 1, rows = 15, total = 0, pageCount;
+	var page = 1, rows = 16, total = 0, pageCount;
 	var loadTypeJjPageData = function(){
 		$.ajax({
 			url:'/front/getTypeJjPageData.ajx', 
@@ -211,11 +191,12 @@
 			data: {
 				page: page,
 				rows: rows,
-				keyword: urlSearchValue,
+				keyword: $(".add_Search").val(),
 				lx1: lx1,
 				lx2: lx2,
 				lx3: lx3,
-				lx4: lx4
+				lx4: lx4,
+				username: sessionStorage.getItem("username")
 			}, 
 			dataType: 'json',
 			success: function(res) {
@@ -265,19 +246,18 @@
 		else paginationHtml += '<li class="page"><a href="javascript:pagination_downPage();">下一页</a></li>';
 		paginationHtml += '</ul></div>';
 		document.getElementById(divID).innerHTML = paginationHtml;
-		
 	};
 
 	var pagination_selectPage = function(pageIndex){
 		page = pageIndex;
-		loadShJjPageData();
+		loadTypeJjPageData();
 		$("html, body").animate({scrollTop : 0}, 100);
 	};
 
 	var pagination_upPage = function(){
 		if(page > 1){
 			page--;
-			loadShJjPageData();
+			loadTypeJjPageData();
 			$("html, body").animate({scrollTop : 0}, 100);
 		}
 	};
@@ -285,7 +265,7 @@
 	var pagination_downPage = function(){
 		if(page < pageCount){
 			page++;
-			loadShJjPageData();
+			loadTypeJjPageData();
 			$("html, body").animate({scrollTop : 0}, 100);
 		}
 	};
@@ -294,33 +274,28 @@
 		lx1 = value;
 		page = 1;
 		loadTypeJjPageData();
-		$(".jjlx1 a").eq(index).addClass("Select").siblings().removeClass("Select");
+		$("."+index).addClass("Select").siblings().removeClass("Select");
 	}
 	
 	var changeLx2 = function(value, index){
 		lx2 = value;
 		page = 1;
 		loadTypeJjPageData();
-		$(".jjlx2 a").eq(index).addClass("Select").siblings().removeClass("Select");
+		$("."+index).addClass("Select").siblings().removeClass("Select");
 	}
 	
 	var changeLx3 = function(value, index){
 		lx3 = value;
 		page = 1;
 		loadTypeJjPageData();
-		$(".jjlx3 a").eq(index).addClass("Select").siblings().removeClass("Select");
+		$("."+index).addClass("Select").siblings().removeClass("Select");
 	}
 	
 	var changeLx4 = function(value, index){
 		lx4 = value;
 		page = 1;
 		loadTypeJjPageData();
-		$(".jjlx4 a").eq(index).addClass("Select").siblings().removeClass("Select");
-	}
-	
-	var header_Search = function(){
-		page = 1;
-		loadTypeJjPageData();
+		$("."+index).addClass("Select").siblings().removeClass("Select");
 	}
 </script>
 </html>

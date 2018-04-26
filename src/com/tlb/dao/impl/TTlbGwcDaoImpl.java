@@ -14,7 +14,7 @@ import com.tlb.entity.TTlbGwc;
 public class TTlbGwcDaoImpl extends BaseDaoImpl<TTlbGwc> implements TTlbGwcDao{
 
 	public Pager<List<Map<String, Object>>> getTTlbGwcs(PageParam page, String yhid) {
-		return this.getForPagerBySql("select a.*,b.jjbt,b.jjtp,b.jjjg,c.zsxm from t_tlb_gwc a, t_tlb_jj b , t_tlb_yh c "
+		return this.getForPagerBySql("select a.*,b.jjbt,b.jjtp,b.jjjg,c.zsxm from t_tlb_gwc a left join t_tlb_jj b on (a.jjid = b.jjid) left join t_tlb_yh c on (a.yhid = c.yhid) "
 				+ "where a.jjid = b.jjid and c.yhid = ? and a.zt = 0 order by cjsj desc", page, yhid);
 	}
 
@@ -42,6 +42,10 @@ public class TTlbGwcDaoImpl extends BaseDaoImpl<TTlbGwc> implements TTlbGwcDao{
 
 	public int getTTlbGwcCountByYhid(String yhid) {
 		return this.count("from TTlbGwc where yhid = ? and zt = 0", yhid);
+	}
+
+	public TTlbGwc getTTlbGwcByJjid(String jjid, String yhid) {
+		return this.get("from TTlbGwc where jjid = ? and yhid = ? and zt = 0", jjid, yhid);
 	}
 
 }

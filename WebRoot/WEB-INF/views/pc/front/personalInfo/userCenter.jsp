@@ -10,6 +10,8 @@
 <title>用户中心-首页</title>
 <style type="text/css">
 	.header_operating a:HOVER{ color: #fff !important;}
+	#menu a:HOVER{color: #8ec82d !important;}
+	.navitems ul li:HOVER {margin-top: 2px;}
 </style>
 </head>
 <body>
@@ -24,7 +26,7 @@
 					</ul>
 				</div>
 				<div class="cart_shop" style="float:left;cursor: pointer;" onclick="window.location.href='/front/shoppingCart.fjsp'">
-					<em class="icon_cart"><span class="digital">1</span></em>我的购物车
+					<em class="icon_cart"><span class="digital">0</span></em>我的购物车
 				</div>
 				<div class="Cart_user r_f" style="margin-top:25px;width: auto;">
 				<div class="header_operating l_f">
@@ -63,7 +65,7 @@
 								<a href="/front/deliveryAddress.fjsp">地址管理</a>
 							</dd>
 							<dd>
-								<a href="#">修改密码</a>
+								<a href="/front/changePwd.fjsp">修改密码</a>
 							</dd>
 						</dl>
 					</div>
@@ -74,22 +76,18 @@
 						<div class="clearfix">
 							<div class="user_Avatar">
 								<div class="Avatar_bg"></div>
-								<img src="/views/front/images/touxiang.jpg" width="60" height="60">
+								<img class="userCenterHead" src="/views/front/images/touxiang.jpg" width="60" height="60">
 							</div>
 							<div class="info_name">
-								<span class="user_name">亚历山大王 <em class="icon_level"></em>
-									<em class="icon_level_putong"></em> <em class="icon_zhuanye"></em></span>
-								<p>
-									<img src="/views/front/images/icon_grade.png" />
-								</p>
+								<span class="user_name">亚历山大王 </span>
 							</div>
 						</div>
 						<div class="Order_Status clearfix">
 							<ul>
-								<li><a href="#">全部订单</a><i class="split_line"></i></li>
-								<li><a href="#">代发货<em>1</em></a><i class="split_line"></i></li>
-								<li><a href="#">待评价<em>2</em></a><i class="split_line"></i></li>
-								<li><a href="#">申请售后</a></li>
+								<li><a href="/front/myOrder.fjsp">全部订单</a><i class="split_line"></i></li>
+<!-- 								<li><a href="#">代发货<em>1</em></a><i class="split_line"></i></li> -->
+<!-- 								<li><a href="#">待评价<em>2</em></a><i class="split_line"></i></li> -->
+<!-- 								<li><a href="#">申请售后</a></li> -->
 							</ul>
 						</div>
 					</div>
@@ -98,7 +96,7 @@
 						<div class="title_name">我的收藏</div>
 						<ul class="Section_list clearfix">
 							<li>
-								<a href="#">
+								<a href="/front/myCollection.fjsp">
 									<img src="/views/front/images/icon_user_05.png" />
 									<h3>商品</h3>
 								</a>
@@ -112,4 +110,21 @@
 	</div>
 </body>
 <script type="text/javascript" src="/views/front/public.js"></script>
+<script type="text/javascript">
+	getGwcCount("digital");
+	
+	var index_initDatas = function() {
+		$.ajax({
+			url:'/front/getUser.ajx', 
+			type: 'post',
+			data: {username: sessionStorage.getItem("username")}, 
+			dataType: 'json',
+			success: function(res) {
+				$(".userCenterHead").attr("src", res.yhtx);
+				$(".user_name").html(res.yhnc);
+			}
+		});
+	};
+	index_initDatas();
+</script>
 </html>
